@@ -7,6 +7,7 @@ import PackBuilder from "./pages/PackBuilder.tsx";
 import PrintPreview from "./pages/PrintPreview.tsx";
 import Import from "./pages/Import.tsx";
 import About from "./pages/About.tsx";
+import DockSelection from "./components/DockSelection.tsx";
 
 export default function App() {
   return(
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="/import" element={<Import />} />
         <Route path="/about" element={<About />} />
       </Routes>
+      <DockSelection />
     </div>
   );
 }

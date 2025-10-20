@@ -33,6 +33,8 @@ export default function Browse() {
                 {spells.map(sp => (
                     <Card
                         key={sp.id}
+                        id={sp.id}
+                        kind="spell"
                         titlePt={sp.name.pt}
                         titleEn={sp.name.en}
                         schoolPt={sp.school.pt}
