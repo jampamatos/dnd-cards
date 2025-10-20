@@ -1,0 +1,59 @@
+[
+    {
+        "id": "shield",
+        "name": { "pt": "Escudo", "en": "Shield" },
+        "level": 1,
+        "school": { "pt": "Abjuração", "en": "Abjuration" },
+        "classes": ["Wizard", "Sorcerer"],
+        "castingTime": { "pt": "Reação", "en": "Reaction" },
+        "range": { "pt": "Pessoal", "en": "Self" },
+        "duration": { "pt": "Até o início do seu próximo turno", "en": "Until the start of your next turn" },
+        "concentration": false,
+        "ritual": false,
+        "components": { "verbal": true, "somatic": true },
+        "text": {
+            "pt": "Uma barreira mágica de proteção aparece instantaneamente ao seu redor. Até o início do seu próximo turno, você recebe um bônus de +5 na CA, incluindo contra o ataque que desencadeou esta reação, e você não pode ser atingido por ataques de oportunidade.",
+            "en": "An invisible barrier of magical force appears and protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you can't be hit by opportunity attacks."
+        },
+        "tags": ["defense", "reaction" ],
+        "source": { "name": "SRD 5.1", "License": "CC-BY-4.0" }
+    },
+    {
+        "id": "cure-wounds",
+        "name": { "pt": "Curar Ferimentos", "en": "Cure Wounds" },
+        "level": 1,
+        "school": { "pt": "Evocação", "en": "Evocation" },
+        "classes": ["Cleric", "Druid", "Bard", "Paladin", "Ranger", "Artificer" ],
+        "castingTime": { "pt": "1 ação", "en": "1 action" },
+        "range": { "pt": "Toque", "en": "Touch" },
+        "duration": { "pt": "Instantâneo", "en": "Instantaneous" },
+        "concentration": false,
+        "ritual": false,
+        "components": { "verbal": true, "somatic": true },
+        "text": {
+            "pt": "Uma criatura que você tocar recupera um número de pontos de vida igual a 1d8 + seu modificador de habilidade de conjuração. O feitiço tem efeito extra quando você o conjura usando um espaço de feitiço de 2º nível ou superior: para cada nível do espaço acima do 1º, o feitiço cura 1d8 pontos de vida adicionais.",
+            "en": "A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. The spell has no effect on undead or constructs. This spell has no effect on undead or constructs. When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d8 for each slot level above 1st."
+        },
+        "tags": ["healing", "touch" ],
+        "source": { "name": "SRD 5.1", "License": "CC-BY-4.0" }        
+    },
+    {
+        "id": "fireball",
+        "name": { "pt": "Bola de Fogo", "en": "Fireball" },
+        "level": 3,
+        "school": { "pt": "Evocação", "en": "Evocation" },
+        "classes": ["Wizard", "Sorcerer"],
+        "castingTime": { "pt": "1 ação", "en": "1 action" },
+        "range": { "pt": "150 pés (46 metros)", "en": "150 feet" },
+        "duration": { "pt": "Instantâneo", "en": "Instantaneous" },
+        "concentration": false,
+        "ritual": false,
+        "components": { "verbal": true, "somatic": true, "material": "uma pequena bola de guano de morcego e enxofre" },
+        "text": {
+            "pt": "Uma esfera flamejante explode em um ponto que você escolher dentro do alcance. Cada criatura em uma esfera de 20 pés centrada nesse ponto deve fazer um teste de resistência de Destreza. Uma criatura sofre 8d6 de dano de fogo em uma falha, ou metade desse dano em um sucesso. O feitiço incendeia objetos inflamáveis na área que não estejam sendo usados ou carregados.",
+            "en": "A bright streak flashes from your pointing finger to a point you choose within range and then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot-radius sphere centered on that point must make a Dexterity saving throw. A target takes 8d6 fire damage on a failed save, or half as much damage on a successful one. The fire spreads around corners. It ignites flammable objects in the area that aren't being worn or carried."
+        },
+        "tags": ["area-of-effect", "fire" ],
+        "source": { "name": "SRD 5.1", "License": "CC-BY-4.0" }
+    }
+]
