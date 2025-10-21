@@ -1,59 +1,211 @@
 [
-    {
-        "id": "shield",
-        "name": { "pt": "Escudo", "en": "Shield" },
-        "level": 1,
-        "school": { "pt": "Abjuração", "en": "Abjuration" },
-        "classes": ["Wizard", "Sorcerer"],
-        "castingTime": { "pt": "Reação", "en": "Reaction" },
-        "range": { "pt": "Pessoal", "en": "Self" },
-        "duration": { "pt": "Até o início do seu próximo turno", "en": "Until the start of your next turn" },
-        "concentration": false,
-        "ritual": false,
-        "components": { "verbal": true, "somatic": true },
-        "text": {
-            "pt": "Uma barreira mágica de proteção aparece instantaneamente ao seu redor. Até o início do seu próximo turno, você recebe um bônus de +5 na CA, incluindo contra o ataque que desencadeou esta reação, e você não pode ser atingido por ataques de oportunidade.",
-            "en": "An invisible barrier of magical force appears and protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you can't be hit by opportunity attacks."
-        },
-        "tags": ["defense", "reaction" ],
-        "source": { "name": "SRD 5.1", "License": "CC-BY-4.0" }
+  {
+    "id": "shield",
+    "name": { "pt": "Escudo", "en": "Shield" },
+    "level": 1,
+    "school": { "pt": "Abjuração", "en": "Abjuration" },
+    "classes": ["Wizard", "Sorcerer"],
+    "castingTime": { "pt": "Reação", "en": "Reaction" },
+    "range": { "pt": "Pessoal", "en": "Self" },
+    "duration": { "pt": "Até o início do seu próximo turno", "en": "Until the start of your next turn" },
+    "concentration": false,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true },
+    "text": {
+      "pt": "Uma barreira invisível surge e concede +5 de CA até o início do seu próximo turno; também evita ataques de oportunidade.",
+      "en": "An invisible barrier of magical force appears, granting +5 to AC until the start of your next turn and preventing opportunity attacks."
     },
-    {
-        "id": "cure-wounds",
-        "name": { "pt": "Curar Ferimentos", "en": "Cure Wounds" },
-        "level": 1,
-        "school": { "pt": "Evocação", "en": "Evocation" },
-        "classes": ["Cleric", "Druid", "Bard", "Paladin", "Ranger", "Artificer" ],
-        "castingTime": { "pt": "1 ação", "en": "1 action" },
-        "range": { "pt": "Toque", "en": "Touch" },
-        "duration": { "pt": "Instantâneo", "en": "Instantaneous" },
-        "concentration": false,
-        "ritual": false,
-        "components": { "verbal": true, "somatic": true },
-        "text": {
-            "pt": "Uma criatura que você tocar recupera um número de pontos de vida igual a 1d8 + seu modificador de habilidade de conjuração. O feitiço tem efeito extra quando você o conjura usando um espaço de feitiço de 2º nível ou superior: para cada nível do espaço acima do 1º, o feitiço cura 1d8 pontos de vida adicionais.",
-            "en": "A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. The spell has no effect on undead or constructs. This spell has no effect on undead or constructs. When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d8 for each slot level above 1st."
-        },
-        "tags": ["healing", "touch" ],
-        "source": { "name": "SRD 5.1", "License": "CC-BY-4.0" }        
+    "tags": ["defesa","reação"],
+    "source": { "name": "SRD 5.1", "license": "CC-BY-4.0" }
+  },
+  {
+    "id": "cure-wounds",
+    "name": { "pt": "Curar Ferimentos", "en": "Cure Wounds" },
+    "level": 1,
+    "school": { "pt": "Evocação", "en": "Evocation" },
+    "classes": ["Bard","Cleric","Druid","Paladin","Ranger"],
+    "castingTime": { "pt": "1 ação", "en": "1 action" },
+    "range": { "pt": "Toque", "en": "Touch" },
+    "duration": { "pt": "Instantânea", "en": "Instantaneous" },
+    "concentration": false,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true },
+    "text": {
+      "pt": "A criatura tocada recupera 1d8 + seu modificador de habilidade de conjuração PV (mais 1d8 por nível do espaço acima de 1º).",
+      "en": "A creature you touch regains 1d8 + your spellcasting ability modifier HP (plus 1d8 per slot level above 1st)."
     },
-    {
-        "id": "fireball",
-        "name": { "pt": "Bola de Fogo", "en": "Fireball" },
-        "level": 3,
-        "school": { "pt": "Evocação", "en": "Evocation" },
-        "classes": ["Wizard", "Sorcerer"],
-        "castingTime": { "pt": "1 ação", "en": "1 action" },
-        "range": { "pt": "150 pés (46 metros)", "en": "150 feet" },
-        "duration": { "pt": "Instantâneo", "en": "Instantaneous" },
-        "concentration": false,
-        "ritual": false,
-        "components": { "verbal": true, "somatic": true, "material": "uma pequena bola de guano de morcego e enxofre" },
-        "text": {
-            "pt": "Uma esfera flamejante explode em um ponto que você escolher dentro do alcance. Cada criatura em uma esfera de 20 pés centrada nesse ponto deve fazer um teste de resistência de Destreza. Uma criatura sofre 8d6 de dano de fogo em uma falha, ou metade desse dano em um sucesso. O feitiço incendeia objetos inflamáveis na área que não estejam sendo usados ou carregados.",
-            "en": "A bright streak flashes from your pointing finger to a point you choose within range and then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot-radius sphere centered on that point must make a Dexterity saving throw. A target takes 8d6 fire damage on a failed save, or half as much damage on a successful one. The fire spreads around corners. It ignites flammable objects in the area that aren't being worn or carried."
-        },
-        "tags": ["area-of-effect", "fire" ],
-        "source": { "name": "SRD 5.1", "License": "CC-BY-4.0" }
-    }
+    "tags": ["cura","toque"],
+    "source": { "name": "SRD 5.1", "license": "CC-BY-4.0" }
+  },
+  {
+    "id": "fireball",
+    "name": { "pt": "Bola de Fogo", "en": "Fireball" },
+    "level": 3,
+    "school": { "pt": "Evocação", "en": "Evocation" },
+    "classes": ["Wizard","Sorcerer"],
+    "castingTime": { "pt": "1 ação", "en": "1 action" },
+    "range": { "pt": "150 pés (46 m)", "en": "150 feet" },
+    "duration": { "pt": "Instantânea", "en": "Instantaneous" },
+    "concentration": false,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true, "material": "uma pequena bola de guano de morcego e enxofre" },
+    "text": {
+      "pt": "Uma esfera de 6 m de raio explode causando 8d6 de dano de fogo (Resistência de DES para metade). Incendeia objetos inflamáveis não vestidos/carregados.",
+      "en": "A 20-foot-radius sphere explodes for 8d6 fire damage (DEX save for half). Ignites unattended flammables."
+    },
+    "tags": ["dano em área","fogo"],
+    "source": { "name": "SRD 5.1", "license": "CC-BY-4.0" }
+  },
+  {
+    "id": "magic-missile",
+    "name": { "pt": "Mísseis Mágicos", "en": "Magic Missile" },
+    "level": 1,
+    "school": { "pt": "Evocação", "en": "Evocation" },
+    "classes": ["Wizard","Sorcerer"],
+    "castingTime": { "pt": "1 ação", "en": "1 action" },
+    "range": { "pt": "120 pés (36 m)", "en": "120 feet" },
+    "duration": { "pt": "Instantânea", "en": "Instantaneous" },
+    "concentration": false,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true },
+    "text": {
+      "pt": "Cria três dardos brilhantes que atingem automaticamente e causam 1d4+1 de dano de força cada. +1 dardo por nível do espaço acima de 1º.",
+      "en": "Create three glowing darts that automatically hit, each dealing 1d4+1 force damage. +1 dart per slot level above 1st."
+    },
+    "tags": ["força","acerto automático"],
+    "source": { "name": "SRD 5.1", "license": "CC-BY-4.0" }
+  },
+  {
+    "id": "mage-armor",
+    "name": { "pt": "Armadura Arcana", "en": "Mage Armor" },
+    "level": 1,
+    "school": { "pt": "Abjuração", "en": "Abjuration" },
+    "classes": ["Wizard","Sorcerer"],
+    "castingTime": { "pt": "1 ação", "en": "1 action" },
+    "range": { "pt": "Toque", "en": "Touch" },
+    "duration": { "pt": "8 horas", "en": "8 hours" },
+    "concentration": false,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true, "material": "uma peça de couro curtido" },
+    "text": {
+      "pt": "A criatura tocada que não esteja usando armadura tem CA igual a 13 + DES por 8 horas.",
+      "en": "A willing creature not wearing armor has AC 13 + DEX for 8 hours."
+    },
+    "tags": ["defesa","buff"],
+    "source": { "name": "SRD 5.1", "license": "CC-BY-4.0" }
+  },
+  {
+    "id": "detect-magic",
+    "name": { "pt": "Detectar Magia", "en": "Detect Magic" },
+    "level": 1,
+    "school": { "pt": "Adivinhação", "en": "Divination" },
+    "classes": ["Bard","Cleric","Druid","Paladin","Ranger","Wizard","Sorcerer"],
+    "castingTime": { "pt": "1 ação", "en": "1 action" },
+    "range": { "pt": "Pessoal (raio de 9 m)", "en": "Self (30-foot radius)" },
+    "duration": { "pt": "Concentração, até 10 minutos", "en": "Concentration, up to 10 minutes" },
+    "concentration": true,
+    "ritual": true,
+    "components": { "verbal": true, "somatic": true },
+    "text": {
+      "pt": "Percebe a presença de magia dentro de 9 m e aprende a escola de magia.",
+      "en": "You sense magic within 30 feet and learn its school."
+    },
+    "tags": ["utilidade","ritual"],
+    "source": { "name": "SRD 5.1", "license": "CC-BY-4.0" }
+  },
+  {
+    "id": "invisibility",
+    "name": { "pt": "Invisibilidade", "en": "Invisibility" },
+    "level": 2,
+    "school": { "pt": "Ilusão", "en": "Illusion" },
+    "classes": ["Bard","Wizard","Sorcerer"],
+    "castingTime": { "pt": "1 ação", "en": "1 action" },
+    "range": { "pt": "Toque", "en": "Touch" },
+    "duration": { "pt": "Concentração, até 1 hora", "en": "Concentration, up to 1 hour" },
+    "concentration": true,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true, "material": "um cílio revestido de goma arábica" },
+    "text": {
+      "pt": "A criatura tocada fica invisível até atacar/conjurar magia. Em espaços de nível maior, afeta criaturas adicionais.",
+      "en": "A creature you touch becomes invisible until it attacks or casts a spell. Higher slots affect additional creatures."
+    },
+    "tags": ["furtividade","buff"],
+    "source": { "name": "SRD 5.1", "license": "CC-BY-4.0" }
+  },
+  {
+    "id": "misty-step",
+    "name": { "pt": "Passo Nebuloso", "en": "Misty Step" },
+    "level": 2,
+    "school": { "pt": "Conjuração", "en": "Conjuration" },
+    "classes": ["Wizard","Sorcerer","Warlock","Bard"],
+    "castingTime": { "pt": "Ação bônus", "en": "Bonus action" },
+    "range": { "pt": "Pessoal", "en": "Self" },
+    "duration": { "pt": "Instantânea", "en": "Instantaneous" },
+    "concentration": false,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": false },
+    "text": {
+      "pt": "Você se envolve em névoa prateada e se teleporta até 30 pés (9 m) para um espaço desocupado que possa ver.",
+      "en": "Briefly surrounded by silvery mist, you teleport up to 30 feet to an unoccupied space you can see."
+    },
+    "tags": ["mobilidade","teleporte"],
+    "source": { "name": "SRD 5.1", "license": "CC-BY-4.0" }
+  },
+  {
+    "id": "counterspell",
+    "name": { "pt": "Contramagia", "en": "Counterspell" },
+    "level": 3,
+    "school": { "pt": "Abjuração", "en": "Abjuration" },
+    "classes": ["Wizard","Sorcerer","Warlock"],
+    "castingTime": { "pt": "Reação", "en": "Reaction" },
+    "range": { "pt": "60 pés (18 m)", "en": "60 feet" },
+    "duration": { "pt": "Instantânea", "en": "Instantaneous" },
+    "concentration": false,
+    "ritual": false,
+    "components": { "verbal": false, "somatic": true },
+    "text": {
+      "pt": "Tente interromper uma magia a até 18 m. Se o nível da magia alvo for igual ou inferior ao nível do seu espaço, ela falha; caso contrário, teste de habilidade.",
+      "en": "You attempt to interrupt a spell within 60 feet. If the spell’s level is equal to or less than the slot used, it fails; otherwise make an ability check."
+    },
+    "tags": ["controle","reação"],
+    "source": { "name": "SRD 5.1", "license": "CC-BY-4.0" }
+  },
+  {
+    "id": "haste",
+    "name": { "pt": "Aceleração", "en": "Haste" },
+    "level": 3,
+    "school": { "pt": "Transmutação", "en": "Transmutation" },
+    "classes": ["Wizard","Sorcerer"],
+    "castingTime": { "pt": "1 ação", "en": "1 action" },
+    "range": { "pt": "30 pés (9 m)", "en": "30 feet" },
+    "duration": { "pt": "Concentração, até 1 minuto", "en": "Concentration, up to 1 minute" },
+    "concentration": true,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true, "material": "uma lasca de raiz de alcaçuz" },
+    "text": {
+      "pt": "Dobra deslocamento, +2 CA, vantagem em DES, ação extra por turno. Ao terminar, o alvo fica letárgico por 1 rodada.",
+      "en": "Target’s speed is doubled, +2 AC, advantage on DEX saves, and gains one additional action each turn; then is lethargic for 1 round."
+    },
+    "tags": ["buff","concentração"],
+    "source": { "name": "SRD 5.1", "license": "CC-BY-4.0" }
+  },
+  {
+    "id": "bless",
+    "name": { "pt": "Bênção", "en": "Bless" },
+    "level": 1,
+    "school": { "pt": "Encantamento", "en": "Enchantment" },
+    "classes": ["Cleric","Paladin"],
+    "castingTime": { "pt": "1 ação", "en": "1 action" },
+    "range": { "pt": "30 pés (9 m)", "en": "30 feet" },
+    "duration": { "pt": "Concentração, até 1 minuto", "en": "Concentration, up to 1 minute" },
+    "concentration": true,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true, "material": "uma gota de água benta" },
+    "text": {
+      "pt": "Até três criaturas ganham +1d4 em testes de ataque e salvaguardas. Espaços superiores afetam mais alvos.",
+      "en": "Up to three creatures gain +1d4 to attack rolls and saving throws. Higher slots affect more targets."
+    },
+    "tags": ["buff","suporte"],
+    "source": { "name": "SRD 5.1", "license": "CC-BY-4.0" }
+  }
 ]
