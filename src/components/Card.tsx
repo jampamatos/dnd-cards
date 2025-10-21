@@ -10,10 +10,10 @@ type CardProps = {
     schoolEn: string;
     pills: string[];        // i.e. ["Level 1", "Action", "Touch", "Instantaneous"]
     bodyPt: string;
-    bodyEn: string;
+    //bodyEn: string;
 };
 
-export default function Card({ id, kind, titlePt, titleEn, schoolPt, schoolEn, pills, bodyPt, bodyEn }: CardProps) {
+export default function Card({ id, kind, titlePt, titleEn, schoolPt, schoolEn, pills, bodyPt }: CardProps) {
     const { add, remove, isSelected } = usePacks();
     const selected = isSelected(id, kind);
 

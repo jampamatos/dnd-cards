@@ -91,7 +91,7 @@ export default function Browse() {
                             sp.concentration ? "Concentração" : "",
                         ].filter(Boolean)}
                         bodyPt={sp.text.pt}
-                        bodyEn={sp.text.en}
+                        //bodyEn={sp.text.en}
                     />
                 ))}
             </div>
