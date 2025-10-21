@@ -1,0 +1,39 @@
+/* --- PRINT BASE --- */
+@media print {
+    html, body { height: auto; }
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .no-print { display: none !important; }
+}
+/* page-size is injected dynamically via <style media="print"> */
+
+/* grid for print with smaller gaps */
+.print-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--cols, 3), 1fr);
+    gap: 8px;
+}
+.print-card {
+    break-inside: avoid;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    background: white;
+}
+
+/* densities: only for typography and paddings; fine-tunning later */
+.print-S { font-size: 10px; }
+.print-M { font-size: 12px; }
+.print-L { font-size: 14px; }
+
+/* optional cutmarks */
+.cutmarks {
+    position: relative;
+}
+.cutmarks::before,
+.cutmarks::after {
+    content: "";
+    position: absolute;
+    border-top: 1px dotted #aaa;
+    left: 0; right: 0; top: -4px;
+}
+.cutmarks::after { top: auto; bottom: -4px; }

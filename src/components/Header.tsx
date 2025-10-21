@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Header() {
     return (
-        <nav style={ { display:"flex", gap:12, padding:"12px 0" }}>
+        <nav className="no-print"style={ { display:"flex", gap:12, padding:"12px 0" }}>
             <Link to="/">Home</Link>
             <Link to="/browse">Navegar</Link>
             <Link to="/search">Busca</Link>

@@ -7,7 +7,7 @@ export default function DockSelection() {
 
     return (
         <div
-            className="dock"
+            className="no-print dock"
             style={{
                 position: "fixed",
                 right: 16,
