@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { usePacks } from "../lib/state/packs";
 import { SpellsArray } from "../lib/schema/spell";
 import type { TSpell } from "../lib/schema/spell";
@@ -40,9 +41,9 @@ export default function PackBuilder() {
         <p>Itens selecionados: {selected.length}</p>
         <div style={{ display:"flex", gap:8, margin:"8px 0" }}>
           <button onClick={clear} style={{ border:"1px solid #ccc", borderRadius:8, padding:"6px 10px" }}>Limpar tudo</button>
-          <a href="/print">
+          <Link to="/print">
             <button style={{ border:"1px solid #ccc", borderRadius:8, padding:"6px 10px" }}>Ir para Imprimir</button>
-          </a>
+          </Link>
         </div>
         <ul style={{ display:"grid", gap:8, paddingLeft:18 }}>
           {items.length ? items : <em>Nada selecionado ainda. Vá em “Navegar”.</em>}
