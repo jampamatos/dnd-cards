@@ -6,6 +6,8 @@ import Card from "../components/Card";
 import Filters from "../components/Filters";
 import Pagination from "../components/Pagination";
 
+type SortKey = "name_pt" | "level";
+
 export default function Browse() {
     const [spells, setSpells] = useState<TSpell[]>([]);
     const [error, setError] = useState<string | null>(null);
@@ -16,6 +18,8 @@ export default function Browse() {
     const [clazz, setClazz] = useState<string | "any">("any");
     const [pageSize, setPageSize] = useState(12);
     const [page, setPage] = useState(1);
+    const [sort, setSort] = useState<SortKey>("name_pt")
+    const onClear = () => { setQ(""); setLevel("any"); setClazz("any"),setSort("name_pt"); setPage(1); };
 
     useEffect(() => {
         import("../data/srd/spells.json")
@@ -31,21 +35,17 @@ export default function Browse() {
 
     // filtered results
     const filtered = useMemo(() => {
-        if (!mini) return [];
-        let ids: string[] | null = null;
-
-        if (q.trim()) {
-            const res = mini.search(q.trim());
-            ids = res.map(r=>r.id);
-        }
-
-        let arr = (ids ? spells.filter(s => ids!.includes(s.id)) : spells);
-
-        if (level !== "any") arr = arr.filter(s => s.level === level);
-        if (clazz !== "any") arr = arr.filter(s => s.classes.includes(clazz));
-
-        return arr.sort((a,b) => (a.level - b.level) || a.name.pt.localeCompare(b.name.pt));
-    }, [mini, spells, q, level, clazz]);
+      if (!mini) return [];
+      let ids: string[] | null = null;
+      if (q.trim()) ids = mini.search(q.trim()).map(r => r.id);
+      let arr = (ids ? spells.filter(s => ids!.includes(s.id)) : spells);
+      if (level !== "any") arr = arr.filter(s => s.level === level);
+      if (clazz !== "any") arr = arr.filter(s => s.classes.includes(clazz));
+      // sort
+      if (sort === "name_pt") arr = [...arr].sort((a,b)=>a.name.pt.localeCompare(b.name.pt));
+      if (sort === "level")   arr = [...arr].sort((a,b)=> (a.level-b.level) || a.name.pt.localeCompare(b.name.pt));
+      return arr;
+    }, [mini, spells, q, level, clazz, sort]);
 
     // pagination
     const start = (page-1) * pageSize;
@@ -59,13 +59,16 @@ export default function Browse() {
     return (
         <div>
             <h2>Navegar - Magias</h2>
+            <p style={{ opacity:.75, marginTop:-8 }}>{filtered.length} resultado(s)</p>
 
             <Filters
                 q={q} setQ={setQ}
                 level={level} setLevel={setLevel}
                 clazz={clazz} setClazz={setClazz}
+                sort={sort} setSort={setSort}
                 total={filtered.length}
                 pageSize={pageSize} setPageSize={setPageSize}
+                onClear={onClear}
             />
 
             <div style={{
@@ -87,6 +90,7 @@ export default function Browse() {
                             sp.castingTime.pt,
                             sp.range.pt,
                             sp.duration.pt,
+                            ...sp.classes,
                             sp.ritual ? "Ritual" : "",
                             sp.concentration ? "Concentração" : "",
                         ].filter(Boolean)}
@@ -95,11 +99,14 @@ export default function Browse() {
                           sp.castingTime.en,
                           sp.range.en,
                           sp.duration.en,
+                          ...sp.classes,
                           sp.ritual ? "Ritual" : "",
                           sp.concentration ? "Concentration" : ""
                         ].filter(Boolean)}
                         bodyPt={sp.text.pt}
                         bodyEn={sp.text.en}
+                        onClickLevel={(lvl)=>{ setLevel(lvl); setPage(1); }}
+                        onClickClass={(c)=> { setClazz(c); setPage(1); }}
                     />
                 ))}
             </div>

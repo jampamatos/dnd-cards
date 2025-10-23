@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 
+type SortKey = "name_pt" | "level";
 type FiltersProps = {
     q: string; setQ: (v:string)=>void;
     level: number | "any"; setLevel: (v:number|"any")=>void;
     clazz: string | "any"; setClazz: (v:string|"any")=>void;
+    sort: SortKey; setSort:(v:SortKey)=>void;
     total: number; pageSize: number; setPageSize:(n:number)=>void;
+    onClear: ()=>void;
 };
 
 const LEVELS = ["any",0,1,2,3,4,5,6,7,8,9] as const;
 
 export default function Filters({
-    q, setQ, level, setLevel, clazz, setClazz, total, pageSize, setPageSize
+    q, setQ, level, setLevel, clazz, setClazz, sort, setSort, total, pageSize, setPageSize, onClear
 }: FiltersProps) {
     const [localQ, setLocalQ] = useState(q);
     useEffect(() => setLocalQ(q), [q]); // keeps local in sync when parent changes
@@ -58,6 +61,22 @@ export default function Filters({
               {[8,12,16,24,36].map(n=><option key={n} value={n}>{n}</option>)}
             </select>
           </label>
+
+          <label style={{ display:"grid" }}>
+            <span>Ordenar:</span>
+            <select value={sort} onChange={e=>setSort(e.target.value as SortKey)}>
+              <option value="name_pt">Nome (A-Z)</option>
+              <option value="level">Nível (0-9)</option>
+            </select>
+          </label>
+
+          <button
+            type="button"
+            onClick={onClear}
+            style={{ justifySelf:"end", padding:"6px 10px", border:"1px solid #ccc", borderRadius:6 }}
+          >
+            Limpar filtros
+          </button>
         </div>
     );
 }
