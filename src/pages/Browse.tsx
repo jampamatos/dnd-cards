@@ -82,7 +82,7 @@ export default function Browse() {
                         titleEn={sp.name.en}
                         schoolPt={sp.school.pt}
                         schoolEn={sp.school.en}
-                        pills={[
+                        pillsPt={[
                             `Nível ${sp.level}`,
                             sp.castingTime.pt,
                             sp.range.pt,
@@ -90,8 +90,16 @@ export default function Browse() {
                             sp.ritual ? "Ritual" : "",
                             sp.concentration ? "Concentração" : "",
                         ].filter(Boolean)}
+                        pillsEn={[
+                          `Level ${sp.level}`,
+                          sp.castingTime.en,
+                          sp.range.en,
+                          sp.duration.en,
+                          sp.ritual ? "Ritual" : "",
+                          sp.concentration ? "Concentration" : ""
+                        ].filter(Boolean)}
                         bodyPt={sp.text.pt}
-                        //bodyEn={sp.text.en}
+                        bodyEn={sp.text.en}
                     />
                 ))}
             </div>

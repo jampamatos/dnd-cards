@@ -1,3 +1,10 @@
+:root { color-scheme: light dark; }
+:root[data-theme="dark"] { --bg: #111; --fg: #eee; --card: #1b1b1b; --border: #333; }
+:root[data-theme="light"] { --bg: #fff; --fg: #111; --card: #fff; --border: #ddd; }
+
+body { background: var(--bg); color: var(--fg); }
+.print-card { background: var(--card); border-color: var(--border); }
+
 /* --- PRINT BASE --- */
 @media print {
     html, body { height: auto; }

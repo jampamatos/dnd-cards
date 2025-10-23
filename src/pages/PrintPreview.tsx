@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { usePacks } from "../lib/state/packs";
 import { SpellsArray, type TSpell } from "../lib/schema/spell";
 import { pageRule, columns } from "../lib/print/layout";
+import { usePrefs } from "../lib/state/prefs";
 import type { PageFormat, Orientation, Density } from "../lib/print/layout";
 import CardPrint from "../components/CardPrint";
 import PrintToolbar from "../components/PrintToolbar";
@@ -9,6 +10,7 @@ import "../styles/print.css";
 
 export default function PrintPreview() {
   const { selected } = usePacks();
+  const { lang } = usePrefs();
 
   // controles
   const [format, setFormat] = useState<PageFormat>("A4");
@@ -47,7 +49,7 @@ export default function PrintPreview() {
         titleEn: sp.name.en,
         schoolPt: sp.school?.pt ?? "",
         schoolEn: sp.school?.en ?? "",
-        pills: [
+        pillsPt: [
           `Nível ${sp.level}`,
           sp.castingTime.pt,
           sp.range.pt,
@@ -55,10 +57,19 @@ export default function PrintPreview() {
           sp.ritual ? "Ritual" : "",
           sp.concentration ? "Concentração" : ""
         ].filter(Boolean),
-        bodyPt: sp.text.pt
+        pillsEn: [
+          `Level ${sp.level}`,
+          sp.castingTime.en,
+          sp.range.en,
+          sp.duration.en,
+          sp.ritual ? "Ritual" : "",
+          sp.concentration ? "Concentration" : ""
+        ].filter(Boolean),
+        bodyPt: sp.text.pt,
+        bodyEn: sp.text.en,
       };
     }).filter(Boolean) as {
-      key: string; titlePt: string; titleEn: string; schoolPt: string; schoolEn: string; pills: string[]; bodyPt: string;
+      key: string; titlePt: string; titleEn: string; schoolPt: string; schoolEn: string; pillsPt: string[]; pillsEn: string[]; bodyPt: string; bodyEn: string;
     }[];
   }, [selected, spellById]);
 
@@ -84,13 +95,12 @@ export default function PrintPreview() {
         {cards.map(c => (
           <CardPrint
             key={c.key}
-            titlePt={c.titlePt}
-            titleEn={c.titleEn}
-            schoolPt={c.schoolPt}
-            schoolEn={c.schoolEn}
-            pills={c.pills}
-            bodyPt={c.bodyPt}
+            titlePt={c.titlePt} titleEn={c.titleEn}
+            schoolPt={c.schoolPt} schoolEn={c.schoolEn}
+            pillsPt={c.pillsPt} pillsEn={c.pillsEn}
+            bodyPt={c.bodyPt} bodyEn={c.bodyEn}
             withCutMarks={cutMarks}
+            lang={lang}
           />
         ))}
       </div>
