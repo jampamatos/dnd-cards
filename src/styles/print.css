@@ -2,14 +2,39 @@
 :root[data-theme="dark"] { --bg: #111; --fg: #eee; --card: #1b1b1b; --border: #333; }
 :root[data-theme="light"] { --bg: #fff; --fg: #111; --card: #fff; --border: #ddd; }
 
+/* print variables */
+:root {
+    --print-header-h: 18mm; /* height of the header repeated on each page */ 
+    --print-gap: 8px;       /* gap between cards */
+}
+
 body { background: var(--bg); color: var(--fg); }
 .print-card { background: var(--card); border-color: var(--border); }
 
 /* --- PRINT BASE --- */
 @media print {
     html, body { height: auto; }
-    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { margin:0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .no-print { display: none !important; }
+
+    /* fixed header taht repeats on all pages */
+    .print-header {
+        position: fixed; inset: 0 0 auto 0;
+        height: var(--print-header-h);
+        background: #fff;
+        border-bottom: 1px solid #ccc;
+        display: flex; align-items: end; justify-content: space-between;
+        padding: 6mm 10mm 4mm;
+        z-index: 9999;
+    }
+    .print-header h1 {
+        font-size: 14pt; line-height: 1.1; margin: 0;
+        text-wrap: balance;
+    }
+    .print-header .meta { font-size: 9pt; opacity: .85; }
+    
+    /* compensates for the area occupied by the header */
+    .print-content { padding-top: calc(var(--print-header-h) + 2mm); }
 }
 /* page-size is injected dynamically via <style media="print"> */
 
@@ -17,14 +42,39 @@ body { background: var(--bg); color: var(--fg); }
 .print-grid {
     display: grid;
     grid-template-columns: repeat(var(--cols, 3), 1fr);
-    gap: 8px;
+    gap: var(--print-gap);
 }
 .print-card {
     break-inside: avoid;
-    border: 1px solid #ddd;
+    page-break-inside: avoid;
+    border: 1px solid #bbb;
     border-radius: 8px;
     padding: 10px;
     background: white;
+    color: #111;
+    /* hyphenation & readability */
+    hyphens: auto; -webkit-hyphens: auto;
+    overflow-wrap: anywhere;
+    orphans: 3; widows: 3;
+}
+.print-card h3 {
+    margin: 0 0 4px;
+    font-size: 1.05em;
+    line-height: 1.2;
+}
+.print-card .pills {
+    display: flex; flex-wrap: wrap; gap: 4px;
+    margin: 4px 0 6px;
+}
+.print-card .pill {
+    font-size: 0.8em;
+    border: 1px solid #ccc;
+    border-radius: 999px;
+    padding: 1px 6px;
+}
+.print-card .body {
+    font-size: 0.95em;
+    line-height: 1.25;
 }
 
 /* densities: only for typography and paddings; fine-tunning later */

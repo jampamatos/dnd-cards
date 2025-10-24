@@ -12,13 +12,15 @@ export default function PrintPreview() {
   const { selected } = usePacks();
   const { lang } = usePrefs();
 
-  // controles
+  // controllah_(gorillaz_feat_mc_bin_laden).mp3
   const [format, setFormat] = useState<PageFormat>("A4");
   const [orientation, setOrientation] = useState<Orientation>("portrait");
   const [density, setDensity] = useState<Density>("M");
   const [cutMarks, setCutMarks] = useState<boolean>(true);
+  const [showHeader, setShowHeader] = useState<boolean>(true);
+  const [headerTitle, setHeaderTitle] = useState<string>("D&D Cards");
 
-  // injeta @page dinamicamente
+  // inject @page dynamically
   useEffect(() => {
     const style = document.createElement("style");
     style.media = "print";
@@ -28,7 +30,7 @@ export default function PrintPreview() {
     return () => { style.remove(); };
   }, [format, orientation]);
 
-  // carregar dados (por enquanto só spells)
+  // load data (only spells for now)
   const [spellById, setSpellById] = useState<Map<string, TSpell>>(new Map());
   useEffect(() => {
     import("../data/srd/spells.json").then((m) => {
@@ -37,7 +39,7 @@ export default function PrintPreview() {
     });
   }, []);
 
-  // resolve itens selecionados
+  // resolves selected items
   const cards = useMemo(() => {
     return selected.map(s => {
       if (s.kind !== "spell") return null; // only spells for now
@@ -75,6 +77,13 @@ export default function PrintPreview() {
 
   // columns per preferences
   const cols = columns(format, orientation, density);
+  const total = cards.length;
+  const stamp = useMemo(() => {
+    const d = new Date();
+    const date = d.toLocaleDateString(lang === "pt" ? "pt-BR" : "en-US");
+    const time = d.toLocaleTimeString(lang === "pt" ? "pt-BR" : "en-US", { hour: "2-digit", minute: "2-digit" });
+    return `${date} • ${time}`;
+  }, [lang]);
 
   return (
     <div>
@@ -84,12 +93,22 @@ export default function PrintPreview() {
         orientation={orientation} setOrientation={setOrientation}
         density={density} setDensity={setDensity}
         cutMarks={cutMarks} setCutMarks={setCutMarks}
+        showHeader={showHeader} setShowHeader={setShowHeader}
+        headerTitle={headerTitle} setHeaderTitle={setHeaderTitle}
         onPrint={()=>window.print()}
       />
 
-      <div
-        className={`print-grid print-${density}`}
+      {showHeader && (
+        <div className="print-header">
+          <h1>{headerTitle}</h1>
+          <div className="meta">{total} {total === 1 ? "card" : "cards"} • {stamp}</div>
+        </div>
+      )}
+
+      <main
         style={{ ["--cols" as any]: String(cols) }}
+        role="main"
+        className={`print-grid print-${density} print-content`}
       >
         {cards.length === 0 && <em className="no-print">Nada selecionado. Vá em “Navegar” e selecione.</em>}
         {cards.map(c => (
@@ -103,7 +122,7 @@ export default function PrintPreview() {
             lang={lang}
           />
         ))}
-      </div>
+      </main>
     </div>
   );
 }

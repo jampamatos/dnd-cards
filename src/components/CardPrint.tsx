@@ -12,17 +12,18 @@ export default function CardPrint(p: CardPrintProps) {
   const body  = p.lang === "pt" ? p.bodyPt : p.bodyEn;
 
   return (
-    <article className={`print-card ${p.withCutMarks ? "cutmarks" : ""}`}>
-      <h3 style={{ marginTop:0 }}>
-        {p.titlePt} <span style={{ opacity:.7 }}> / {p.titleEn}</span><br/>
+    <article className={`print-card ${p.withCutMarks ? "cutmarks" : ""}`} lang={p.lang}>
+      <h3>
+        {p.titlePt} <span style={{ opacity:.7 }}> / {p.titleEn}</span><br />
         <small style={{ fontWeight:500, fontSize:14 }}>{p.schoolPt} <span style={{ opacity:.7 }}> / {p.schoolEn}</span></small>
       </h3>
-      <div style={{ display:"flex", flexWrap:"wrap", gap:6, margin:"6px 0 8px" }}>
-        {pills.map((p, i) => (
-          <span key={i} style={{ fontSize: "0.85em", border:"1px solid #ccc", borderRadius: 999, padding:"1px 6px" }}>{p}</span>
+      <div className="pills">
+        {pills.map((tag, i) => (
+          <span key={i} className="pill">{tag}</span>
         ))}
       </div>
-      <div style={{ fontSize:"0.95em", lineHeight:1.25 }}>{body}</div>
+
+      <div className="body">{body}</div>
     </article>
   );
 }

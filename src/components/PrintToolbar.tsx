@@ -5,6 +5,8 @@ type Props = {
     orientation: Orientation; setOrientation: (v: Orientation) => void;
     density: Density; setDensity: (v: Density) => void;
     cutMarks: boolean; setCutMarks: (v: boolean) => void;
+    showHeader: boolean; setShowHeader: (v: boolean) => void;
+    headerTitle: string; setHeaderTitle: (v: string) => void;
     onPrint: () => void;
 };
 
@@ -13,6 +15,8 @@ export default function PrintToolbar({
     orientation, setOrientation,
     density, setDensity,
     cutMarks, setCutMarks,
+    showHeader, setShowHeader,
+    headerTitle, setHeaderTitle,
     onPrint
 }: Props) {
     return (
@@ -38,6 +42,8 @@ export default function PrintToolbar({
             </select>
           </label>
           <label><input type="checkbox" checked={cutMarks} onChange={e=>setCutMarks(e.target.checked)} /> Linhas de corte</label>
+          <label><input type="checkbox" checked={showHeader} onChange={e=>setShowHeader(e.target.checked)} /> Cabeçalhos</label>
+          <label>Título: <input value={headerTitle} onChange={e=>setHeaderTitle(e.target.value)} placeholder="D&D Cards" style={{ width:220 }} /></label>
           <button onClick={onPrint} style={{ border:"1px solid #ccc", borderRadius:8, padding:"6px 10px" }}>Imprimir / PDF</button>
         </div>
     )
