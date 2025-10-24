@@ -1,117 +1,195 @@
 import { useEffect, useMemo, useState } from "react";
-import { SpellsArray } from "../lib/schema/spell";
-import { buildIndex, toDocs } from "../lib/search/indexer";
-import type { TSpell } from "../lib/schema/spell";
 import Card from "../components/Card";
 import Filters from "../components/Filters";
 import Pagination from "../components/Pagination";
+import { SpellsArray } from "../lib/schema/spell";
+import { FeaturesArray } from "../lib/schema/feature";
+import type { TSpell } from "../lib/schema/spell";
+import type { TFeature } from "../lib/schema/feature";
+import { buildIndex, toDocs } from "../lib/search/indexer";
 
-type SortKey = "name_pt" | "level";
+type Tab = "spells" | "features";
 
 export default function Browse() {
-    const [spells, setSpells] = useState<TSpell[]>([]);
-    const [error, setError] = useState<string | null>(null);
+  const [tab, setTab] = useState<Tab>("spells");
 
-    // filters and controls
-    const [q, setQ] = useState("");
-    const [level, setLevel] = useState<number | "any">("any");
-    const [clazz, setClazz] = useState<string | "any">("any");
-    const [pageSize, setPageSize] = useState(12);
-    const [page, setPage] = useState(1);
-    const [sort, setSort] = useState<SortKey>("name_pt")
-    const onClear = () => { setQ(""); setLevel("any"); setClazz("any"),setSort("name_pt"); setPage(1); };
+  // spells state
+  const [spells, setSpells] = useState<TSpell[]>([]);
+  const [q, setQ] = useState("");
+  const [level, setLevel] = useState<number | "any">("any");
+  const [clazz, setClazz] = useState<string | "any">("any");
+  const [sort, setSort] = useState<"name-asc"|"level-asc"|"level-desc">("level-asc");
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(12);
+  const [error, setError] = useState<string | null>(null);
 
-    useEffect(() => {
-        import("../data/srd/spells.json")
-          .then((m) => setSpells(SpellsArray.parse(m.default)))
-          .catch((e) => setError(String(e)));
-    }, []);
+  // features state
+  const [features, setFeatures] = useState<TFeature[]>([]);
+  const [fLevel, setFLevel] = useState<number | "any">("any");
+  const [fClazz, setFClazz] = useState<string | "any">("any");
+  const [fSort, setFSort] = useState<"name-asc"|"level-asc"|"level-desc">("level-asc");
+  const [fPage, setFPage] = useState(1);
+  const [fPageSize, setFPageSize] = useState(12);
 
-    // search index
-    const mini = useMemo(() => {
-        if (!spells.length) return null;
-        return buildIndex(toDocs(spells));
-    }, [spells]);
+  useEffect(() => {
+    import("../data/srd/spells.json").then(m => setSpells(SpellsArray.parse(m.default))).catch(e=>setError(String(e)));
+    import("../data/srd/features.json").then(m => setFeatures(FeaturesArray.parse(m.default))).catch(e=>setError(String(e)));
+  }, []);
 
-    // filtered results
-    const filtered = useMemo(() => {
-      if (!mini) return [];
-      let ids: string[] | null = null;
-      if (q.trim()) ids = mini.search(q.trim()).map(r => r.id);
-      let arr = (ids ? spells.filter(s => ids!.includes(s.id)) : spells);
-      if (level !== "any") arr = arr.filter(s => s.level === level);
-      if (clazz !== "any") arr = arr.filter(s => s.classes.includes(clazz));
-      // sort
-      if (sort === "name_pt") arr = [...arr].sort((a,b)=>a.name.pt.localeCompare(b.name.pt));
-      if (sort === "level")   arr = [...arr].sort((a,b)=> (a.level-b.level) || a.name.pt.localeCompare(b.name.pt));
-      return arr;
-    }, [mini, spells, q, level, clazz, sort]);
+  // search index (spells)
+  const mini = useMemo(() => spells.length ? buildIndex(toDocs(spells)) : null, [spells]);
 
-    // pagination
-    const start = (page-1) * pageSize;
-    const pageItems = filtered.slice(start, start + pageSize);
+  // spells pipeline
+  const spellsFiltered = useMemo(() => {
+    if (!mini) return [];
+    let ids: string[] | null = null;
+    if (q.trim()) ids = mini.search(q.trim()).map(r => r.id);
+    let arr = (ids ? spells.filter(s => ids!.includes(s.id)) : spells);
+    if (level !== "any") arr = arr.filter(s => s.level === level);
+    if (clazz !== "any") arr = arr.filter(s => s.classes.includes(clazz));
+    return arr;
+  }, [mini, spells, q, level, clazz]);
 
-    // reset page when filter changes
-    useEffect(() => { setPage(1); }, [q, level, clazz, pageSize]);
+  const spellsSorted = useMemo(() => {
+    const a = spellsFiltered.slice();
+    if (sort === "name-asc") a.sort((x,y)=>x.name.pt.localeCompare(y.name.pt));
+    if (sort === "level-asc") a.sort((x,y)=>(x.level-y.level)||x.name.pt.localeCompare(y.name.pt));
+    if (sort === "level-desc") a.sort((x,y)=>(y.level-x.level)||x.name.pt.localeCompare(y.name.pt));
+    return a;
+  }, [spellsFiltered, sort]);
 
-    if (error) return <p style={{ color:"crimson" }}>Erro carregando dados: {error}</p>;
+  const sStart = (page-1) * pageSize;
+  const sPageItems = spellsSorted.slice(sStart, sStart + pageSize);
+  useEffect(()=>{ setPage(1); }, [q, level, clazz, pageSize, sort]);
 
-    return (
-        <div>
-            <h2>Navegar - Magias</h2>
-            <p style={{ opacity:.75, marginTop:-8 }}>{filtered.length} resultado(s)</p>
+  function handleLevelClick(l:number){ setLevel(l); window.scrollTo({top:0, behavior:"smooth"}); }
+  function handleClassClick(c:string){ setClazz(c); window.scrollTo({top:0, behavior:"smooth"}); }
+  function clearAllSpells(){ setQ(""); setLevel("any"); setClazz("any"); setSort("level-asc"); }
 
-            <Filters
-                q={q} setQ={setQ}
-                level={level} setLevel={setLevel}
-                clazz={clazz} setClazz={setClazz}
-                sort={sort} setSort={setSort}
-                total={filtered.length}
-                pageSize={pageSize} setPageSize={setPageSize}
-                onClear={onClear}
-            />
+  // features pipeline
+  const featuresFiltered = useMemo(() => {
+    let arr = features.slice();
+    if (fLevel !== "any") arr = arr.filter(f => f.level === fLevel);
+    if (fClazz !== "any") arr = arr.filter(f => f.class === fClazz);
+    return arr;
+  }, [features, fLevel, fClazz]);
 
-            <div style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-                gap: 12,
-            }}>
-                {pageItems.map(sp => (
-                    <Card
-                        key={sp.id}
-                        id={sp.id}
-                        kind="spell"
-                        titlePt={sp.name.pt}
-                        titleEn={sp.name.en}
-                        schoolPt={sp.school.pt}
-                        schoolEn={sp.school.en}
-                        pillsPt={[
-                            `Nível ${sp.level}`,
-                            sp.castingTime.pt,
-                            sp.range.pt,
-                            sp.duration.pt,
-                            ...sp.classes,
-                            sp.ritual ? "Ritual" : "",
-                            sp.concentration ? "Concentração" : "",
-                        ].filter(Boolean)}
-                        pillsEn={[
-                          `Level ${sp.level}`,
-                          sp.castingTime.en,
-                          sp.range.en,
-                          sp.duration.en,
-                          ...sp.classes,
-                          sp.ritual ? "Ritual" : "",
-                          sp.concentration ? "Concentration" : ""
-                        ].filter(Boolean)}
-                        bodyPt={sp.text.pt}
-                        bodyEn={sp.text.en}
-                        onClickLevel={(lvl)=>{ setLevel(lvl); setPage(1); }}
-                        onClickClass={(c)=> { setClazz(c); setPage(1); }}
-                    />
-                ))}
-            </div>
+  const featuresSorted = useMemo(() => {
+    const a = featuresFiltered.slice();
+    if (fSort === "name-asc") a.sort((x,y)=>x.name.pt.localeCompare(y.name.pt));
+    if (fSort === "level-asc") a.sort((x,y)=>(x.level-y.level)||x.name.pt.localeCompare(y.name.pt));
+    if (fSort === "level-desc") a.sort((x,y)=>(y.level-x.level)||x.name.pt.localeCompare(y.name.pt));
+    return a;
+  }, [featuresFiltered, fSort]);
 
-            <Pagination page={page} setPage={setPage} total={filtered.length} pageSize={pageSize} />
-        </div>
-    );
+  const fStart = (fPage-1) * fPageSize;
+  const fPageItems = featuresSorted.slice(fStart, fStart + fPageSize);
+  useEffect(()=>{ setFPage(1); }, [fLevel, fClazz, fPageSize, fSort]);
+
+  if (error) return <p style={{ color:"crimson" }}>Erro carregando dados: {error}</p>;
+
+  return (
+    <div>
+      <h2>Navegar</h2>
+
+      <div className="no-print" style={{ display:"flex", gap:8, marginBottom:12 }}>
+        <button onClick={()=>setTab("spells")} style={{ padding:"6px 10px", border:"1px solid #ccc", borderRadius:8, background: tab==="spells"?"#eef5ff":"#fff" }}>
+          Magias
+        </button>
+        <button onClick={()=>setTab("features")} style={{ padding:"6px 10px", border:"1px solid #ccc", borderRadius:8, background: tab==="features"?"#eef5ff":"#fff" }}>
+          Features
+        </button>
+      </div>
+
+      {tab === "spells" ? (
+        <>
+          <Filters
+            q={q} setQ={setQ}
+            level={level} setLevel={setLevel}
+            clazz={clazz} setClazz={setClazz}
+            sort={sort} setSort={setSort}
+            total={spellsSorted.length}
+            pageSize={pageSize} setPageSize={setPageSize}
+            onClearAll={clearAllSpells}
+            onClearLevel={()=>setLevel("any")}
+            onClearClazz={()=>setClazz("any")}
+          />
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(260px, 1fr))", gap:12 }}>
+            {sPageItems.map(sp => (
+              <Card
+                key={sp.id}
+                id={sp.id}
+                kind="spell"
+                titlePt={sp.name.pt}
+                titleEn={sp.name.en}
+                schoolPt={sp.school.pt}
+                schoolEn={sp.school.en}
+                pillsPt={[
+                  `Nível ${sp.level}`,
+                  sp.castingTime.pt, sp.range.pt, sp.duration.pt,
+                  sp.ritual ? "Ritual" : "", sp.concentration ? "Concentração" : ""
+                ].filter(Boolean)}
+                pillsEn={[
+                  `Level ${sp.level}`,
+                  sp.castingTime.en, sp.range.en, sp.duration.en,
+                  sp.ritual ? "Ritual" : "", sp.concentration ? "Concentration" : ""
+                ].filter(Boolean)}
+                bodyPt={sp.text.pt}
+                bodyEn={sp.text.en}
+                level={sp.level}
+                classes={sp.classes}
+                onLevelClick={handleLevelClick}
+                onClassClick={handleClassClick}
+              />
+            ))}
+          </div>
+          <Pagination page={page} setPage={setPage} total={spellsSorted.length} pageSize={pageSize} />
+        </>
+      ) : (
+        <>
+          <Filters
+            q={""} setQ={()=>{}}
+            level={fLevel} setLevel={setFLevel}
+            clazz={fClazz} setClazz={setFClazz}
+            sort={fSort} setSort={setFSort}
+            total={featuresSorted.length}
+            pageSize={fPageSize} setPageSize={setFPageSize}
+            onClearAll={()=>{ setFLevel("any"); setFClazz("any"); setFSort("level-asc"); }}
+            onClearLevel={()=>setFLevel("any")}
+            onClearClazz={()=>setFClazz("any")}
+          />
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(260px, 1fr))", gap:12 }}>
+            {fPageItems.map(ft => (
+              <Card
+                key={ft.id}
+                id={ft.id}
+                kind="feature"
+                titlePt={ft.name.pt}
+                titleEn={ft.name.en}
+                schoolPt={ft.class}
+                schoolEn={ft.class}
+                pillsPt={[
+                  `Nível ${ft.level}`,
+                  ft.action?.pt ?? "",
+                  ft.uses ? `Usos: ${ft.uses}` : ""
+                ].filter(Boolean)}
+                pillsEn={[
+                  `Level ${ft.level}`,
+                  ft.action?.en ?? "",
+                  ft.uses ? `Uses: ${ft.uses}` : ""
+                ].filter(Boolean)}
+                bodyPt={ft.text.pt}
+                bodyEn={ft.text.en}
+                level={ft.level}
+                classes={[ft.class]}
+                onLevelClick={(l:number)=>setFLevel(l)}
+                onClassClick={(c:string)=>setFClazz(c)}
+              />
+            ))}
+          </div>
+          <Pagination page={fPage} setPage={setFPage} total={featuresSorted.length} pageSize={fPageSize} />
+        </>
+      )}
+    </div>
+  );
 }

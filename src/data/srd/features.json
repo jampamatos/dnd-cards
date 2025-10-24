@@ -1,0 +1,116 @@
+[
+  {
+    "id": "fighter-fighting-style-defense",
+    "name": { "pt": "Estilo de Luta: Defesa", "en": "Fighting Style: Defense" },
+    "class": "Fighter",
+    "level": 1,
+    "text": {
+      "pt": "Enquanto estiver usando armadura, você recebe +1 na CA.",
+      "en": "While wearing armor, you gain a +1 bonus to AC."
+    },
+    "tags": ["passiva","defesa"],
+    "source": { "name": "SRD 5.1", "license": "CC-BY-4.0" }
+  },
+  {
+    "id": "fighter-second-wind",
+    "name": { "pt": "Fôlego", "en": "Second Wind" },
+    "class": "Fighter",
+    "level": 1,
+    "action": { "pt": "Ação bônus", "en": "Bonus action" },
+    "uses": "1/descanso curto ou longo",
+    "text": {
+      "pt": "Recupere PV iguais a 1d10 + seu nível de guerreiro.",
+      "en": "Regain hit points equal to 1d10 + your fighter level."
+    },
+    "tags": ["cura"],
+    "source": { "name": "SRD 5.1", "license": "CC-BY-4.0" }
+  },
+  {
+    "id": "fighter-action-surge",
+    "name": { "pt": "Surto de Ação", "en": "Action Surge" },
+    "class": "Fighter",
+    "level": 2,
+    "text": {
+      "pt": "Em seu turno, faça uma ação adicional além da sua ação normal (1/descanso curto ou longo).",
+      "en": "On your turn, take one additional action (1/short or long rest)."
+    },
+    "tags": ["explosão-de-recursos"],
+    "source": { "name": "SRD 5.1", "license": "CC-BY-4.0" }
+  },
+  {
+    "id": "fighter-extra-attack",
+    "name": { "pt": "Ataque Extra", "en": "Extra Attack" },
+    "class": "Fighter",
+    "level": 5,
+    "text": {
+      "pt": "Quando realizar a ação de Ataque, ataque duas vezes em vez de uma.",
+      "en": "When you take the Attack action, you can attack twice instead of once."
+    },
+    "tags": ["ofensiva"],
+    "source": { "name": "SRD 5.1", "license": "CC-BY-4.0" }
+  },
+  {
+    "id": "rogue-sneak-attack",
+    "name": { "pt": "Ataque Furtivo", "en": "Sneak Attack" },
+    "class": "Rogue",
+    "level": 1,
+    "text": {
+      "pt": "Uma vez por turno, cause dano extra quando tiver vantagem no ataque ou um aliado adjacente ao alvo.",
+      "en": "Once per turn, deal extra damage when you have advantage on the attack or an ally is adjacent to the target."
+    },
+    "tags": ["dano"],
+    "source": { "name": "SRD 5.1", "license": "CC-BY-4.0" }
+  },
+  {
+    "id": "rogue-cunning-action",
+    "name": { "pt": "Ação Ardilosa", "en": "Cunning Action" },
+    "class": "Rogue",
+    "level": 2,
+    "action": { "pt": "Ação bônus", "en": "Bonus action" },
+    "text": {
+      "pt": "Use Disparar, Desengajar ou Esconder-se como ação bônus em cada turno.",
+      "en": "Use Dash, Disengage, or Hide as a bonus action on each of your turns."
+    },
+    "tags": ["mobilidade","furtividade"],
+    "source": { "name": "SRD 5.1", "license": "CC-BY-4.0" }
+  },
+  {
+    "id": "druid-wild-shape",
+    "name": { "pt": "Forma Selvagem", "en": "Wild Shape" },
+    "class": "Druid",
+    "level": 2,
+    "uses": "2/descanso curto ou longo",
+    "text": {
+      "pt": "Transforme-se em uma besta que você já viu (restrições por CR/locomoção).",
+      "en": "Transform into a beast you have seen (CR/movement restrictions apply)."
+    },
+    "tags": ["transformação"],
+    "source": { "name": "SRD 5.1", "license": "CC-BY-4.0" }
+  },
+  {
+    "id": "cleric-channel-divinity",
+    "name": { "pt": "Canalizar Divindade", "en": "Channel Divinity" },
+    "class": "Cleric",
+    "level": 2,
+    "uses": "1/descanso curto ou longo",
+    "text": {
+      "pt": "Canalize poder divino para efeitos como Afastar Mortos-Vivos; opções extras vêm do seu Domínio.",
+      "en": "Channel divine power for effects like Turn Undead; additional options come from your Domain."
+    },
+    "tags": ["clérigo","recurso"],
+    "source": { "name": "SRD 5.1", "license": "CC-BY-4.0" }
+  },
+  {
+    "id": "wizard-arcane-recovery",
+    "name": { "pt": "Recuperação Arcana", "en": "Arcane Recovery" },
+    "class": "Wizard",
+    "level": 1,
+    "uses": "1/dia",
+    "text": {
+      "pt": "Em um descanso curto, recupere espaços cuja soma de níveis seja igual a metade do nível de mago (arred. para cima).",
+      "en": "During a short rest, recover spell slots with a combined level equal to half your wizard level (rounded up)."
+    },
+    "tags": ["recarga","magia"],
+    "source": { "name": "SRD 5.1", "license": "CC-BY-4.0" }
+  }
+]
