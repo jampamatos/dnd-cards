@@ -17,15 +17,53 @@ type FiltersProps = {
   onClearTags?: ()=>void;
 };
 
-// Shared list so dropdown and clearing logic stay in sync with spell levels
 const LEVELS = ["any",0,1,2,3,4,5,6,7,8,9] as const;
 
 export default function Filters(p: FiltersProps) {
   const { lang } = usePrefs();
+  const L = lang === "pt"
+    ? {
+        search: "Busca (PT/EN):",
+        placeholder: "fireball, escudo, cura...",
+        level: "Nível:",
+        any: "Qualquer",
+        clazz: "Classe:",
+        sort: "Ordenar por:",
+        nameAZ: "Nome (A→Z)",
+        levelUp: "Nível (↑)",
+        levelDown: "Nível (↓)",
+        perPage: "Por página",
+        tags: "Tags:",
+        clearTags: "Limpar tags",
+        clearAll: "Limpar filtros",
+        results: (n:number)=> n===1 ? "resultado" : "resultados",
+        levelChip: (n:number)=> `Nível ${n}`,
+        classChip: (c:string)=> c,
+        tagTitle: "Filtrar por tag",
+      }
+    : {
+        search: "Search (PT/EN):",
+        placeholder: "fireball, shield, healing...",
+        level: "Level:",
+        any: "Any",
+        clazz: "Class:",
+        sort: "Sort by:",
+        nameAZ: "Name (A→Z)",
+        levelUp: "Level (↑)",
+        levelDown: "Level (↓)",
+        perPage: "Per page",
+        tags: "Tags:",
+        clearTags: "Clear tags",
+        clearAll: "Clear filters",
+        results: (n:number)=> n===1 ? "result" : "results",
+        levelChip: (n:number)=> `Level ${n}`,
+        classChip: (c:string)=> c,
+        tagTitle: "Filter by tag",
+      };
+
   const label = (k: TagKey) => (lang === "pt" ? TAG_CATALOG[k].pt : TAG_CATALOG[k].en);
 
   function toggleTag(k: TagKey) {
-    // toggle to add/remove tag, delegating state control to the parent component
     const has = p.tags.includes(k);
     p.setTags(has ? p.tags.filter(t => t !== k) : [...p.tags, k]);
   }
@@ -34,42 +72,42 @@ export default function Filters(p: FiltersProps) {
     <div style={{ display:"grid", gap:8 }}>
       <div style={{ display:"grid", gap:8, gridTemplateColumns:"1fr repeat(4, max-content)", alignItems:"end" }}>
         <label style={{ display:"grid" }}>
-          <span>Busca (PT/EN):</span>
+          <span>{L.search}</span>
           <input
             value={p.q}
             onChange={e=>p.setQ(e.target.value)}
-            placeholder="fireball, escudo, cura..."
+            placeholder={L.placeholder}
             style={{ padding:"6px 8px", border:"1px solid #ccc", borderRadius:6 }}
           />
         </label>
 
         <label style={{ display:"grid" }}>
-          <span>Nível:</span>
+          <span>{L.level}</span>
           <select value={String(p.level)} onChange={e=>p.setLevel(e.target.value==="any"?"any":Number(e.target.value))}>
-            {LEVELS.map(l => <option key={String(l)} value={String(l)}>{l==="any"?"Qualquer":`Nível ${l}`}</option>)}
+            {LEVELS.map(l => <option key={String(l)} value={String(l)}>{l==="any"?L.any:`${lang==="pt"?"Nível":"Level"} ${l}`}</option>)}
           </select>
         </label>
 
         <label style={{ display:"grid" }}>
-          <span>Classe:</span>
+          <span>{L.clazz}</span>
           <select value={p.clazz} onChange={e=>p.setClazz(e.target.value)}>
-            <option value="any">Qualquer</option>
+            <option value="any">{L.any}</option>
             {["Artificer","Bard","Cleric","Druid","Paladin","Ranger","Sorcerer","Wizard","Warlock"]
               .map(c => <option key={c} value={c}>{c}</option>)}
           </select>
         </label>
 
         <label style={{ display:"grid" }}>
-          <span>Ordenar por:</span>
+          <span>{L.sort}</span>
           <select value={p.sort} onChange={e=>p.setSort(e.target.value as Sort)}>
-            <option value="name-asc">Nome (A→Z)</option>
-            <option value="level-asc">Nível (↑)</option>
-            <option value="level-desc">Nível (↓)</option>
+            <option value="name-asc">{L.nameAZ}</option>
+            <option value="level-asc">{L.levelUp}</option>
+            <option value="level-desc">{L.levelDown}</option>
           </select>
         </label>
 
         <label style={{ display:"grid" }}>
-          <span>Por página ({p.total}):</span>
+          <span>{L.perPage} ({p.total}):</span>
           <select value={String(p.pageSize)} onChange={e=>p.setPageSize(Number(e.target.value))}>
             {[8,12,16,24,36].map(n=><option key={n} value={n}>{n}</option>)}
           </select>
@@ -78,7 +116,7 @@ export default function Filters(p: FiltersProps) {
 
       {/* Tag palette */}
       <div style={{ display:"flex", gap:8, flexWrap:"wrap", alignItems:"center" }}>
-        <span style={{ opacity:.8 }}>{lang==="pt"?"Tags:":"Tags:"}</span>
+        <span style={{ opacity:.8 }}>{L.tags}</span>
         {TAG_ORDER.map((k) => {
           const active = p.tags.includes(k);
           return (
@@ -92,7 +130,7 @@ export default function Filters(p: FiltersProps) {
                 background: active ? "#eef5ff" : "#fff",
                 borderRadius:999, padding:"2px 10px", cursor:"pointer"
               }}
-              title={lang==="pt"?"Filtrar por tag":"Filter by tag"}
+              title={L.tagTitle}
             >
               #{label(k)}
             </button>
@@ -104,23 +142,23 @@ export default function Filters(p: FiltersProps) {
             onClick={p.onClearTags ?? (()=>p.setTags([]))}
             style={{ marginLeft:"auto", border:"1px solid #ccc", borderRadius:8, padding:"6px 10px" }}
           >
-            {lang==="pt"?"Limpar tags":"Clear tags"}
+            {L.clearTags}
           </button>
         )}
       </div>
 
       {/* Active filter chips */}
       <div style={{ display:"flex", gap:8, alignItems:"center", flexWrap:"wrap" }}>
-        <strong>{p.total} resultado(s)</strong>
+        <strong>{p.total} {L.results(p.total)}</strong>
 
         {p.level!=="any" &&
           <button onClick={p.onClearLevel} style={{ border:"1px solid #ccc", borderRadius:999, padding:"2px 10px" }}>
-            Nível {p.level} ✕
+            {L.levelChip(p.level as number)} ✕
           </button>}
 
         {p.clazz!=="any" &&
           <button onClick={p.onClearClazz} style={{ border:"1px solid #ccc", borderRadius:999, padding:"2px 10px" }}>
-            {p.clazz} ✕
+            {L.classChip(p.clazz)} ✕
           </button>}
 
         {p.tags.map((k)=>(
@@ -135,7 +173,7 @@ export default function Filters(p: FiltersProps) {
 
         {(p.level!=="any" || p.clazz!=="any" || p.q || p.tags.length>0) &&
           <button onClick={p.onClearAll} style={{ marginLeft:"auto", border:"1px solid #ccc", borderRadius:8, padding:"6px 10px" }}>
-            Limpar filtros
+            {L.clearAll}
           </button>}
       </div>
     </div>

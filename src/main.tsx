@@ -1,5 +1,6 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
+import { PrefsProvider } from "./lib/state/prefs.ts";
 import { applyTheme } from "./styles/theme";
 import App from "./App.tsx";
 
@@ -10,7 +11,9 @@ applyTheme("system");
 registerSW({ immediate: true })
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <BrowserRouter basename={import.meta.env.BASE_URL}>
-    <App />
-  </BrowserRouter>
+  <PrefsProvider>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
+      <App />
+    </BrowserRouter>
+  </PrefsProvider>
 );

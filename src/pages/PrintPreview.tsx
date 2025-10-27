@@ -85,6 +85,10 @@ export default function PrintPreview() {
     return `${date} • ${time}`;
   }, [lang]);
 
+  const L = lang === "pt"
+    ? { title: "Pré-visualização de Impressão", card: "carta", cards: "cartas", empty: "Nada selecionado. Vá em “Navegar” e selecione." }
+    : { title: "Print Preview", card: "card", cards: "cards", empty: "Nothing selected. Go to “Browse” and select." };
+
   return (
     <div>
       <h2 className="no-print">Print Preview</h2>
@@ -101,7 +105,9 @@ export default function PrintPreview() {
       {showHeader && (
         <div className="print-header">
           <h1>{headerTitle}</h1>
-          <div className="meta">{total} {total === 1 ? "card" : "cards"} • {stamp}</div>
+          <div className="meta">
+            {total} {total === 1 ? L.card : L.cards} • {stamp}
+          </div>
         </div>
       )}
 
@@ -110,7 +116,7 @@ export default function PrintPreview() {
         role="main"
         className={`print-grid print-${density} print-content`}
       >
-        {cards.length === 0 && <em className="no-print">Nada selecionado. Vá em “Navegar” e selecione.</em>}
+        {cards.length === 0 && <em className="no-print">{L.empty}</em>}
         {cards.map(c => (
           <CardPrint
             key={c.key}

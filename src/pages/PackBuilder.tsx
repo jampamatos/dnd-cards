@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { usePacks } from "../lib/state/packs";
 import { SpellsArray } from "../lib/schema/spell";
-import { FeaturesArray } from "../lib/schema/feature"; // <— estava faltando
+import { FeaturesArray } from "../lib/schema/feature";
 import type { TSpell } from "../lib/schema/spell";
 import type { TFeature } from "../lib/schema/feature";
+import { usePrefs } from "../lib/state/prefs";
 
 type IndexMaps = {
   spellById: Map<string, TSpell>;
@@ -12,6 +13,31 @@ type IndexMaps = {
 };
 
 export default function PackBuilder() {
+  const { lang } = usePrefs();
+  const L = lang === "pt"
+    ? {
+        title: "Montar Pacote",
+        selected: "Itens selecionados",
+        remove: "Remover",
+        clearAll: "Limpar tudo",
+        goToPrint: "Ir para Imprimir",
+        nothing: "Nada selecionado ainda. Vá em “Navegar”.",
+        level: "Nível",
+        klass: (c: string) => c,
+        browse: "Navegar",
+      }
+    : {
+        title: "Pack Builder",
+        selected: "Selected items",
+        remove: "Remove",
+        clearAll: "Clear all",
+        goToPrint: "Go to Print",
+        nothing: "Nothing selected yet. Go to “Browse”.",
+        level: "Level",
+        klass: (c: string) => c,
+        browse: "Browse",
+      };
+
   const { selected, remove, clear } = usePacks();
   const [maps, setMaps] = useState<IndexMaps>({
     spellById: new Map(),
@@ -36,8 +62,12 @@ export default function PackBuilder() {
       if (!sp) return null;
       return (
         <li key={s.kind + s.id} style={{ display:"flex", justifyContent:"space-between", gap:12 }}>
-          <span><strong>{sp.name.pt}</strong> <span style={{opacity:.7}}>({sp.name.en})</span> — Nível {sp.level}</span>
-          <button onClick={() => remove(s.id, s.kind)} style={{ border:"1px solid #ccc", borderRadius:6, padding:"2px 8px" }}>Remover</button>
+          <span>
+            <strong>{sp.name.pt}</strong> <span style={{opacity:.7}}>({sp.name.en})</span> — {L.level} {sp.level}
+          </span>
+          <button onClick={() => remove(s.id, s.kind)} style={{ border:"1px solid #ccc", borderRadius:6, padding:"2px 8px" }}>
+            {L.remove}
+          </button>
         </li>
       );
     }
@@ -46,27 +76,31 @@ export default function PackBuilder() {
       if (!ft) return null;
       return (
         <li key={s.kind + s.id} style={{ display:"flex", justifyContent:"space-between", gap:12 }}>
-          <span><strong>{ft.name.pt}</strong> <span style={{opacity:.7}}>({ft.name.en})</span> — {ft.class} • Nível {ft.level}</span>
-          <button onClick={() => remove(s.id, s.kind)} style={{ border:"1px solid #ccc", borderRadius:6, padding:"2px 8px" }}>Remover</button>
+          <span>
+            <strong>{ft.name.pt}</strong> <span style={{opacity:.7}}>({ft.name.en})</span> — {L.klass(ft.class)} • {L.level} {ft.level}
+          </span>
+          <button onClick={() => remove(s.id, s.kind)} style={{ border:"1px solid #ccc", borderRadius:6, padding:"2px 8px" }}>
+            {L.remove}
+          </button>
         </li>
       );
     }
     return null;
   }).filter(Boolean);
 
-    return (
-      <div>
-        <h2>Pack Builder</h2>
-        <p>Itens selecionados: {selected.length}</p>
-        <div style={{ display:"flex", gap:8, margin:"8px 0" }}>
-          <button onClick={clear} style={{ border:"1px solid #ccc", borderRadius:8, padding:"6px 10px" }}>Limpar tudo</button>
-          <Link to="/print">
-            <button style={{ border:"1px solid #ccc", borderRadius:8, padding:"6px 10px" }}>Ir para Imprimir</button>
-          </Link>
-        </div>
-        <ul style={{ display:"grid", gap:8, paddingLeft:18 }}>
-          {items.length ? items : <em>Nada selecionado ainda. Vá em “Navegar”.</em>}
-        </ul>
+  return (
+    <div>
+      <h2>{L.title}</h2>
+      <p>{L.selected}: {selected.length}</p>
+      <div style={{ display:"flex", gap:8, margin:"8px 0" }}>
+        <button onClick={clear} style={{ border:"1px solid #ccc", borderRadius:8, padding:"6px 10px" }}>{L.clearAll}</button>
+        <Link to="/print">
+          <button style={{ border:"1px solid #ccc", borderRadius:8, padding:"6px 10px" }}>{L.goToPrint}</button>
+        </Link>
       </div>
-    );
+      <ul style={{ display:"grid", gap:8, paddingLeft:18 }}>
+        {items.length ? items : <em>{L.nothing}</em>}
+      </ul>
+    </div>
+  );
 }

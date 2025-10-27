@@ -1,3 +1,7 @@
+import { usePrefs } from "../lib/state/prefs";
+
 export default function About() {
-    return <h2>Sobre & Licenças</h2>;
+  const { lang } = usePrefs();
+  const title = lang === "pt" ? "Sobre & Licenças" : "About & Licenses";
+  return <h2>{title}</h2>;
 }

@@ -10,6 +10,7 @@ import type { TFeature } from "../lib/schema/feature";
 import { buildIndex, toDocs } from "../lib/search/indexer";
 import type { UnifiedDoc } from "../lib/search/indexer";
 import { detectSpellTags, detectFeatureTags, type TagKey } from "../lib/search/tags";
+import { usePrefs } from "../lib/state/prefs";
 
 type HitKind = "spell" | "feature";
 type SortOption = "name-asc" | "level-asc" | "level-desc";
@@ -172,18 +173,23 @@ export default function Browse() {
 
   if (error) return <p style={{ color:"crimson" }}>Erro carregando dados: {error}</p>;
 
+  const { lang } = usePrefs();
+  const L = lang === "pt"
+      ? { title: "Navegar", spells: "Magias", features: "Características" }
+      : { title: "Browse",   spells: "Spells", features: "Features" };
+
   return (
     <div>
-      <h2>Navegar</h2>
+      <h2>{L.title}</h2>
 
       <div className="no-print" style={{ display: "flex", gap: 8, marginBottom: 12 }}>
         <button onClick={() => setTab("spells")}
                 style={{ padding: "6px 10px", border: "1px solid #ccc", borderRadius: 8, background: tab === "spells" ? "#eef5ff" : "#fff" }}>
-          Magias
+          {L.spells}
         </button>
         <button onClick={() => setTab("features")}
                 style={{ padding: "6px 10px", border: "1px solid #ccc", borderRadius: 8, background: tab === "features" ? "#eef5ff" : "#fff" }}>
-          Features
+          {L.features}
         </button>
       </div>
 

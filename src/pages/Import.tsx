@@ -1,3 +1,6 @@
+import { usePrefs } from "../lib/state/prefs";
+
 export default function Import() {
-    return <h2>Importar Pacote</h2>;
+  const { lang } = usePrefs();
+  return <h2>{lang === "pt" ? "Importar Pacote" : "Import Pack"}</h2>;
 }

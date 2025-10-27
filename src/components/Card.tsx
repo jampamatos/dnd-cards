@@ -22,7 +22,7 @@ type CardProps = {
 
 function pillToTag(pill: string, lang: "pt" | "en"): TagKey | null {
   const t = pill.toLowerCase();
-  // Order matters so a "bonus action" pill is not interpreted as plain "action"
+  // order matters
   if (t.includes(lang === "pt" ? "reação" : "reaction")) return "reaction";
   if (t.includes(lang === "pt" ? "ação bônus" : "bonus action")) return "bonus-action";
   if (t.includes(lang === "pt" ? "ação" : "action")) return "action";
@@ -45,35 +45,64 @@ export default function Card(props: CardProps) {
   const { lang } = usePrefs();
   const selected = isSelected(id, kind);
 
-  // Localize textual content according to user preference
+  // localized text
   const pills = lang === "pt" ? pillsPt : pillsEn;
   const body  = lang === "pt" ? bodyPt  : bodyEn;
+
+  const L = lang === "pt"
+    ? {
+        add: "+ Selecionar",
+        remove: "✓ Selecionado",
+        ttAdd: "Adicionar à Seleção",
+        ttRemove: "Remover da Seleção",
+        ttLevel: "Filtrar por nível",
+        ttTag: "Filtrar por tag",
+      }
+    : {
+        add: "+ Select",
+        remove: "✓ Selected",
+        ttAdd: "Add to Selection",
+        ttRemove: "Remove from Selection",
+        ttLevel: "Filter by level",
+        ttTag: "Filter by tag",
+      };
+
+  const TitleBlock = () => (
+    <h3 style={{ margin:0, fontWeight:700 }}>
+      {lang === "pt"
+        ? (<>{titlePt} <span style={{ opacity:.7 }}> / {titleEn}</span></>)
+        : titleEn}
+    </h3>
+  );
+
+  const SchoolBlock = () => (
+    <h4 style={{ margin:0, fontWeight:500, fontSize:14 }}>
+      {lang === "pt"
+        ? (<>{schoolPt} <span style={{ opacity:.7 }}> / {schoolEn}</span></>)
+        : schoolEn}
+    </h4>
+  );
 
   return (
     <article style={{ border:"1px solid #ddd", borderRadius:8, padding:12, breakInside:"avoid" }}>
       <header style={{ display:"flex", justifyContent:"space-between", gap:8 }}>
         <div>
-          <h3 style={{ margin:0, fontWeight:700 }}>
-            {titlePt} <span style={{ opacity:.7 }}> / {titleEn}</span>
-          </h3>
-          <h4 style={{ margin:0, fontWeight:500, fontSize:14 }}>
-            {schoolPt} <span style={{ opacity:.7 }}> / {schoolEn}</span>
-          </h4>
+          <TitleBlock />
+          <SchoolBlock />
         </div>
         <button
           onClick={() => selected ? remove(id, kind) : add({ id, kind })}
           style={{ padding:"4px 8px", borderRadius:8, border:"1px solid #ccc", background:selected?"#e6ffed":"#f6f6f6" }}
-          title={selected ? "Remover da Seleção" : "Adicionar à Seleção"}
+          title={selected ? L.ttRemove : L.ttAdd}
         >
-          {selected ? "✓ Selecionado" : "+ Selecionar"}
+          {selected ? L.remove : L.add}
         </button>
       </header>
 
-      {/* Standard pills */}
+      {/* standard pills */}
       <div style={{ display:"flex", flexWrap:"wrap", gap:6, margin:"8px 0" }}>
         {pills.map((p, i) => {
           const isLevelPill = i === 0 && typeof level === "number" && !!onLevelClick;
-          // derived mapping lets non-level pills act as quick tag filters
           const mappedTag = !isLevelPill && onTagClick ? pillToTag(p, lang) : null;
           const clickable = isLevelPill || Boolean(mappedTag);
 
@@ -94,7 +123,7 @@ export default function Card(props: CardProps) {
                 background: clickable ? "#f6faff" : "transparent",
                 cursor: clickable ? "pointer" : "default"
               }}
-              title={isLevelPill ? "Filtrar por nível" : (mappedTag ? (lang==="pt"?"Filtrar por tag":"Filter by tag") : undefined)}
+              title={isLevelPill ? L.ttLevel : (mappedTag ? L.ttTag : undefined)}
             >
               {p}
             </button>
@@ -102,7 +131,7 @@ export default function Card(props: CardProps) {
         })}
       </div>
 
-      {/* Classes clicáveis */}
+      {/* classes */}
       {classes?.length ? (
         <div style={{ display:"flex", flexWrap:"wrap", gap:6, margin:"0 0 8px" }}>
           {classes.map((c) => (
@@ -110,7 +139,7 @@ export default function Card(props: CardProps) {
               key={c}
               onClick={onClassClick ? ()=>onClassClick(c) : undefined}
               style={{ fontSize:12, border:"1px solid #ccc", borderRadius:999, padding:"2px 8px", background:"#fafafa", cursor:"pointer" }}
-              title="Filtrar por classe"
+              title={lang === "pt" ? "Filtrar por classe" : "Filter by class"}
             >
               {c}
             </button>
@@ -118,7 +147,7 @@ export default function Card(props: CardProps) {
         </div>
       ) : null}
 
-      {/* Advanced tag chips sourced from heuristics (if supplied) */}
+      {/* advanced tags */}
       {tagKeys && tagKeys.length > 0 && (
         <div style={{ display:"flex", flexWrap:"wrap", gap:6, margin:"0 0 8px" }}>
           {tagKeys.map((k) => {

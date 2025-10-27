@@ -14,9 +14,17 @@ export default function CardPrint(p: CardPrintProps) {
   return (
     <article className={`print-card ${p.withCutMarks ? "cutmarks" : ""}`} lang={p.lang}>
       <h3>
-        {p.titlePt} <span style={{ opacity:.7 }}> / {p.titleEn}</span><br />
-        <small style={{ fontWeight:500, fontSize:14 }}>{p.schoolPt} <span style={{ opacity:.7 }}> / {p.schoolEn}</span></small>
+        {p.lang === "pt"
+          ? (<>{p.titlePt} <span style={{ opacity:.7 }}> / {p.titleEn}</span></>)
+          : p.titleEn}
+        <br />
+        <small style={{ fontWeight:500, fontSize:14 }}>
+          {p.lang === "pt"
+            ? (<>{p.schoolPt} <span style={{ opacity:.7 }}> / {p.schoolEn}</span></>)
+            : p.schoolEn}
+        </small>
       </h3>
+
       <div className="pills">
         {pills.map((tag, i) => (
           <span key={i} className="pill">{tag}</span>
