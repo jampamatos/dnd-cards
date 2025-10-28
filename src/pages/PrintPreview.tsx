@@ -18,6 +18,7 @@ type CardVM = {
   schoolPt: string; schoolEn: string;
   pillsPt: string[]; pillsEn: string[];
   bodyPt: string; bodyEn: string;
+  components?: TSpell["components"];
 };
 
 export default function PrintPreview() {
@@ -65,6 +66,7 @@ export default function PrintPreview() {
           pillsPt: [ `Nível ${sp.level}`, sp.castingTime.pt, sp.range.pt, sp.duration.pt ].filter(Boolean),
           pillsEn: [ `Level ${sp.level}`, sp.castingTime.en, sp.range.en, sp.duration.en ].filter(Boolean),
           bodyPt: sp.text.pt, bodyEn: sp.text.en,
+          components: sp.components,
         });
       } else {
         const ft = features.find(f => f.id === it.id);
@@ -200,6 +202,11 @@ export default function PrintPreview() {
                 schoolPt={c.schoolPt} schoolEn={c.schoolEn}
                 pillsPt={c.pillsPt} pillsEn={c.pillsEn}
                 bodyPt={c.bodyPt} bodyEn={c.bodyEn}
+                components={{
+                  verbal: c.components?.verbal,
+                  somatic: c.components?.somatic,
+                  material: c.components?.material,
+                }}
                 withCutMarks={cutMarks}
                 lang={lang}
               />

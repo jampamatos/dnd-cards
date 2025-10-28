@@ -156,6 +156,13 @@ input::placeholder { color: var(--muted); opacity: .9; }
   background: color-mix(in oklab, var(--text) 6%, var(--surface));
   color: var(--text);
 }
+/* Component chips (V/S/M): outline + dashed to distinguish from semantic tags */
+.chip--component {
+  background: transparent;
+  border-style: dashed;
+  font-weight: 700;
+}
+.chip--component[title] { cursor: help; }
 .chip--click {
   background: color-mix(in oklab, var(--primary) 14%, var(--surface));
   cursor: pointer;
@@ -165,6 +172,41 @@ input::placeholder { color: var(--muted); opacity: .9; }
   color: var(--primary);
   background: color-mix(in oklab, var(--primary) 18%, var(--surface));
 }
+
+/* Components container pill: slightly different look to group V/S/M */
+.chip--components {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  /* visual sutilmente diferente do restante */
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.18);
+  padding: 2px 6px;
+  /* permite que o material seja grande sem quebrar layout */
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+
+/* Remove margins that some .chip variants might have when nested */
+.chip--components .chip {
+  margin: 0;
+}
+
+/* Inner component chips (V/S/M) stay dashed; stronger weight already set */
+.chip--component {
+  background: transparent;
+  border-style: dashed;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Material pill: show long text gracefully */
+.chip--component-m {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 
 /* ------------------------------------------------------------------------
    8) Cards (browse grid)

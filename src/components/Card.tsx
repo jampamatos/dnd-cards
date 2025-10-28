@@ -10,6 +10,7 @@ type CardProps = {
   schoolPt: string;   schoolEn: string;
   pillsPt: string[];  pillsEn: string[];
   bodyPt: string;     bodyEn: string;
+  components?: { verbal?: boolean; somatic?: boolean; material?:string};
   level?: number;
   classes?: string[];
   onLevelClick?: (lvl:number)=>void;
@@ -66,6 +67,21 @@ export default function Card(props: CardProps) {
         ttLevel: "Filter by level",
         ttTag: "Filter by tag",
       };
+  
+  // Derive V/S/M component chips. We keep them lightweight and accessible
+  const compItems = (() => {
+    const c = props.components;
+    if (!c) return [] as Array<{key:'V'|'S'|'M'; title:string; material?:string}>;
+    const items: Array<{key:'V'|'S'|'M'; title:string; material?:string}> = [];
+    if (c.verbal)  items.push({ key: 'V', title: lang === 'pt' ? 'Componente Verbal'  : 'Verbal component' });
+    if (c.somatic) items.push({ key: 'S', title: lang === 'pt' ? 'Componente Somático' : 'Somatic component' });
+    if (c.material) items.push({
+      key: 'M',
+      title: (lang === 'pt' ? 'Componente Material: ' : 'Material component: ') + c.material,
+      material: c.material,
+    });
+    return items;
+  })();
 
   const TitleBlock = () => (
     <h3 style={{ margin:0, fontWeight:700 }}>
@@ -127,6 +143,34 @@ export default function Card(props: CardProps) {
           return <span key={i} className="chip">{p}</span>;
         })}
       </div>
+
+      {compItems.length > 0 && (
+        <div className="chips" style={{ margin: "0 0 8px" }}>
+          {/* Outer container pill to group component chips */}
+          <span
+            className="chip chip--components"
+            title={lang === "pt" ? "Componentes da magia" : "Spell components"}
+            aria-label={lang === "pt" ? "Componentes da magia" : "Spell components"}
+          >
+            {compItems.map((it) => {
+              const isMaterial = it.key === "M";
+              const label = isMaterial ? (it.material ?? "M") : it.key; // show material text instead of just "M"
+      
+              return (
+                <span
+                  key={it.key}
+                  className={`chip chip--component ${isMaterial ? "chip--component-m" : ""}`}
+                  title={it.title}
+                  aria-label={it.title}
+                >
+                  {label}
+                </span>
+              );
+            })}
+          </span>
+        </div>
+      )}
+
 
       {classes?.length ? (
         <div className="chips" style={{ margin:"0 0 8px" }}>
