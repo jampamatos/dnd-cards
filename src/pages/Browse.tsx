@@ -243,6 +243,11 @@ export default function Browse() {
                   ].filter(Boolean)}
                   bodyPt={sp.text.pt}
                   bodyEn={sp.text.en}
+                  components={{
+                    verbal: sp.components?.verbal,
+                    somatic: sp.components?.somatic,
+                    material:sp.components?.material,
+                  }}
                   level={sp.level}
                   classes={sp.classes}
                   onLevelClick={handleLevelClick}

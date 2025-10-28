@@ -10,6 +10,7 @@ type CardProps = {
   schoolPt: string;   schoolEn: string;
   pillsPt: string[];  pillsEn: string[];
   bodyPt: string;     bodyEn: string;
+  components?: { verbal?: boolean; somatic?: boolean; material?:string};
   level?: number;
   classes?: string[];
   onLevelClick?: (lvl:number)=>void;
@@ -19,6 +20,36 @@ type CardProps = {
   tagKeys?: TagKey[];
   onTagClick?: (tag: TagKey)=>void;
 };
+
+// Escape HTML to prevent injection before applying inline markup.
+function escapeHtml(s: string): string {
+  return s
+    .replaceAll(/&/g, "&amp;")
+    .replaceAll(/</g, "&lt;")
+    .replaceAll(/>/g, "&gt;")
+    .replaceAll(/"/g, "&quot;")
+    .replaceAll(/'/g, "&#039;");
+}
+
+// Very small inline-markdown: **bold**, __bold__, *italic*, _italic_ + \n -> <br>
+function inlineMarkdownToHtml(s: string): string {
+  let h = escapeHtml(s);
+  // bold (process first to avoid greedily catching the * in italics)
+  h = h.replace(/(\*\*|__)(.+?)\1/g, "<strong>$2</strong>");
+  // italic
+  h = h.replace(/(\*|_)(.+?)\1/g, "<em>$2</em>");
+  // single line breaks become <br>
+  h = h.replace(/\n/g, "<br/>");
+  return h;
+}
+
+// Render body with paragraph support: split on blank lines (\n\n)
+function renderRichBody(body: string) {
+  const paragraphs = body.split(/\n\s*\n/);
+  return paragraphs.map((p, i) => (
+    <p key={i} dangerouslySetInnerHTML={{ __html: inlineMarkdownToHtml(p) }} />
+  ));
+}
 
 function pillToTag(pill: string, lang: "pt" | "en"): TagKey | null {
   const t = pill.toLowerCase();
@@ -66,6 +97,21 @@ export default function Card(props: CardProps) {
         ttLevel: "Filter by level",
         ttTag: "Filter by tag",
       };
+  
+  // Derive V/S/M component chips. We keep them lightweight and accessible
+  const compItems = (() => {
+    const c = props.components;
+    if (!c) return [] as Array<{key:'V'|'S'|'M'; title:string; material?:string}>;
+    const items: Array<{key:'V'|'S'|'M'; title:string; material?:string}> = [];
+    if (c.verbal)  items.push({ key: 'V', title: lang === 'pt' ? 'Componente Verbal'  : 'Verbal component' });
+    if (c.somatic) items.push({ key: 'S', title: lang === 'pt' ? 'Componente Somático' : 'Somatic component' });
+    if (c.material) items.push({
+      key: 'M',
+      title: (lang === 'pt' ? 'Componente Material: ' : 'Material component: ') + c.material,
+      material: c.material,
+    });
+    return items;
+  })();
 
   const TitleBlock = () => (
     <h3 style={{ margin:0, fontWeight:700 }}>
@@ -128,6 +174,34 @@ export default function Card(props: CardProps) {
         })}
       </div>
 
+      {compItems.length > 0 && (
+        <div className="chips" style={{ margin: "0 0 8px" }}>
+          {/* Outer container pill to group component chips */}
+          <span
+            className="chip chip--components"
+            title={lang === "pt" ? "Componentes da magia" : "Spell components"}
+            aria-label={lang === "pt" ? "Componentes da magia" : "Spell components"}
+          >
+            {compItems.map((it) => {
+              const isMaterial = it.key === "M";
+              const label = isMaterial ? (it.material ?? "M") : it.key; // show material text instead of just "M"
+      
+              return (
+                <span
+                  key={it.key}
+                  className={`chip chip--component ${isMaterial ? "chip--component-m" : ""}`}
+                  title={it.title}
+                  aria-label={it.title}
+                >
+                  {label}
+                </span>
+              );
+            })}
+          </span>
+        </div>
+      )}
+
+
       {classes?.length ? (
         <div className="chips" style={{ margin:"0 0 8px" }}>
           {classes.map((c) => (
@@ -171,7 +245,9 @@ export default function Card(props: CardProps) {
         </div>
       )}
 
-      <p style={{ marginTop:8 }}>{body}</p>
+      <div className="body" style={{ marginTop: 8 }}>
+        {renderRichBody(body)}
+      </div>
     </article>
   );
 }
