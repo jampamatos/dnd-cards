@@ -61,11 +61,11 @@ export default function PackBuilder() {
       const sp = maps.spellById.get(s.id);
       if (!sp) return null;
       return (
-        <li key={s.kind + s.id} style={{ display:"flex", justifyContent:"space-between", gap:12 }}>
+        <li key={s.kind + s.id} className="pack-list__item">
           <span>
-            <strong>{sp.name.pt}</strong> <span style={{opacity:.7}}>({sp.name.en})</span> — {L.level} {sp.level}
+            <strong>{sp.name.pt}</strong> <span className="muted">({sp.name.en})</span> — {L.level} {sp.level}
           </span>
-          <button onClick={() => remove(s.id, s.kind)} style={{ border:"1px solid #ccc", borderRadius:6, padding:"2px 8px" }}>
+          <button type="button" onClick={() => remove(s.id, s.kind)} className="btn">
             {L.remove}
           </button>
         </li>
@@ -75,11 +75,11 @@ export default function PackBuilder() {
       const ft = maps.featureById.get(s.id);
       if (!ft) return null;
       return (
-        <li key={s.kind + s.id} style={{ display:"flex", justifyContent:"space-between", gap:12 }}>
+        <li key={s.kind + s.id} className="pack-list__item">
           <span>
-            <strong>{ft.name.pt}</strong> <span style={{opacity:.7}}>({ft.name.en})</span> — {L.klass(ft.class)} • {L.level} {ft.level}
+            <strong>{ft.name.pt}</strong> <span className="muted">({ft.name.en})</span> — {L.klass(ft.class)} • {L.level} {ft.level}
           </span>
-          <button onClick={() => remove(s.id, s.kind)} style={{ border:"1px solid #ccc", borderRadius:6, padding:"2px 8px" }}>
+          <button type="button" onClick={() => remove(s.id, s.kind)} className="btn">
             {L.remove}
           </button>
         </li>
@@ -89,18 +89,18 @@ export default function PackBuilder() {
   }).filter(Boolean);
 
   return (
-    <div>
-      <h2>{L.title}</h2>
+    <section className="page container">
+      <h1>{L.title}</h1>
       <p>{L.selected}: {selected.length}</p>
-      <div style={{ display:"flex", gap:8, margin:"8px 0" }}>
-        <button onClick={clear} style={{ border:"1px solid #ccc", borderRadius:8, padding:"6px 10px" }}>{L.clearAll}</button>
-        <Link to="/print">
-          <button style={{ border:"1px solid #ccc", borderRadius:8, padding:"6px 10px" }}>{L.goToPrint}</button>
+      <div className="pack-actions">
+        <button type="button" onClick={clear} className="btn">{L.clearAll}</button>
+        <Link to="/print" className="btn btn-primary" role="button">
+          {L.goToPrint}
         </Link>
       </div>
-      <ul style={{ display:"grid", gap:8, paddingLeft:18 }}>
-        {items.length ? items : <em>{L.nothing}</em>}
+      <ul className="pack-list">
+        {items.length ? items : <li><em>{L.nothing}</em></li>}
       </ul>
-    </div>
+    </section>
   );
 }

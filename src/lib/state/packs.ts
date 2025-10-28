@@ -6,6 +6,7 @@ import {
   useMemo,
   useRef,
   useState,
+  type DependencyList,
   type ReactNode,
 } from "react";
 import { idbGet, idbSet } from "../db";
@@ -30,7 +31,7 @@ const Ctx = createContext<PacksCtx | null>(null);
 const IDB_KEY = "packs.selected";
 
 /** use a tiny debounce so we don't spam IDB on rapid clicks */
-function useDebouncedEffect(effect: () => void, deps: any[], ms: number) {
+function useDebouncedEffect(effect: () => void, deps: DependencyList, ms: number) {
   const t = useRef<number | null>(null);
   useEffect(() => {
     if (t.current) window.clearTimeout(t.current);

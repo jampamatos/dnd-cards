@@ -94,6 +94,7 @@ export default function Browse() {
   const [fPageSize, setFPageSize] = useState(12);
 
   const [error, setError] = useState<string | null>(null);
+  const { lang } = usePrefs();
 
   // load data
   useEffect(() => {
@@ -171,16 +172,24 @@ export default function Browse() {
   const fItems = featuresSorted.slice(fStart, fStart + fPageSize);
   useEffect(()=>{ setFPage(1); }, [q, fLevel, fClazz, fTags, fPageSize, fSort]);
 
-  if (error) return <p style={{ color:"crimson" }}>Erro carregando dados: {error}</p>;
+  if (error) {
+    const errorLabel = lang === "pt" ? "Erro carregando dados" : "Error loading data";
+    return (
+      <section className="page container">
+        <p style={{ color: "crimson" }}>{errorLabel}: {error}</p>
+      </section>
+    );
+  }
 
-  const { lang } = usePrefs();
   const L = lang === "pt"
       ? { title: "Navegar", spells: "Magias", features: "Características" }
       : { title: "Browse",   spells: "Spells", features: "Features" };
 
   return (
-    <div>
-      <h2>{L.title}</h2>
+    <section className="page">
+      <div className="container">
+        <h1>{L.title}</h1>
+      </div>
 
       <div className="no-print segmented container">
         <button onClick={() => setTab("spells")}
@@ -298,6 +307,6 @@ export default function Browse() {
           <Pagination page={fPage} setPage={setFPage} total={featuresSorted.length} pageSize={fPageSize} />
         </>
       )}
-    </div>
+    </section>
   );
 }

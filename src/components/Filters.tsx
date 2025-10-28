@@ -23,6 +23,7 @@ export default function Filters(p: FiltersProps) {
   const { lang } = usePrefs();
   const L = lang === "pt"
     ? {
+        formLabel: "Controles de filtro",
         search: "Busca (PT/EN):",
         placeholder: "fireball, escudo, cura...",
         level: "Nível:",
@@ -42,6 +43,7 @@ export default function Filters(p: FiltersProps) {
         tagTitle: "Filtrar por tag",
       }
     : {
+        formLabel: "Filter controls",
         search: "Search (PT/EN):",
         placeholder: "fireball, shield, healing...",
         level: "Level:",
@@ -69,29 +71,48 @@ export default function Filters(p: FiltersProps) {
   }
 
   return (
-    <div className="filters sticky container">
+    <form
+      className="filters sticky container"
+      onSubmit={(event) => event.preventDefault()}
+      aria-label={L.formLabel}
+    >
       <div className="filters-row">
         {/* inputs iguais, só sem inline styles */}
         <label>
           <span>{L.search}</span>
-          <input value={p.q} onChange={e=>p.setQ(e.target.value)} placeholder={L.placeholder} />
+          <input
+            type="search"
+            inputMode="search"
+            value={p.q}
+            onChange={(e) => p.setQ(e.target.value)}
+            placeholder={L.placeholder}
+          />
         </label>
         <label>
           <span>{L.level}</span>
-          <select value={String(p.level)} onChange={e=>p.setLevel(e.target.value==="any"?"any":Number(e.target.value))}>
-            {LEVELS.map(l => <option key={String(l)} value={String(l)}>{l==="any"?L.any:`${lang==="pt"?"Nível":"Level"} ${l}`}</option>)}
+          <select
+            value={String(p.level)}
+            onChange={(e) => p.setLevel(e.target.value === "any" ? "any" : Number(e.target.value))}
+          >
+            {LEVELS.map((l) => (
+              <option key={String(l)} value={String(l)}>
+                {l === "any" ? L.any : `${lang === "pt" ? "Nível" : "Level"} ${l}`}
+              </option>
+            ))}
           </select>
         </label>
         <label>
           <span>{L.clazz}</span>
-          <select value={p.clazz} onChange={e=>p.setClazz(e.target.value)}>
+          <select value={p.clazz} onChange={(e) => p.setClazz(e.target.value)}>
             <option value="any">{L.any}</option>
-            {["Artificer","Bard","Cleric","Druid","Paladin","Ranger","Sorcerer","Wizard","Warlock"].map(c => <option key={c} value={c}>{c}</option>)}
+            {["Artificer","Bard","Cleric","Druid","Paladin","Ranger","Sorcerer","Wizard","Warlock"].map((c) => (
+              <option key={c} value={c}>{c}</option>
+            ))}
           </select>
         </label>
         <label>
           <span>{L.sort}</span>
-          <select value={p.sort} onChange={e=>p.setSort(e.target.value as Sort)}>
+          <select value={p.sort} onChange={(e) => p.setSort(e.target.value as Sort)}>
             <option value="name-asc">{L.nameAZ}</option>
             <option value="level-asc">{L.levelUp}</option>
             <option value="level-desc">{L.levelDown}</option>
@@ -99,8 +120,10 @@ export default function Filters(p: FiltersProps) {
         </label>
         <label>
           <span>{L.perPage} ({p.total}):</span>
-          <select value={String(p.pageSize)} onChange={e=>p.setPageSize(Number(e.target.value))}>
-            {[8,12,16,24,36].map(n=><option key={n} value={n}>{n}</option>)}
+          <select value={String(p.pageSize)} onChange={(e) => p.setPageSize(Number(e.target.value))}>
+            {[8,12,16,24,36].map((n) => (
+              <option key={n} value={n}>{n}</option>
+            ))}
           </select>
         </label>
       </div>
@@ -110,29 +133,53 @@ export default function Filters(p: FiltersProps) {
         {TAG_ORDER.map((k) => {
           const active = p.tags.includes(k);
           return (
-            <button key={k} onClick={()=>toggleTag(k)}
-              className={`chip ${active?"chip--active":""}`} title={L.tagTitle}>
+            <button 
+              key={k} 
+              type="button"
+              onClick={()=>toggleTag(k)}
+              aria-pressed={active}
+              className={`chip ${active? "chip--active" : ""}`} 
+              title={L.tagTitle}
+            >
               #{label(k)}
             </button>
           );
         })}
         {p.tags.length > 0 && (
-          <button onClick={p.onClearTags ?? (()=>p.setTags([]))} className="btn" style={{ marginLeft:"auto" }}>
+          <button
+            type="button"
+            onClick={p.onClearTags ?? (() => p.setTags([]))}
+            className="btn"
+            style={{ marginLeft:"auto" }}
+          >
             {L.clearTags}
           </button>
         )}
       </div>
 
       <div className="chips" style={{ alignItems:"center" }}>
-        <strong>{p.total} {L.results(p.total)}</strong>
-        {p.level!=="any" && <button onClick={p.onClearLevel} className="chip">{L.levelChip(p.level as number)} ✕</button>}
-        {p.clazz!=="any" && <button onClick={p.onClearClazz} className="chip">{L.classChip(p.clazz)} ✕</button>}
-        {p.tags.map((k)=>(
-          <button key={k} onClick={()=>toggleTag(k)} className="chip">#{label(k)} ✕</button>
+        <strong aria-live="polite">{p.total} {L.results(p.total)}</strong>
+        {p.level !== "any" && (
+          <button type="button" onClick={p.onClearLevel} className="chip">
+            {L.levelChip(p.level as number)} ✕
+          </button>
+        )}
+        {p.clazz !== "any" && (
+          <button type="button" onClick={p.onClearClazz} className="chip">
+            {L.classChip(p.clazz)} ✕
+          </button>
+        )}
+        {p.tags.map((k) => (
+          <button key={k} type="button" onClick={() => toggleTag(k)} className="chip">
+            #{label(k)} ✕
+          </button>
         ))}
-        {(p.level!=="any" || p.clazz!=="any" || p.q || p.tags.length>0) &&
-          <button onClick={p.onClearAll} className="btn" style={{ marginLeft:"auto" }}>{L.clearAll}</button>}
+        {(p.level !== "any" || p.clazz !== "any" || p.q || p.tags.length > 0) && (
+          <button type="button" onClick={p.onClearAll} className="btn" style={{ marginLeft:"auto" }}>
+            {L.clearAll}
+          </button>
+        )}
       </div>
-    </div>
+    </form>
   );
 }

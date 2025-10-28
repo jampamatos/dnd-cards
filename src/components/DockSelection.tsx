@@ -12,14 +12,14 @@ export default function DockSelection() {
     : { items: "Selected items",     view: "View Pack",  clear: "Clear"  };
 
   return (
-    <div className="no-print dock">
-      <span style={{ fontWeight:700 }}>
+    <aside className="no-print dock" aria-label={L.items}>
+      <span style={{ fontWeight:700 }} aria-live="polite">
         {L.items}: {selected.length}
       </span>
-      <Link to="/pack">
-        <button className="btn">{L.view}</button>
+      <Link to="/pack" className="btn btn-primary" role="button">
+        {L.view}
       </Link>
-      <button className="btn" onClick={clear}>{L.clear}</button>
-    </div>
+      <button type="button" className="btn" onClick={clear}>{L.clear}</button>
+    </aside>
   );
 }

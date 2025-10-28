@@ -70,7 +70,7 @@ export default function Card(props: CardProps) {
   const TitleBlock = () => (
     <h3 style={{ margin:0, fontWeight:700 }}>
       {lang === "pt"
-        ? (<>{titlePt} <span style={{ opacity:.7 }}> / {titleEn}</span></>)
+        ? (<>{titlePt} <span className="muted"> / {titleEn}</span></>)
         : titleEn}
     </h3>
   );
@@ -78,7 +78,7 @@ export default function Card(props: CardProps) {
   const SchoolBlock = () => (
     <h4 style={{ margin:0, fontWeight:500, fontSize:14 }}>
       {lang === "pt"
-        ? (<>{schoolPt} <span style={{ opacity:.7 }}> / {schoolEn}</span></>)
+        ? (<>{schoolPt} <span className="muted"> / {schoolEn}</span></>)
         : schoolEn}
     </h4>
   );
@@ -91,9 +91,12 @@ export default function Card(props: CardProps) {
           <SchoolBlock />
         </div>
         <button
+          type="button"
           onClick={() => selected ? remove(id, kind) : add({ id, kind })}
           className={`btn ${selected ? "btn-primary":""}`}
           title={selected ? L.ttRemove : L.ttAdd}
+          aria-pressed={selected}
+          aria-label={selected ? L.ttRemove : L.ttAdd}
         >
           {selected ? L.remove : L.add}
         </button>
@@ -108,21 +111,39 @@ export default function Card(props: CardProps) {
             isLevelPill ? () => onLevelClick!(level!) :
             mappedTag ? () => onTagClick!(mappedTag) :
             undefined;
-          return (
-            <button key={i} onClick={onClick} className={`chip ${clickable?"chip--click":""}`} title={isLevelPill?L.ttLevel:(mappedTag?L.ttTag:undefined)}>
-              {p}
-            </button>
-          );
+          if (clickable) {
+            return (
+              <button
+                type="button"
+                key={i}
+                onClick={onClick}
+                className={`chip chip--click`}
+                title={isLevelPill ? L.ttLevel : L.ttTag}
+              >
+                {p}
+              </button>
+            );
+          }
+          return <span key={i} className="chip">{p}</span>;
         })}
       </div>
 
       {classes?.length ? (
         <div className="chips" style={{ margin:"0 0 8px" }}>
           {classes.map((c) => (
-            <button key={c} onClick={onClassClick ? ()=>onClassClick(c) : undefined} className="chip chip--click"
-              title={lang === "pt" ? "Filtrar por classe" : "Filter by class"}>
-              {c}
-            </button>
+            onClassClick ? (
+              <button
+                type="button"
+                key={c}
+                onClick={() => onClassClick(c)}
+                className="chip chip--click"
+                title={lang === "pt" ? "Filtrar por classe" : "Filter by class"}
+              >
+                {c}
+              </button>
+            ) : (
+              <span key={c} className="chip">{c}</span>
+            )
           ))}
         </div>
       ) : null}
@@ -132,10 +153,19 @@ export default function Card(props: CardProps) {
           {tagKeys.map((k) => {
             const label = lang === "pt" ? TAG_CATALOG[k].pt : TAG_CATALOG[k].en;
             return (
-              <button key={k} onClick={onTagClick ? ()=>onTagClick(k) : undefined} className="chip chip--click"
-                title={lang === "pt" ? "Filtrar por tag" : "Filter by tag"}>
-                #{label}
-              </button>
+              onTagClick ? (
+                <button
+                  type="button"
+                  key={k}
+                  onClick={() => onTagClick(k)}
+                  className="chip chip--click"
+                  title={lang === "pt" ? "Filtrar por tag" : "Filter by tag"}
+                >
+                  #{label}
+                </button>
+              ) : (
+                <span key={k} className="chip">#{label}</span>
+              )
             );
           })}
         </div>

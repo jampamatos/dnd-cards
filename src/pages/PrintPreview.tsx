@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
+import type { DragEvent } from "react";
 import { usePacks } from "../lib/state/packs";
 import { SpellsArray } from "../lib/schema/spell";
 import { FeaturesArray } from "../lib/schema/feature";
@@ -90,7 +91,7 @@ export default function PrintPreview() {
     dragIndex.current = i;
     ev.dataTransfer.effectAllowed = "move";
   };
-  const onDragOver = (i: number) => (ev: React.DragEvent) => {
+  const onDragOver = (ev: DragEvent<HTMLDivElement>) => {
     if (!reorderMode) return;
     ev.preventDefault();
     ev.dataTransfer.dropEffect = "move";
@@ -142,9 +143,15 @@ export default function PrintPreview() {
     window.print();
   }
 
+  const gridStyle: CSSProperties & { [key: `--${string}`]: string } = {
+    "--cols": String(cols),
+  };
+
   return (
-    <div>
-      <h2 className="no-print">{L.title}</h2>
+    <section className="page">
+      <div className="container no-print">
+        <h1>{L.title}</h1>
+      </div>
 
       <PrintToolbar
         format={format} setFormat={setFormat}
@@ -170,10 +177,10 @@ export default function PrintPreview() {
       )}
 
       {/* FRONT PAGES */}
-      <main
-        style={{ ["--cols" as any]: String(cols) }}
-        role="main"
+      <section
+        style={gridStyle}
         className={`print-grid print-${density} print-content`}
+        aria-label={lang === "pt" ? "Cartas para impressão" : "Cards ready for print"}
       >
         {cards.length === 0 && <em className="no-print">{L.empty}</em>}
         {cards.map((c, i) => {
@@ -183,7 +190,7 @@ export default function PrintPreview() {
               key={c.key}
               draggable={draggable}
               onDragStart={onDragStart(i)}
-              onDragOver={onDragOver(i)}
+              onDragOver={onDragOver}
               onDrop={onDrop(i)}
               title={draggable ? (lang === "pt" ? "Arraste para reordenar" : "Drag to reorder") : undefined}
               style={draggable ? { outline:"1px dashed var(--border)", borderRadius:8 } : undefined}
@@ -199,7 +206,7 @@ export default function PrintPreview() {
             </div>
           );
         })}
-      </main>
+      </section>
 
       {/* BACK PAGES */}
       {backsEnabled && (
@@ -213,10 +220,10 @@ export default function PrintPreview() {
               </div>
             </div>
           )}
-          <main
-            style={{ ["--cols" as any]: String(cols) }}
-            role="main"
+          <section
+            style={gridStyle}
             className={`print-grid print-${density} print-content`}
+            aria-label={lang === "pt" ? "Versos das cartas" : "Card backs"}
           >
             { (backsMirrorCols ? mirrorByColumns(cards, cols) : cards).map((c) => (
               <CardBackPrint
@@ -226,9 +233,9 @@ export default function PrintPreview() {
                 lang={lang}
               />
             ))}
-          </main>
+          </section>
         </>
       )}
-    </div>
+    </section>
   );
 }

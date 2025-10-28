@@ -1,12 +1,18 @@
+import { useId, type ChangeEvent } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { usePrefs } from "../lib/state/prefs";
+import type { Theme } from "../styles/theme";
 
 export default function Header() {
   const { lang, setLang, theme, setTheme } = usePrefs();
   const { pathname } = useLocation();
+  const langFieldId = useId();
+  const themeFieldId = useId();
 
   const L = {
     pt: {
+      nav: "Navegação principal",
+      skip: "Ir para o conteúdo",
       home: "Início",
       browse: "Navegar",
       search: "Busca",
@@ -21,6 +27,8 @@ export default function Header() {
       dark: "Escuro",
     },
     en: {
+      nav: "Main navigation",
+      skip: "Skip to content",
       home: "Home",
       browse: "Browse",
       search: "Search",
@@ -36,33 +44,75 @@ export default function Header() {
     },
   }[lang];
 
+  const links = [
+    { to: "/", label: L.home },
+    { to: "/browse", label: L.browse },
+    { to: "/search", label: L.search },
+    { to: "/pack", label: L.pack },
+    { to: "/print", label: L.print },
+    { to: "/import", label: L.import },
+    { to: "/about", label: L.about },
+  ];
+
+  const handleLangChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const next = event.target.value;
+    if (next === "pt" || next === "en") {
+      setLang(next);
+    }
+  };
+
+  const handleThemeChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const next = event.target.value as Theme;
+    if (next === "light" || next === "dark" || next === "system") {
+      setTheme(next);
+    }
+  };
+
   return (
-  <nav className="no-print toolbar container">
-    <Link to="/" aria-current={pathname === "/" ? "page" : undefined}>{L.home}</Link>
-    <Link to="/browse" aria-current={pathname === "/browse" ? "page" : undefined}>{L.browse}</Link>
-    <Link to="/search" aria-current={pathname === "/search" ? "page" : undefined}>{L.search}</Link>
-    <Link to="/pack" aria-current={pathname === "/pack" ? "page" : undefined}>{L.pack}</Link>
-    <Link to="/print" aria-current={pathname === "/print" ? "page" : undefined}>{L.print}</Link>
-    <Link to="/import" aria-current={pathname === "/import" ? "page" : undefined}>{L.import}</Link>
-    <Link to="/about" aria-current={pathname === "/about" ? "page" : undefined}>{L.about}</Link>
+    <header className="site-header no-print">
+      {/* Skip link for keyboard/screen reader users */}
+      <a href="#main" className="skip">{L.skip}</a>
+      <nav className="container site-header__nav" aria-label={L.nav}>
+        <ul className="toolbar__list">
+          {links.map(({ to, label }) => (
+            <li key={to}>
+              <Link
+                to={to}
+                aria-current={pathname === to ? "page" : undefined}
+              >
+                {label}
+              </Link>
+            </li>
+          ))}
+        </ul>
 
-    <span style={{ marginLeft:"auto" }} />
+        <div className="toolbar__actions">
+          <label className="toolbar__control" htmlFor={langFieldId}>
+            <span>{L.language}</span>
+            <select
+              id={langFieldId}
+              value={lang}
+              onChange={handleLangChange}
+            >
+              <option value="pt">PT</option>
+              <option value="en">EN</option>
+            </select>
+          </label>
 
-    <label style={{ display:"flex", alignItems:"center", gap:6 }}>
-      {L.language}:
-      <select value={lang} onChange={(e)=>setLang(e.target.value as "pt"|"en")}>
-        <option value="pt">PT</option><option value="en">EN</option>
-      </select>
-    </label>
-
-    <label style={{ display:"flex", alignItems:"center", gap:6}}>
-      {L.theme}:
-      <select value={theme} onChange={e=>setTheme(e.target.value as any)}>
-        <option value="system">{L.system}</option>
-        <option value="light">{L.light}</option>
-        <option value="dark">{L.dark}</option>
-      </select>
-    </label>
-  </nav>
-);
+          <label className="toolbar__control" htmlFor={themeFieldId}>
+            <span>{L.theme}</span>
+            <select
+              id={themeFieldId}
+              value={theme}
+              onChange={handleThemeChange}
+            >
+              <option value="system">{L.system}</option>
+              <option value="light">{L.light}</option>
+              <option value="dark">{L.dark}</option>
+            </select>
+          </label>
+        </div>
+      </nav>
+    </header>
+  );
 }

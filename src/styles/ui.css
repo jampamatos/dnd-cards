@@ -1,38 +1,55 @@
-/* Design tokens */
-:root{
-  --radius:12px; --radius-pill:999px;
-  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:24px;
-  --shadow:0 6px 24px rgba(0,0,0,.08);
+/* ========================================================================
+   UI base styles (app chrome) — not for print
+   ======================================================================== */
 
-  --bg:#fafafa;
-  --surface:#ffffff;
-  --text:#1b1b1b;
-  --muted:#5e6673;
-  --border:#e5e7eb;
+/* ------------------------------------------------------------------------
+   1) Design tokens (light & dark)
+   ------------------------------------------------------------------------ */
+:root {
+  --radius: 12px;
+  --radius-pill: 999px;
 
-  --primary:#0b57d0;
-  --primary-weak:#eef5ff; /* usado em estados fracos */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
 
-  --sticky-top: 64px;
+  --shadow: 0 6px 24px rgba(0,0,0,.08);
+
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --text: #1b1b1b;
+  --muted: #5e6673;
+  --border: #e5e7eb;
+
+  --primary: #0b57d0;
+  --primary-weak: #eef5ff; /* subtle background for primary states */
+
+  --sticky-top: 64px;      /* top offset for sticky filters/header */
 }
 
-[data-theme="dark"]{
-  --bg:#0f1115;
-  --surface:#151821;
-  --text:#e7eaf0;
-  --muted:#a4adbb;
-  --border:#232838;
+[data-theme="dark"] {
+  --bg: #0f1115;
+  --surface: #151821;
+  --text: #e7eaf0;
+  --muted: #a4adbb;
+  --border: #232838;
 
-  --primary:#7aa2ff;
-  --primary-weak:#0e1a2e;
+  --primary: #7aa2ff;
+  --primary-weak: #0e1a2e;
 }
 
-/* Base reset-ish */
-html,body,#root { height:100%; background:var(--bg); color:var(--text); }
+/* ------------------------------------------------------------------------
+   2) Base reset-ish
+   ------------------------------------------------------------------------ */
+html, body, #root { height: 100%; background: var(--bg); color: var(--text); }
 *, *::before, *::after { box-sizing: border-box; }
-a { color: inherit; }
+a { color: inherit; text-decoration: none; }
 
-/* Form controls: contraste coerente nos dois temas */
+/* ------------------------------------------------------------------------
+   3) Form controls (consistent contrast in both themes)
+   ------------------------------------------------------------------------ */
 input, select, textarea, button {
   color: var(--text);
   background: var(--surface);
@@ -44,110 +61,288 @@ input, select, textarea {
 }
 input::placeholder { color: var(--muted); opacity: .9; }
 
-/* App frame */
-.container{ max-width:1200px; margin:0 auto; padding:0 var(--space-4); }
+/* ------------------------------------------------------------------------
+   4) Layout helpers
+   ------------------------------------------------------------------------ */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 var(--space-4); }
+.app-main {
+  display: block;
+  padding: var(--space-4) 0 var(--space-5);
+}
+.app-main:focus {
+  outline: none;
+}
+.page {
+  margin-bottom: var(--space-5);
+}
 
-/* Toolbar / Header */
-.toolbar{
-  display:flex; gap:var(--space-3); align-items:center;
-  padding:var(--space-3) 0; flex-wrap:wrap;
+/* ------------------------------------------------------------------------
+   5) Header / Toolbar
+   ------------------------------------------------------------------------ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
 }
-.toolbar a{
-  text-decoration:none; padding:4px 8px;
-  border:1px solid color-mix(in oklab, var(--text) 10%, transparent);
-  border-radius:6px; background: transparent;
+.site-header__nav {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  padding: var(--space-3) 0;
+  flex-wrap: wrap;
 }
-.toolbar a[aria-current="page"]{ background: var(--primary-weak); }
-.toolbar select{
-  background: var(--surface); color: var(--text);
+.toolbar__list {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+.toolbar__actions {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  margin-left: auto;
+}
+.toolbar__control {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  font-size: 0.9rem;
+}
+.toolbar__control select {
+  min-height: 32px;
+}
+.site-header__nav a {
+  padding: 4px 8px;
+  border: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
+  border-radius: 6px;
+  background: transparent;
+}
+.site-header__nav a[aria-current="page"] { background: var(--primary-weak); }
+
+/* ------------------------------------------------------------------------
+   6) Buttons
+   ------------------------------------------------------------------------ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
   border: 1px solid var(--border);
-  border-radius: 8px; padding: 6px 8px;
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  text-decoration: none;
 }
-
-/* Buttons */
-.btn{
-  padding:6px 10px; border:1px solid var(--border);
-  border-radius:8px; background:var(--surface); color:var(--text);
-}
-.btn-primary{
+.btn-primary {
   border-color: color-mix(in oklab, var(--primary) 45%, var(--border));
   background: var(--primary-weak);
 }
 
-/* Chips / pills – contraste fixo mesmo que haja regras globais em button */
-.chips{ display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
-.chip{
-  font-size:12px;
-  border:1px solid var(--border);
-  border-radius:var(--radius-pill);
-  padding:2px 10px;
+/* ------------------------------------------------------------------------
+   7) Chips / pills
+   ------------------------------------------------------------------------ */
+.chips { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.chip {
+  font-size: 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 2px 10px;
   background: color-mix(in oklab, var(--text) 6%, var(--surface));
   color: var(--text);
 }
-.chip--click{
+.chip--click {
   background: color-mix(in oklab, var(--primary) 14%, var(--surface));
-  cursor:pointer;
+  cursor: pointer;
 }
-.chip--active{
+.chip--active {
   border-color: var(--primary);
   color: var(--primary);
   background: color-mix(in oklab, var(--primary) 18%, var(--surface));
 }
 
-/* Cards grid */
-.grid-cards{
-  display:grid; gap:var(--space-4);
+/* ------------------------------------------------------------------------
+   8) Cards (browse grid)
+   ------------------------------------------------------------------------ */
+.grid-cards {
+  display: grid;
+  gap: var(--space-4);
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 }
-
-/* Card */
-.card{
-  border:1px solid var(--border); background:var(--surface);
-  border-radius:var(--radius); padding:var(--space-4);
-  box-shadow:var(--shadow); break-inside:avoid;
+.card {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  box-shadow: var(--shadow);
+  break-inside: avoid;
 }
-.card__head{ display:flex; justify-content:space-between; gap:var(--space-3); align-items:flex-start; }
-.card__h3{ margin:0; font-weight:700; line-height:1.1; }
-.card__h4{ margin:0; font-weight:600; font-size:14px; color:var(--muted); }
+.card__head { display: flex; justify-content: space-between; gap: var(--space-3); align-items: flex-start; }
+.card__h3 { margin: 0; font-weight: 700; line-height: 1.1; }
+.card__h4 { margin: 0; font-weight: 600; font-size: 14px; color: var(--muted); }
 
-/* Sticky filters */
-.filters{ display:grid; gap:var(--space-3); }
-.filters-row{
-  display:grid; gap:var(--space-3);
-  grid-template-columns:1fr repeat(4, max-content);
-  align-items:end;
+/* ------------------------------------------------------------------------
+   9) Filters (sticky)
+   ------------------------------------------------------------------------ */
+.filters { display: grid; gap: var(--space-3); }
+.filters-row {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: 1fr repeat(4, max-content);
+  align-items: end;
 }
-.sticky{
-  position:sticky; top:var(--sticky-top); z-index:10;
-  padding:var(--space-3) 0; background:var(--bg);
-}
-
-/* Pagination */
-.pagination{ display:flex; gap:8px; align-items:center; justify-content:center; margin:12px 0; }
-.pagination button{ padding:4px 8px; border-radius:8px; }
-
-/* Floating dock */
-.dock{
-  position:fixed; right:16px; bottom:16px;
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:12px; padding:10px 12px; box-shadow:var(--shadow);
-  display:flex; gap:8px; align-items:center; z-index:50;
+.sticky {
+  position: sticky;
+  top: var(--sticky-top);
+  z-index: 10;
+  padding: var(--space-3) 0;
+  background: var(--bg);
 }
 
-/* Segmented control (tabs “Magias / Características”) */
-.segmented{ display:flex; gap:8px; margin-bottom: var(--space-3); }
-.seg{
-  padding:6px 12px;
-  border-radius:8px;
-  border:1px solid var(--border);
+/* ------------------------------------------------------------------------
+   10) Pagination
+   ------------------------------------------------------------------------ */
+.pagination {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  margin: 12px 0;
+}
+.pagination button { padding: 4px 8px; border-radius: 8px; }
+
+/* ------------------------------------------------------------------------
+   11) Floating dock (selection)
+   ------------------------------------------------------------------------ */
+.dock {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 12px;
+  box-shadow: var(--shadow);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  z-index: 50;
+}
+
+/* ------------------------------------------------------------------------
+   12) Segmented control (tabs “Magias / Características”)
+   ------------------------------------------------------------------------ */
+.segmented { display: flex; gap: 8px; margin-bottom: var(--space-3); }
+.seg {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
   background: color-mix(in oklab, var(--text) 6%, var(--surface));
   color: var(--text);
 }
-.seg[aria-pressed="true"]{
+.seg[aria-pressed="true"] {
   border-color: var(--primary);
   background: color-mix(in oklab, var(--primary) 20%, var(--surface));
   box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--primary) 35%, transparent);
 }
 
+/* ------------------------------------------------------------------------
+   13) Pack builder list
+   ------------------------------------------------------------------------ */
+.pack-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: var(--space-3) 0;
+}
+.pack-list {
+  list-style: none;
+  display: grid;
+  gap: var(--space-2);
+  padding: 0;
+  margin: 0;
+}
+.pack-list__item {
+  display: flex;
+  gap: var(--space-3);
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: color-mix(in oklab, var(--surface) 90%, transparent);
+}
+.pack-list__item .btn {
+  white-space: nowrap;
+}
+.muted {
+  opacity: 0.7;
+}
 
-/* Print tweaks em styles/print.css */
+/* ------------------------------------------------------------------------
+   14) Print toolbar
+   ------------------------------------------------------------------------ */
+.print-toolbar {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  padding: var(--space-3) 0;
+  flex-wrap: wrap;
+}
+.print-toolbar__control {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 120px;
+}
+.print-toolbar__control select,
+.print-toolbar__input {
+  min-height: 32px;
+}
+.print-toolbar__input {
+  width: min(220px, 100%);
+}
+.print-toolbar__check {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.print-toolbar__divider {
+  width: 1px;
+  height: 28px;
+  background: var(--border);
+}
+.print-toolbar__legend {
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------------------
+   15) Accessibility polish (focus ring + skip link)
+   ------------------------------------------------------------------------ */
+/* Visible focus ring for interactive elements */
+:where(.btn, .chip, .seg, .site-header__nav a, .pagination button):focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Skip-to-content link (hidden until focused) */
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+}
+.skip:focus {
+  left: 8px;
+  top: 8px;
+  background: var(--surface);
+  color: var(--text);
+  padding: 8px 12px;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  z-index: 1000;
+}

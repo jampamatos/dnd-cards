@@ -1,6 +1,8 @@
 import type { TSpell } from "../schema/spell";
 import type { TFeature } from "../schema/feature";
 
+type MaybeTagged = { tags?: string[] };
+
 export type TagKey =
   | "healing"
   | "damage"
@@ -112,7 +114,7 @@ export function detectSpellTags(sp: TSpell): TagKey[] {
   const tags = new Set<TagKey>();
 
   // (1) JSON -> canon
-  mapJsonTags((sp as any).tags).forEach((t) => tags.add(t));
+  mapJsonTags((sp as MaybeTagged).tags).forEach((t) => tags.add(t));
 
   // (2) Structured + heuristics
   if (sp.ritual) tags.add("ritual");
@@ -159,7 +161,7 @@ export function detectFeatureTags(ft: TFeature): TagKey[] {
   const tags = new Set<TagKey>();
 
   // (1) JSON -> canon
-  mapJsonTags((ft as any).tags).forEach((t) => tags.add(t));
+  mapJsonTags((ft as MaybeTagged).tags).forEach((t) => tags.add(t));
 
   // (2) Action/time
   const actPT = ft.action?.pt ?? "";
