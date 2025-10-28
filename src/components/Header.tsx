@@ -1,6 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
 import { usePrefs } from "../lib/state/prefs";
-import { applyTheme } from "../styles/theme";
 
 export default function Header() {
   const { lang, setLang, theme, setTheme } = usePrefs();
@@ -37,52 +36,33 @@ export default function Header() {
     },
   }[lang];
 
-  const linkStyle = (to: string) => ({
-    padding: "4px 8px",
-    borderRadius: 6,
-    textDecoration: "none",
-    border: "1px solid #3333",
-    background: pathname === to ? "#eef5ff" : "transparent",
-  });
-
   return (
-    <nav className="no-print" style={{ display:"flex", gap:12, padding:"12px 0", alignItems:"center", flexWrap:"wrap" }}>
-      <Link to="/" style={linkStyle("/")}>{L.home}</Link>
-      <Link to="/browse" style={linkStyle("/browse")}>{L.browse}</Link>
-      <Link to="/search" style={linkStyle("/search")}>{L.search}</Link>
-      <Link to="/pack" style={linkStyle("/pack")}>{L.pack}</Link>
-      <Link to="/print" style={linkStyle("/print")}>{L.print}</Link>
-      <Link to="/import" style={linkStyle("/import")}>{L.import}</Link>
-      <Link to="/about" style={linkStyle("/about")}>{L.about}</Link>
+  <nav className="no-print toolbar container">
+    <Link to="/" aria-current={pathname === "/" ? "page" : undefined}>{L.home}</Link>
+    <Link to="/browse" aria-current={pathname === "/browse" ? "page" : undefined}>{L.browse}</Link>
+    <Link to="/search" aria-current={pathname === "/search" ? "page" : undefined}>{L.search}</Link>
+    <Link to="/pack" aria-current={pathname === "/pack" ? "page" : undefined}>{L.pack}</Link>
+    <Link to="/print" aria-current={pathname === "/print" ? "page" : undefined}>{L.print}</Link>
+    <Link to="/import" aria-current={pathname === "/import" ? "page" : undefined}>{L.import}</Link>
+    <Link to="/about" aria-current={pathname === "/about" ? "page" : undefined}>{L.about}</Link>
 
-      <span style={{ marginLeft:"auto" }} />
+    <span style={{ marginLeft:"auto" }} />
 
-      <label style={{ display:"flex", alignItems:"center", gap:6 }}>
-        {L.language}:
-        <select
-          value={lang}
-          onChange={(e)=>setLang(e.target.value as "pt"|"en")}
-        >
-          <option value="pt">PT</option>
-          <option value="en">EN</option>
-        </select>
-      </label>
+    <label style={{ display:"flex", alignItems:"center", gap:6 }}>
+      {L.language}:
+      <select value={lang} onChange={(e)=>setLang(e.target.value as "pt"|"en")}>
+        <option value="pt">PT</option><option value="en">EN</option>
+      </select>
+    </label>
 
-      <label style={{ display:"flex", alignItems:"center", gap:6}}>
-        {L.theme}:
-        <select
-          value={theme}
-          onChange={e=>{
-            const t = e.target.value as "system"|"light"|"dark";
-            setTheme(t);
-            applyTheme(t); // apply immediately
-          }}
-        >
-          <option value="system">{L.system}</option>
-          <option value="light">{L.light}</option>
-          <option value="dark">{L.dark}</option>
-        </select>
-      </label>
-    </nav>
-  );
+    <label style={{ display:"flex", alignItems:"center", gap:6}}>
+      {L.theme}:
+      <select value={theme} onChange={e=>setTheme(e.target.value as any)}>
+        <option value="system">{L.system}</option>
+        <option value="light">{L.light}</option>
+        <option value="dark">{L.dark}</option>
+      </select>
+    </label>
+  </nav>
+);
 }

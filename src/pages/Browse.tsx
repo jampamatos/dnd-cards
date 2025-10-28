@@ -182,13 +182,15 @@ export default function Browse() {
     <div>
       <h2>{L.title}</h2>
 
-      <div className="no-print" style={{ display: "flex", gap: 8, marginBottom: 12 }}>
+      <div className="no-print segmented container">
         <button onClick={() => setTab("spells")}
-                style={{ padding: "6px 10px", border: "1px solid #ccc", borderRadius: 8, background: tab === "spells" ? "#eef5ff" : "#fff" }}>
+                className="seg"
+                aria-pressed={tab === "spells"}>
           {L.spells}
         </button>
         <button onClick={() => setTab("features")}
-                style={{ padding: "6px 10px", border: "1px solid #ccc", borderRadius: 8, background: tab === "features" ? "#eef5ff" : "#fff" }}>
+                className="seg"
+                aria-pressed={tab === "features"}>
           {L.features}
         </button>
       </div>
@@ -208,7 +210,7 @@ export default function Browse() {
             // tags
             tags={tags} setTags={setTags} onClearTags={()=>setTags([])}
           />
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 12 }}>
+          <div className="grid-cards container">
             {sItems.map((sp) => {
               const keys = spellTagMap.get(sp.id) ?? [];
               return (
@@ -259,7 +261,7 @@ export default function Browse() {
             // tags
             tags={fTags} setTags={setFTags} onClearTags={()=>setFTags([])}
           />
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 12 }}>
+          <div className="grid-cards container">
             {fItems.map((ft) => {
               const keys = featureTagMap.get(ft.id) ?? [];
               return (

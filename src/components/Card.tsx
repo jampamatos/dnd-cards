@@ -84,81 +84,56 @@ export default function Card(props: CardProps) {
   );
 
   return (
-    <article style={{ border:"1px solid #ddd", borderRadius:8, padding:12, breakInside:"avoid" }}>
-      <header style={{ display:"flex", justifyContent:"space-between", gap:8 }}>
+    <article className="card">
+      <header className="card__head">
         <div>
           <TitleBlock />
           <SchoolBlock />
         </div>
         <button
           onClick={() => selected ? remove(id, kind) : add({ id, kind })}
-          style={{ padding:"4px 8px", borderRadius:8, border:"1px solid #ccc", background:selected?"#e6ffed":"#f6f6f6" }}
+          className={`btn ${selected ? "btn-primary":""}`}
           title={selected ? L.ttRemove : L.ttAdd}
         >
           {selected ? L.remove : L.add}
         </button>
       </header>
 
-      {/* standard pills */}
-      <div style={{ display:"flex", flexWrap:"wrap", gap:6, margin:"8px 0" }}>
+      <div className="chips" style={{ margin:"8px 0" }}>
         {pills.map((p, i) => {
           const isLevelPill = i === 0 && typeof level === "number" && !!onLevelClick;
           const mappedTag = !isLevelPill && onTagClick ? pillToTag(p, lang) : null;
           const clickable = isLevelPill || Boolean(mappedTag);
-
           const onClick =
             isLevelPill ? () => onLevelClick!(level!) :
             mappedTag ? () => onTagClick!(mappedTag) :
             undefined;
-
           return (
-            <button
-              key={i}
-              onClick={onClick}
-              style={{
-                fontSize:12,
-                border:"1px solid #ccc",
-                borderRadius:999,
-                padding:"2px 8px",
-                background: clickable ? "#f6faff" : "transparent",
-                cursor: clickable ? "pointer" : "default"
-              }}
-              title={isLevelPill ? L.ttLevel : (mappedTag ? L.ttTag : undefined)}
-            >
+            <button key={i} onClick={onClick} className={`chip ${clickable?"chip--click":""}`} title={isLevelPill?L.ttLevel:(mappedTag?L.ttTag:undefined)}>
               {p}
             </button>
           );
         })}
       </div>
 
-      {/* classes */}
       {classes?.length ? (
-        <div style={{ display:"flex", flexWrap:"wrap", gap:6, margin:"0 0 8px" }}>
+        <div className="chips" style={{ margin:"0 0 8px" }}>
           {classes.map((c) => (
-            <button
-              key={c}
-              onClick={onClassClick ? ()=>onClassClick(c) : undefined}
-              style={{ fontSize:12, border:"1px solid #ccc", borderRadius:999, padding:"2px 8px", background:"#fafafa", cursor:"pointer" }}
-              title={lang === "pt" ? "Filtrar por classe" : "Filter by class"}
-            >
+            <button key={c} onClick={onClassClick ? ()=>onClassClick(c) : undefined} className="chip chip--click"
+              title={lang === "pt" ? "Filtrar por classe" : "Filter by class"}>
               {c}
             </button>
           ))}
         </div>
       ) : null}
 
-      {/* advanced tags */}
       {tagKeys && tagKeys.length > 0 && (
-        <div style={{ display:"flex", flexWrap:"wrap", gap:6, margin:"0 0 8px" }}>
+        <div className="chips" style={{ margin:"0 0 8px" }}>
           {tagKeys.map((k) => {
             const label = lang === "pt" ? TAG_CATALOG[k].pt : TAG_CATALOG[k].en;
             return (
-              <button
-                key={k}
-                onClick={onTagClick ? ()=>onTagClick(k) : undefined}
-                style={{ fontSize:12, border:"1px solid #bbb", borderRadius:999, padding:"2px 8px", background:"#fff", cursor:"pointer" }}
-                title={lang === "pt" ? "Filtrar por tag" : "Filter by tag"}
-              >
+              <button key={k} onClick={onTagClick ? ()=>onTagClick(k) : undefined} className="chip chip--click"
+                title={lang === "pt" ? "Filtrar por tag" : "Filter by tag"}>
                 #{label}
               </button>
             );

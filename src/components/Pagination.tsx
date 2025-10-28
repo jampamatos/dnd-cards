@@ -13,7 +13,7 @@ export default function Pagination({ page,setPage,total,pageSize }: Props) {
   const label = lang === "pt" ? "Página" : "Page";
 
   return (
-    <div style={{ display:"flex", gap:8, alignItems:"center", justifyContent:"center", margin:"12px 0" }}>
+    <div className="pagination">
       <button onClick={()=>setPage(1)} disabled={page===1}>«</button>
       <button onClick={()=>setPage(Math.max(1,page-1))} disabled={page===1}>‹</button>
       <span>{label} {page} / {pages}</span>

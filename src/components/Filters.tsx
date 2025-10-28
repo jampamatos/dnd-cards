@@ -69,35 +69,27 @@ export default function Filters(p: FiltersProps) {
   }
 
   return (
-    <div style={{ display:"grid", gap:8 }}>
-      <div style={{ display:"grid", gap:8, gridTemplateColumns:"1fr repeat(4, max-content)", alignItems:"end" }}>
-        <label style={{ display:"grid" }}>
+    <div className="filters sticky container">
+      <div className="filters-row">
+        {/* inputs iguais, só sem inline styles */}
+        <label>
           <span>{L.search}</span>
-          <input
-            value={p.q}
-            onChange={e=>p.setQ(e.target.value)}
-            placeholder={L.placeholder}
-            style={{ padding:"6px 8px", border:"1px solid #ccc", borderRadius:6 }}
-          />
+          <input value={p.q} onChange={e=>p.setQ(e.target.value)} placeholder={L.placeholder} />
         </label>
-
-        <label style={{ display:"grid" }}>
+        <label>
           <span>{L.level}</span>
           <select value={String(p.level)} onChange={e=>p.setLevel(e.target.value==="any"?"any":Number(e.target.value))}>
             {LEVELS.map(l => <option key={String(l)} value={String(l)}>{l==="any"?L.any:`${lang==="pt"?"Nível":"Level"} ${l}`}</option>)}
           </select>
         </label>
-
-        <label style={{ display:"grid" }}>
+        <label>
           <span>{L.clazz}</span>
           <select value={p.clazz} onChange={e=>p.setClazz(e.target.value)}>
             <option value="any">{L.any}</option>
-            {["Artificer","Bard","Cleric","Druid","Paladin","Ranger","Sorcerer","Wizard","Warlock"]
-              .map(c => <option key={c} value={c}>{c}</option>)}
+            {["Artificer","Bard","Cleric","Druid","Paladin","Ranger","Sorcerer","Wizard","Warlock"].map(c => <option key={c} value={c}>{c}</option>)}
           </select>
         </label>
-
-        <label style={{ display:"grid" }}>
+        <label>
           <span>{L.sort}</span>
           <select value={p.sort} onChange={e=>p.setSort(e.target.value as Sort)}>
             <option value="name-asc">{L.nameAZ}</option>
@@ -105,8 +97,7 @@ export default function Filters(p: FiltersProps) {
             <option value="level-desc">{L.levelDown}</option>
           </select>
         </label>
-
-        <label style={{ display:"grid" }}>
+        <label>
           <span>{L.perPage} ({p.total}):</span>
           <select value={String(p.pageSize)} onChange={e=>p.setPageSize(Number(e.target.value))}>
             {[8,12,16,24,36].map(n=><option key={n} value={n}>{n}</option>)}
@@ -114,67 +105,33 @@ export default function Filters(p: FiltersProps) {
         </label>
       </div>
 
-      {/* Tag palette */}
-      <div style={{ display:"flex", gap:8, flexWrap:"wrap", alignItems:"center" }}>
+      <div className="chips" style={{ alignItems:"center" }}>
         <span style={{ opacity:.8 }}>{L.tags}</span>
         {TAG_ORDER.map((k) => {
           const active = p.tags.includes(k);
           return (
-            <button
-              key={k}
-              onClick={()=>toggleTag(k)}
-              style={{
-                fontSize:12,
-                border:"1px solid " + (active ? "#3b82f6" : "#ccc"),
-                color: active ? "#0b57d0" : "inherit",
-                background: active ? "#eef5ff" : "#fff",
-                borderRadius:999, padding:"2px 10px", cursor:"pointer"
-              }}
-              title={L.tagTitle}
-            >
+            <button key={k} onClick={()=>toggleTag(k)}
+              className={`chip ${active?"chip--active":""}`} title={L.tagTitle}>
               #{label(k)}
             </button>
           );
         })}
-
         {p.tags.length > 0 && (
-          <button
-            onClick={p.onClearTags ?? (()=>p.setTags([]))}
-            style={{ marginLeft:"auto", border:"1px solid #ccc", borderRadius:8, padding:"6px 10px" }}
-          >
+          <button onClick={p.onClearTags ?? (()=>p.setTags([]))} className="btn" style={{ marginLeft:"auto" }}>
             {L.clearTags}
           </button>
         )}
       </div>
 
-      {/* Active filter chips */}
-      <div style={{ display:"flex", gap:8, alignItems:"center", flexWrap:"wrap" }}>
+      <div className="chips" style={{ alignItems:"center" }}>
         <strong>{p.total} {L.results(p.total)}</strong>
-
-        {p.level!=="any" &&
-          <button onClick={p.onClearLevel} style={{ border:"1px solid #ccc", borderRadius:999, padding:"2px 10px" }}>
-            {L.levelChip(p.level as number)} ✕
-          </button>}
-
-        {p.clazz!=="any" &&
-          <button onClick={p.onClearClazz} style={{ border:"1px solid #ccc", borderRadius:999, padding:"2px 10px" }}>
-            {L.classChip(p.clazz)} ✕
-          </button>}
-
+        {p.level!=="any" && <button onClick={p.onClearLevel} className="chip">{L.levelChip(p.level as number)} ✕</button>}
+        {p.clazz!=="any" && <button onClick={p.onClearClazz} className="chip">{L.classChip(p.clazz)} ✕</button>}
         {p.tags.map((k)=>(
-          <button
-            key={k}
-            onClick={()=>toggleTag(k)}
-            style={{ border:"1px solid #ccc", borderRadius:999, padding:"2px 10px" }}
-          >
-            #{label(k)} ✕
-          </button>
+          <button key={k} onClick={()=>toggleTag(k)} className="chip">#{label(k)} ✕</button>
         ))}
-
         {(p.level!=="any" || p.clazz!=="any" || p.q || p.tags.length>0) &&
-          <button onClick={p.onClearAll} style={{ marginLeft:"auto", border:"1px solid #ccc", borderRadius:8, padding:"6px 10px" }}>
-            {L.clearAll}
-          </button>}
+          <button onClick={p.onClearAll} className="btn" style={{ marginLeft:"auto" }}>{L.clearAll}</button>}
       </div>
     </div>
   );
