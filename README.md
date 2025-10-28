@@ -1,5 +1,9 @@
 # D&D Cards
 
+![Release](https://img.shields.io/github/v/release/jampamatos/dnd-cards?display_name=tag&sort=semver)
+![License](https://img.shields.io/badge/license-MIT%20%2B%20CC%20BY%204.0-lightgrey)
+![Docs CI](https://github.com/jampamatos/dnd-cards/actions/workflows/docs-ci.yml/badge.svg)
+
 Bilingual application (PT/EN) for exploring, selecting, and printing D&D 5e spell and feature cards (SRD 5.1 – 2024).
 
 > React + TypeScript + Vite with static PWA distribution. Preferences, language, card selection, and print status are saved in the browser (IndexedDB/localStorage).

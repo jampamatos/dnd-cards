@@ -1,0 +1,21 @@
+name: docs-ci
+on: [pull_request, workflow_dispatch]
+jobs:
+  markdownlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm i -g markdownlint-cli2
+      - run: markdownlint-cli2 "**/*.md"
+  linkcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: lycheeverse/lychee-action@v1
+        with:
+          args: >-
+            --no-progress --accept 200,429
+            --exclude "localhost|127.0.0.1"
+            .
