@@ -7,14 +7,17 @@ import App from "./App.tsx";
 
 // @ts-ignore: virtual module provided by Vite PWA plugin
 import { registerSW } from 'virtual:pwa-register'
+import { PacksProvider } from "./lib/state/packs.ts";
 
 applyTheme("system");
 registerSW({ immediate: true })
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <PrefsProvider>
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
-      <App />
-    </BrowserRouter>
+    <PacksProvider>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
+        <App />
+      </BrowserRouter>
+    </PacksProvider>
   </PrefsProvider>
 );
