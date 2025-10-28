@@ -1,0 +1,21 @@
+# Changelog
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [1.0.0] - 2025-10-28
+### Added
+- Unified browser (Spells + Features) with clickable pills and PT/EN search.
+- Packs persisted in IndexedDB (offline-ready).
+- Print Builder: drag-and-drop reordering, 1–2 columns, front/back with mirroring.
+- Global preferences (PT/EN language and light/dark/system theme).
+- PWA manifest, theme-color, and icons; offline installation and use.
+
+### Improved
+- General layout (chips, card grid, floating dock).
+- Accessibility: visible focus, skip-to-content, aria labels, and aria-live.
+- Print styles (hyphenation, spacing, repeated header).
+
+### Fixed
+- Contrast and readability in dark mode (chips, tabs, dock). - Filtering by tags and visual duplication anomalies.
