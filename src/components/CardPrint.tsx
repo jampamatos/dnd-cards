@@ -8,6 +8,28 @@ type CardPrintProps = {
   lang: "pt" | "en";
 };
 
+function escapeHtml(s: string): string {
+  return s
+    .replaceAll(/&/g, "&amp;")
+    .replaceAll(/</g, "&lt;")
+    .replaceAll(/>/g, "&gt;")
+    .replaceAll(/"/g, "&quot;")
+    .replaceAll(/'/g, "&#039;");
+}
+function inlineMarkdownToHtml(s: string): string {
+  let h = escapeHtml(s);
+  h = h.replace(/(\*\*|__)(.+?)\1/g, "<strong>$2</strong>");
+  h = h.replace(/(\*|_)(.+?)\1/g, "<em>$2</em>");
+  h = h.replace(/\n/g, "<br/>");
+  return h;
+}
+function renderRichBody(body: string) {
+  const paragraphs = body.split(/\n\s*\n/);
+  return paragraphs.map((p, i) => (
+    <p key={i} dangerouslySetInnerHTML={{ __html: inlineMarkdownToHtml(p) }} />
+  ));
+}
+
 export default function CardPrint(p: CardPrintProps) {
   const pills = p.lang === "pt" ? p.pillsPt : p.pillsEn;
   const body  = p.lang === "pt" ? p.bodyPt : p.bodyEn;
@@ -69,7 +91,7 @@ export default function CardPrint(p: CardPrintProps) {
         </div>
       )}
 
-      <div className="body">{body}</div>
+      <div className="body">{renderRichBody(body)}</div>
     </article>
   );
 }

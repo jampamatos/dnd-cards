@@ -21,6 +21,36 @@ type CardProps = {
   onTagClick?: (tag: TagKey)=>void;
 };
 
+// Escape HTML to prevent injection before applying inline markup.
+function escapeHtml(s: string): string {
+  return s
+    .replaceAll(/&/g, "&amp;")
+    .replaceAll(/</g, "&lt;")
+    .replaceAll(/>/g, "&gt;")
+    .replaceAll(/"/g, "&quot;")
+    .replaceAll(/'/g, "&#039;");
+}
+
+// Very small inline-markdown: **bold**, __bold__, *italic*, _italic_ + \n -> <br>
+function inlineMarkdownToHtml(s: string): string {
+  let h = escapeHtml(s);
+  // bold (process first to avoid greedily catching the * in italics)
+  h = h.replace(/(\*\*|__)(.+?)\1/g, "<strong>$2</strong>");
+  // italic
+  h = h.replace(/(\*|_)(.+?)\1/g, "<em>$2</em>");
+  // single line breaks become <br>
+  h = h.replace(/\n/g, "<br/>");
+  return h;
+}
+
+// Render body with paragraph support: split on blank lines (\n\n)
+function renderRichBody(body: string) {
+  const paragraphs = body.split(/\n\s*\n/);
+  return paragraphs.map((p, i) => (
+    <p key={i} dangerouslySetInnerHTML={{ __html: inlineMarkdownToHtml(p) }} />
+  ));
+}
+
 function pillToTag(pill: string, lang: "pt" | "en"): TagKey | null {
   const t = pill.toLowerCase();
   // order matters
@@ -215,7 +245,9 @@ export default function Card(props: CardProps) {
         </div>
       )}
 
-      <p style={{ marginTop:8 }}>{body}</p>
+      <div className="body" style={{ marginTop: 8 }}>
+        {renderRichBody(body)}
+      </div>
     </article>
   );
 }
