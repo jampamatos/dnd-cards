@@ -1,83 +1,120 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { usePacks } from "../lib/state/packs";
-import { SpellsArray, type TSpell } from "../lib/schema/spell";
-import { pageRule, columns } from "../lib/print/layout";
-import { usePrefs } from "../lib/state/prefs";
-import type { PageFormat, Orientation, Density } from "../lib/print/layout";
-import CardPrint from "../components/CardPrint";
+import { SpellsArray } from "../lib/schema/spell";
+import { FeaturesArray } from "../lib/schema/feature";
+import type { TSpell } from "../lib/schema/spell";
+import type { TFeature } from "../lib/schema/feature";
+import { columns } from "../lib/print/layout";
 import PrintToolbar from "../components/PrintToolbar";
-import "../styles/print.css";
+import CardPrint from "../components/CardPrint";
+import CardBackPrint from "../components/CardBackPrint";
+import { usePrefs } from "../lib/state/prefs";
+import "../styles/print.css"
+
+type CardVM = {
+  key: string;
+  titlePt: string; titleEn: string;
+  schoolPt: string; schoolEn: string;
+  pillsPt: string[]; pillsEn: string[];
+  bodyPt: string; bodyEn: string;
+};
 
 export default function PrintPreview() {
   const { selected } = usePacks();
   const { lang } = usePrefs();
 
-  // controllah_(gorillaz_feat_mc_bin_laden).mp3
-  const [format, setFormat] = useState<PageFormat>("A4");
-  const [orientation, setOrientation] = useState<Orientation>("portrait");
-  const [density, setDensity] = useState<Density>("M");
-  const [cutMarks, setCutMarks] = useState<boolean>(true);
-  const [showHeader, setShowHeader] = useState<boolean>(true);
-  const [headerTitle, setHeaderTitle] = useState<string>("D&D Cards");
+  // toolbar state
+  const [format, setFormat] = useState<"A4" | "Letter" | "A3">("A4");
+  const [orientation, setOrientation] = useState<"portrait" | "landscape">("portrait");
+  const [density, setDensity] = useState<"S" | "M" | "L">("M");
+  const [cutMarks, setCutMarks] = useState(true);
+  const [showHeader, setShowHeader] = useState(true);
+  const [headerTitle, setHeaderTitle] = useState("D&D Cards");
 
-  // inject @page dynamically
-  useEffect(() => {
-    const style = document.createElement("style");
-    style.media = "print";
-    style.id = "page-rule";
-    style.innerHTML = pageRule(format, orientation, 10);
-    document.head.appendChild(style);
-    return () => { style.remove(); };
-  }, [format, orientation]);
+  // builder state
+  const [reorderMode, setReorderMode] = useState(false);
+  const [colsOverride, setColsOverride] = useState<0 | 1 | 2>(0); // 0 = auto
+  const [backsEnabled, setBacksEnabled] = useState(false);
+  const [backsMirrorCols, setBacksMirrorCols] = useState(true);
 
-  // load data (only spells for now)
-  const [spellById, setSpellById] = useState<Map<string, TSpell>>(new Map());
+  // data
+  const [spells, setSpells] = useState<TSpell[]>([]);
+  const [features, setFeatures] = useState<TFeature[]>([]);
+
   useEffect(() => {
-    import("../data/srd/spells.json").then((m) => {
-      const arr = SpellsArray.parse(m.default);
-      setSpellById(new Map(arr.map(s => [s.id, s])));
+    Promise.all([
+      import("../data/srd/spells.json").then(m => SpellsArray.parse(m.default)),
+      import("../data/srd/features.json").then(m => FeaturesArray.parse(m.default)),
+    ]).then(([sp, ft]) => {
+      setSpells(sp); setFeatures(ft);
     });
   }, []);
 
-  // resolves selected items
-  const cards = useMemo(() => {
-    return selected.map(s => {
-      if (s.kind !== "spell") return null; // only spells for now
-      const sp = spellById.get(s.id);
-      if (!sp) return null;
-      return {
-        key: s.kind + s.id,
-        titlePt: sp.name.pt,
-        titleEn: sp.name.en,
-        schoolPt: sp.school?.pt ?? "",
-        schoolEn: sp.school?.en ?? "",
-        pillsPt: [
-          `Nível ${sp.level}`,
-          sp.castingTime.pt,
-          sp.range.pt,
-          sp.duration.pt,
-          sp.ritual ? "Ritual" : "",
-          sp.concentration ? "Concentração" : ""
-        ].filter(Boolean),
-        pillsEn: [
-          `Level ${sp.level}`,
-          sp.castingTime.en,
-          sp.range.en,
-          sp.duration.en,
-          sp.ritual ? "Ritual" : "",
-          sp.concentration ? "Concentration" : ""
-        ].filter(Boolean),
-        bodyPt: sp.text.pt,
-        bodyEn: sp.text.en,
-      };
-    }).filter(Boolean) as {
-      key: string; titlePt: string; titleEn: string; schoolPt: string; schoolEn: string; pillsPt: string[]; pillsEn: string[]; bodyPt: string; bodyEn: string;
-    }[];
-  }, [selected, spellById]);
+  // build VM list from selection
+  const cardsRaw: CardVM[] = useMemo(() => {
+    const out: CardVM[] = [];
+    for (const it of selected) {
+      if (it.kind === "spell") {
+        const sp = spells.find(s => s.id === it.id);
+        if (!sp) continue;
+        out.push({
+          key: "spell:" + sp.id,
+          titlePt: sp.name.pt, titleEn: sp.name.en,
+          schoolPt: sp.school.pt, schoolEn: sp.school.en,
+          pillsPt: [ `Nível ${sp.level}`, sp.castingTime.pt, sp.range.pt, sp.duration.pt ].filter(Boolean),
+          pillsEn: [ `Level ${sp.level}`, sp.castingTime.en, sp.range.en, sp.duration.en ].filter(Boolean),
+          bodyPt: sp.text.pt, bodyEn: sp.text.en,
+        });
+      } else {
+        const ft = features.find(f => f.id === it.id);
+        if (!ft) continue;
+        out.push({
+          key: "feature:" + ft.id,
+          titlePt: ft.name.pt, titleEn: ft.name.en,
+          schoolPt: ft.class, schoolEn: ft.class,
+          pillsPt: [ `Nível ${ft.level}`, ft.action?.pt ?? "" ].filter(Boolean),
+          pillsEn: [ `Level ${ft.level}`, ft.action?.en ?? "" ].filter(Boolean),
+          bodyPt: ft.text.pt, bodyEn: ft.text.en,
+        });
+      }
+    }
+    return out;
+  }, [selected, spells, features]);
 
-  // columns per preferences
-  const cols = columns(format, orientation, density);
-  const total = cards.length;
+  // reorder support (drag & drop)
+  const [cards, setCards] = useState<CardVM[]>([]);
+  useEffect(() => setCards(cardsRaw), [cardsRaw]);
+
+  const dragIndex = useRef<number | null>(null);
+  const onDragStart = (i: number) => (ev: React.DragEvent) => {
+    dragIndex.current = i;
+    ev.dataTransfer.effectAllowed = "move";
+  };
+  const onDragOver = (i: number) => (ev: React.DragEvent) => {
+    if (!reorderMode) return;
+    ev.preventDefault();
+    ev.dataTransfer.dropEffect = "move";
+  };
+  const onDrop = (i: number) => (ev: React.DragEvent) => {
+    ev.preventDefault();
+    if (dragIndex.current === null) return;
+    const from = dragIndex.current;
+    const to = i;
+    if (from === to) return;
+    setCards((old) => {
+      const temp = old.slice();
+      const [moved] = temp.splice(from, 1);
+      temp.splice(to, 0, moved);
+      return temp;
+    });
+    dragIndex.current = null;
+  };
+
+  // compute columns
+  const autoCols = columns(format, orientation, density);
+  const cols = colsOverride === 0 ? autoCols : colsOverride;
+
+  // timestamp
   const stamp = useMemo(() => {
     const d = new Date();
     const date = d.toLocaleDateString(lang === "pt" ? "pt-BR" : "en-US");
@@ -86,12 +123,29 @@ export default function PrintPreview() {
   }, [lang]);
 
   const L = lang === "pt"
-    ? { title: "Pré-visualização de Impressão", card: "carta", cards: "cartas", empty: "Nada selecionado. Vá em “Navegar” e selecione." }
-    : { title: "Print Preview", card: "card", cards: "cards", empty: "Nothing selected. Go to “Browse” and select." };
+    ? { title: "Pré-visualização de Impressão", card: "carta", cardsLbl: "cartas", empty: "Nada selecionado. Vá em “Navegar” e selecione." }
+    : { title: "Print Preview", card: "card",   cardsLbl: "cards",  empty: "Nothing selected. Go to “Browse” and select." };
+
+  // helper: mirror columns for backs
+  function mirrorByColumns(list: CardVM[], columns: number): CardVM[] {
+    if (columns <= 1) return list.slice();
+    const out: CardVM[] = [];
+    for (let i = 0; i < list.length; i += columns) {
+      const row = list.slice(i, i + columns);
+      out.push(...row.reverse());
+    }
+    return out;
+  }
+
+  // print action
+  function handlePrint() {
+    window.print();
+  }
 
   return (
     <div>
-      <h2 className="no-print">Print Preview</h2>
+      <h2 className="no-print">{L.title}</h2>
+
       <PrintToolbar
         format={format} setFormat={setFormat}
         orientation={orientation} setOrientation={setOrientation}
@@ -99,36 +153,82 @@ export default function PrintPreview() {
         cutMarks={cutMarks} setCutMarks={setCutMarks}
         showHeader={showHeader} setShowHeader={setShowHeader}
         headerTitle={headerTitle} setHeaderTitle={setHeaderTitle}
-        onPrint={()=>window.print()}
+        reorderMode={reorderMode} setReorderMode={setReorderMode}
+        colsOverride={colsOverride} setColsOverride={setColsOverride}
+        backsEnabled={backsEnabled} setBacksEnabled={setBacksEnabled}
+        backsMirrorCols={backsMirrorCols} setBacksMirrorCols={setBacksMirrorCols}
+        onPrint={handlePrint}
       />
 
       {showHeader && (
         <div className="print-header">
           <h1>{headerTitle}</h1>
           <div className="meta">
-            {total} {total === 1 ? L.card : L.cards} • {stamp}
+            {cards.length} {cards.length === 1 ? L.card : L.cardsLbl} • {stamp}
           </div>
         </div>
       )}
 
+      {/* FRONT PAGES */}
       <main
         style={{ ["--cols" as any]: String(cols) }}
         role="main"
         className={`print-grid print-${density} print-content`}
       >
         {cards.length === 0 && <em className="no-print">{L.empty}</em>}
-        {cards.map(c => (
-          <CardPrint
-            key={c.key}
-            titlePt={c.titlePt} titleEn={c.titleEn}
-            schoolPt={c.schoolPt} schoolEn={c.schoolEn}
-            pillsPt={c.pillsPt} pillsEn={c.pillsEn}
-            bodyPt={c.bodyPt} bodyEn={c.bodyEn}
-            withCutMarks={cutMarks}
-            lang={lang}
-          />
-        ))}
+        {cards.map((c, i) => {
+          const draggable = reorderMode;
+          return (
+            <div
+              key={c.key}
+              draggable={draggable}
+              onDragStart={onDragStart(i)}
+              onDragOver={onDragOver(i)}
+              onDrop={onDrop(i)}
+              title={draggable ? (lang === "pt" ? "Arraste para reordenar" : "Drag to reorder") : undefined}
+              style={draggable ? { outline:"1px dashed var(--border)", borderRadius:8 } : undefined}
+            >
+              <CardPrint
+                titlePt={c.titlePt} titleEn={c.titleEn}
+                schoolPt={c.schoolPt} schoolEn={c.schoolEn}
+                pillsPt={c.pillsPt} pillsEn={c.pillsEn}
+                bodyPt={c.bodyPt} bodyEn={c.bodyEn}
+                withCutMarks={cutMarks}
+                lang={lang}
+              />
+            </div>
+          );
+        })}
       </main>
+
+      {/* BACK PAGES */}
+      {backsEnabled && (
+        <>
+          <div className="print-page-break" />
+          {showHeader && (
+            <div className="print-header">
+              <h1>{headerTitle}</h1>
+              <div className="meta">
+                {cards.length} {cards.length === 1 ? L.card : L.cardsLbl} • {stamp}
+              </div>
+            </div>
+          )}
+          <main
+            style={{ ["--cols" as any]: String(cols) }}
+            role="main"
+            className={`print-grid print-${density} print-content`}
+          >
+            { (backsMirrorCols ? mirrorByColumns(cards, cols) : cards).map((c) => (
+              <CardBackPrint
+                key={"back:" + c.key}
+                titlePt={c.titlePt} titleEn={c.titleEn}
+                withCutMarks={cutMarks}
+                lang={lang}
+              />
+            ))}
+          </main>
+        </>
+      )}
     </div>
   );
 }
