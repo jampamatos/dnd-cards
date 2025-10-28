@@ -42,9 +42,13 @@ export const TAG_CATALOG: Record<TagKey, { pt: string; en: string }> = {
 // Stable ordering used to present tags consistently across lists
 const ORDER: TagKey[] = [
   "healing","damage","ritual","concentration","action","bonus-action","reaction",
-  "touch", "self", "short-rest","long-rest","buff","debuff","summon","utility"
+  "touch","self","short-rest","long-rest","buff","debuff","summon","utility"
 ];
 export const TAG_ORDER = ORDER;
+
+// ------------------------------
+// Utilities
+// ------------------------------
 
 function norm(s: string) {
   // Remove accents and lowercase so Portuguese matches English heuristics
@@ -53,13 +57,25 @@ function norm(s: string) {
     .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase();
 }
+
 function has(txt: string | undefined, needles: string[]) {
-  // quick guard against missing translations
+  // Quick guard against missing translations
   if (!txt) return false;
   const t = norm(txt);
-  // check against several correlated keywords to capture different spellings
+  // Check against several correlated keywords to capture different spellings
   return needles.some((n) => t.includes(norm(n)));
 }
+
+function textHaystack(pt?: string, en?: string): string {
+  // Lowercased PT+EN blob for regex checks
+  const a = (pt ?? "").toLowerCase();
+  const b = (en ?? "").toLowerCase();
+  return `${a}\n${b}`;
+}
+
+// ------------------------------
+// JSON -> Canonical mapping
+// ------------------------------
 
 const JSON_TO_CANON: Record<string, TagKey> = {
   // core
@@ -109,11 +125,60 @@ function mapJsonTags(tags?: string[]): TagKey[] {
   return [...out];
 }
 
+// ------------------------------
+// Robust BUFF detection (textual)
+// ------------------------------
+
+/**
+ * Positive textual indicators that truly imply a buff (benefit to the target).
+ * We deliberately avoid generic "increase/aumenta" unless tied to concrete buffs.
+ */
+const RX_BUFF_POSITIVE: RegExp[] = [
+  // Portuguese
+  /\b(bônus|bonus)\b/i,
+  /\b(vantagem)\b/i,
+  /\b(pontos?\s+de\s+vida(?:\s+temporários?)?)\b/i,
+  /\b(pontos?\s+de\s+vida\s+máximos?)\s+(?:aumentam|aumenta)\b/i,
+  /\b(ca|classe\s+de\s+armadura)\s*(\+|\bmais\b)\s*\d+\b/i,
+  /\b(ataque|ataques|testes?|salvaguardas?)\s*(\+|\bmais\b)\s*\d+\b/i,
+  // English
+  /\bbonus\b/i,
+  /\badvantage\b/i,
+  /\btemporary\s+hit\s+points?\b/i,
+  /\bmaximum\s+hit\s+points?\s+(?:increase|increases)\b/i,
+  /\b(ac|armor\s+class)\s*(\+|\bplus\b)\s*\d+\b/i,
+  /\b(attack|checks?|saving\s+throws?)\s*(\+|\bplus\b)\s*\d+\b/i,
+];
+
+/**
+ * Negative contexts that must NOT imply buff.
+ * Typical false positive: "damage increases ..." / "o dano aumenta ..."
+ */
+const RX_BUFF_NEGATIVE: RegExp[] = [
+  // Portuguese
+  /\b(o\s+)?dano\s+(aumenta|aumentam)\b/i,
+  /\baumenta(?:r)?\s+o\s+dano\b/i,
+  // English
+  /\bdamage\s+(increase|increases|increased)\b/i,
+  /\bincrease(?:s|d)?\s+(?:the\s+)?damage\b/i,
+];
+
+function detectBuffFromBody(pt?: string, en?: string): boolean {
+  const hay = textHaystack(pt, en);
+  const hasPositive = RX_BUFF_POSITIVE.some((rx) => rx.test(hay));
+  const hasNegative = RX_BUFF_NEGATIVE.some((rx) => rx.test(hay));
+  return hasPositive && !hasNegative;
+}
+
+// ------------------------------
+// Public API
+// ------------------------------
+
 /** Detect tags associated to a spell record */
 export function detectSpellTags(sp: TSpell): TagKey[] {
   const tags = new Set<TagKey>();
 
-  // (1) JSON -> canon
+  // (1) JSON -> canonical (source of truth)
   mapJsonTags((sp as MaybeTagged).tags).forEach((t) => tags.add(t));
 
   // (2) Structured + heuristics
@@ -127,7 +192,7 @@ export function detectSpellTags(sp: TSpell): TagKey[] {
   const hasAct   = has(ctPT, ["ação"]) || has(ctEN, ["action"]);
   if (hasReact) tags.add("reaction");
   if (hasBonus) tags.add("bonus-action");
-  else if (hasAct && !hasReact) tags.add("action"); // evita marcar "Ação" junto de "Bônus" ou "Reação"
+  else if (hasAct && !hasReact) tags.add("action"); // keep "Action" only when it's not Reaction/Bonus
 
   const rangePT = sp.range?.pt ?? "";
   const rangeEN = sp.range?.en ?? "";
@@ -140,12 +205,16 @@ export function detectSpellTags(sp: TSpell): TagKey[] {
   if (has(bodyPT, ["dano"]) || has(bodyEN, ["damage"])) tags.add("damage");
   if (has(bodyPT, ["invocar","conjurar criatura"]) || has(bodyEN, ["summon","conjure"])) tags.add("summon");
 
-  if (has(bodyPT, ["vantagem","aumenta","bônus"]) || has(bodyEN, ["advantage","increase","bonus"])) tags.add("buff");
+  // --- refined BUFF detection (avoid "damage increases" false positives) ---
+  if (detectBuffFromBody(bodyPT, bodyEN)) tags.add("buff");
+
+  // Debuff can remain simple (common, explicit wording)
   if (has(bodyPT, ["desvantagem","reduz","penalidade"]) || has(bodyEN, ["disadvantage","reduce","penalty"])) tags.add("debuff");
 
   if (has(bodyPT, ["descanso curto"]) || has(bodyEN, ["short rest"])) tags.add("short-rest");
   if (has(bodyPT, ["descanso longo"]) || has(bodyEN, ["long rest"])) tags.add("long-rest");
 
+  // Utility as a fallback when not healing/damage
   if (!tags.has("healing") && !tags.has("damage")) {
     if (has(bodyPT, ["detectar","abrir","trancar","invisibilidade","teleportar","mensagem"]) ||
         has(bodyEN, ["detect","open","lock","invisibility","teleport","message"])) {
@@ -160,7 +229,7 @@ export function detectSpellTags(sp: TSpell): TagKey[] {
 export function detectFeatureTags(ft: TFeature): TagKey[] {
   const tags = new Set<TagKey>();
 
-  // (1) JSON -> canon
+  // (1) JSON -> canonical
   mapJsonTags((ft as MaybeTagged).tags).forEach((t) => tags.add(t));
 
   // (2) Action/time
@@ -171,13 +240,16 @@ export function detectFeatureTags(ft: TFeature): TagKey[] {
   const hasAct   = has(actPT, ["ação"]) || has(actEN, ["action"]);
   if (hasReact) tags.add("reaction");
   if (hasBonus) tags.add("bonus-action");
-  else if (hasAct && !hasReact) tags.add("action"); // evita duplicidade
+  else if (hasAct && !hasReact) tags.add("action"); // avoid duplication
 
   const bodyPT = ft.text?.pt ?? "";
   const bodyEN = ft.text?.en ?? "";
   if (has(bodyPT, ["curar","cura","pontos de vida"]) || has(bodyEN, ["heal","healing","hit points"])) tags.add("healing");
   if (has(bodyPT, ["dano"]) || has(bodyEN, ["damage"])) tags.add("damage");
-  if (has(bodyPT, ["vantagem","bônus"]) || has(bodyEN, ["advantage","bonus"])) tags.add("buff");
+
+  // Reuse refined buff detector for features as well
+  if (detectBuffFromBody(bodyPT, bodyEN)) tags.add("buff");
+
   if (has(bodyPT, ["desvantagem","reduz"]) || has(bodyEN, ["disadvantage","reduce"])) tags.add("debuff");
   if (has(bodyPT, ["descanso curto"]) || has(bodyEN, ["short rest"])) tags.add("short-rest");
   if (has(bodyPT, ["descanso longo"]) || has(bodyEN, ["long rest"])) tags.add("long-rest");
