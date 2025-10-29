@@ -13,13 +13,70 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Added proper link styling for D&D theme */
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  font-weight: 600;
+  color: #8b4513;
+  text-decoration: underline;
+  text-decoration-color: rgba(139, 69, 19, 0.3);
+  text-underline-offset: 2px;
+  transition: all 0.2s ease;
 }
+
 a:hover {
-  color: #535bf2;
+  color: #a0522d;
+  text-decoration-color: rgba(160, 82, 45, 0.6);
+}
+
+a:focus-visible {
+  outline: 2px solid #8b4513;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Dark mode link colors */
+@media (prefers-color-scheme: dark) {
+  a {
+    color: #d4a574;
+    text-decoration-color: rgba(212, 165, 116, 0.3);
+  }
+
+  a:hover {
+    color: #e6c29a;
+    text-decoration-color: rgba(230, 194, 154, 0.6);
+  }
+
+  a:focus-visible {
+    outline-color: #d4a574;
+  }
+}
+
+[data-theme="dark"] a {
+  color: #d4a574;
+  text-decoration-color: rgba(212, 165, 116, 0.3);
+}
+
+[data-theme="dark"] a:hover {
+  color: #e6c29a;
+  text-decoration-color: rgba(230, 194, 154, 0.6);
+}
+
+[data-theme="dark"] a:focus-visible {
+  outline-color: #d4a574;
+}
+
+[data-theme="light"] a {
+  color: #8b4513;
+  text-decoration-color: rgba(139, 69, 19, 0.3);
+}
+
+[data-theme="light"] a:hover {
+  color: #a0522d;
+  text-decoration-color: rgba(160, 82, 45, 0.6);
+}
+
+[data-theme="light"] a:focus-visible {
+  outline-color: #8b4513;
 }
 
 body {
@@ -58,9 +115,6 @@ button:focus-visible {
   :root {
     color: #213547;
     background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
   }
   button {
     background-color: #f9f9f9;
