@@ -29,22 +29,42 @@ type FiltersProps = {
   kind: "spell" | "feature"
 }
 
+function FilterIcon() {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      aria-hidden="true"
+    >
+      <path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z" />
+    </svg>
+  )
+}
+
 export default function Filters(p: FiltersProps) {
   const { lang } = usePrefs()
   const filtersId = useId()
   const isSpell = p.kind === "spell"
   const levelValues: Array<number | "any"> = ["any", ...p.levelOptions]
-  const [filtersOpen, setFiltersOpen] = useState(() => {
+  const getDesktopMatch = () => {
     if (typeof window === "undefined") return true
     return window.matchMedia("(min-width: 769px)").matches
-  })
+  }
+  const [isDesktop, setIsDesktop] = useState(getDesktopMatch)
+  const [filtersOpen, setFiltersOpen] = useState(getDesktopMatch)
 
   useEffect(() => {
     if (typeof window === "undefined") return
     const mq = window.matchMedia("(min-width: 769px)")
     const handle = (event: MediaQueryListEvent) => {
+      setIsDesktop(event.matches)
       setFiltersOpen(event.matches)
     }
+    setIsDesktop(mq.matches)
     if (typeof mq.addEventListener === "function") {
       mq.addEventListener("change", handle)
       return () => mq.removeEventListener("change", handle)
@@ -109,25 +129,27 @@ export default function Filters(p: FiltersProps) {
     p.setTags(has ? p.tags.filter((t) => t !== k) : [...p.tags, k])
   }
 
+  const toggleLabel = filtersOpen ? L.hideFilters : L.showFilters
+  const showButtonText = filtersOpen || !isDesktop
+
   return (
     <>
-      <div className="filters-mobile-toggle container">
+      <div className={`filters-toggle container ${filtersOpen ? "" : "filters-toggle--floating"}`}>
         <button
-          className="btn btn-primary"
+          className={`btn btn-primary filters-toggle-btn ${filtersOpen ? "" : "filters-toggle-btn--floating"}`}
           onClick={() => setFiltersOpen((prev) => !prev)}
           aria-expanded={filtersOpen}
           aria-controls={filtersId}
+          aria-label={toggleLabel}
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z" />
-          </svg>
-          {filtersOpen ? L.hideFilters : L.showFilters}
+          <FilterIcon />
+          {showButtonText && <span>{toggleLabel}</span>}
         </button>
       </div>
 
       <form
         id={filtersId}
-        className={`filters sticky container ${filtersOpen ? "" : "filters--collapsed"}`}
+        className={`filters sticky container ${filtersOpen ? "" : "filters--hidden"}`}
         onSubmit={(event) => event.preventDefault()}
         aria-label={L.formLabel}
         aria-hidden={filtersOpen ? undefined : true}

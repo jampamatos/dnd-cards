@@ -14,6 +14,7 @@
   --space-3: 12px;
   --space-4: 16px;
   --space-5: 24px;
+  --space-6: 35px;
 
   /* Enhanced shadows for depth and fantasy feel */
   --shadow: 0 4px 16px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
@@ -565,20 +566,37 @@ input::placeholder {
    9) Filters with mobile-friendly responsive design
    ------------------------------------------------------------------------ */
 /* Filter toggle button */
-.filters-mobile-toggle {
+.filters-toggle {
+  position: sticky;
+  top: calc(var(--sticky-top) + var(--space-2));
+  z-index: 40;
   display: flex;
   justify-content: flex-end;
   margin-bottom: var(--space-3);
 }
 
+.filters-toggle-btn {
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filters-toggle-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
 @media (max-width: 768px) {
-  .filters-mobile-toggle {
-    display: block;
+  .filters-toggle {
+    position: static;
   }
 
-  .filters-mobile-toggle .btn {
+  .filters-toggle-btn {
     width: 100%;
   }
+}
+
+.filters-toggle--floating {
+  margin-bottom: 0;
 }
 
 .filters {
@@ -594,11 +612,10 @@ input::placeholder {
   margin-bottom: var(--space-4);
 }
 
-.filters--collapsed {
+.filters--hidden {
   display: none;
 }
 
-/* Mobile-first responsive filter layout */
 .filters-row {
   display: grid;
   gap: var(--space-3);
@@ -624,6 +641,27 @@ input::placeholder {
   gap: var(--space-1);
   font-weight: 500;
   font-size: 0.9rem;
+}
+
+@media (min-width: 769px) {
+  .filters-toggle--floating {
+    position: static;
+  }
+
+  .filters-toggle-btn--floating {
+    position: fixed;
+    top: calc(var(--sticky-top) + var(--space-6));
+    right: var(--space-5);
+    width: 52px;
+    height: 52px;
+    padding: 0;
+    border-radius: 999px;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .filters-toggle-btn--floating span {
+    display: none;
+  }
 }
 
 /* Fixed sticky behavior - moves to top when header scrolls away */
