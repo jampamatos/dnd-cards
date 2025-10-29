@@ -11,6 +11,7 @@ import { buildIndex, toDocs } from "../lib/search/indexer";
 import type { UnifiedDoc } from "../lib/search/indexer";
 import { detectSpellTags, detectFeatureTags, type TagKey } from "../lib/search/tags";
 import { usePrefs } from "../lib/state/prefs";
+import { formatFeatureLevel, formatSpellLevel } from "../lib/format";
 
 type HitKind = "spell" | "feature";
 type SortOption = "name-asc" | "level-asc" | "level-desc";
@@ -121,6 +122,18 @@ export default function Browse() {
     return m;
   }, [features]);
 
+  const spellLevels = useMemo(() => {
+    const set = new Set<number>();
+    for (const sp of spells) set.add(sp.level);
+    return Array.from(set).sort((a, b) => a - b);
+  }, [spells]);
+
+  const featureLevels = useMemo(() => {
+    const set = new Set<number>();
+    for (const ft of features) set.add(ft.level);
+    return Array.from(set).sort((a, b) => a - b);
+  }, [features]);
+
   // helpers
   const hasAllTags = (keys: TagKey[] | undefined, selected: TagKey[]) =>
     selected.length === 0 || (keys && selected.every((k) => keys.includes(k)));
@@ -150,6 +163,9 @@ export default function Browse() {
   const sStart = (page-1) * pageSize;
   const sItems = spellsSorted.slice(sStart, sStart + pageSize);
   useEffect(()=>{ setPage(1); }, [q, level, clazz, tags, pageSize, sort]);
+  useEffect(() => {
+    if (level !== "any" && !spellLevels.includes(level)) setLevel("any");
+  }, [level, spellLevels]);
 
   function handleLevelClick(l:number){ setLevel(l); window.scrollTo({top:0, behavior:"smooth"}); }
   function handleClassClick(c:string){ setClazz(c); window.scrollTo({top:0, behavior:"smooth"}); }
@@ -171,6 +187,9 @@ export default function Browse() {
   const fStart = (fPage-1) * fPageSize;
   const fItems = featuresSorted.slice(fStart, fStart + fPageSize);
   useEffect(()=>{ setFPage(1); }, [q, fLevel, fClazz, fTags, fPageSize, fSort]);
+  useEffect(() => {
+    if (fLevel !== "any" && !featureLevels.includes(fLevel)) setFLevel("any");
+  }, [fLevel, featureLevels]);
 
   if (error) {
     const errorLabel = lang === "pt" ? "Erro carregando dados" : "Error loading data";
@@ -209,6 +228,7 @@ export default function Browse() {
           <Filters
             q={q} setQ={setQ}
             level={level} setLevel={setLevel}
+            levelOptions={spellLevels}
             clazz={clazz} setClazz={setClazz}
             sort={sort} setSort={setSort}
             total={spellsSorted.length}
@@ -218,6 +238,7 @@ export default function Browse() {
             onClearClazz={()=>setClazz("any")}
             // tags
             tags={tags} setTags={setTags} onClearTags={()=>setTags([])}
+            kind="spell"
           />
           <div className="grid-cards container">
             {sItems.map((sp) => {
@@ -232,12 +253,12 @@ export default function Browse() {
                   schoolPt={sp.school.pt}
                   schoolEn={sp.school.en}
                   pillsPt={[
-                    `Nível ${sp.level}`,
+                    formatSpellLevel(sp.level, "pt"),
                     sp.castingTime.pt, sp.range.pt, sp.duration.pt,
                     sp.ritual ? "Ritual" : "", sp.concentration ? "Concentração" : "",
                   ].filter(Boolean)}
                   pillsEn={[
-                    `Level ${sp.level}`,
+                    formatSpellLevel(sp.level, "en"),
                     sp.castingTime.en, sp.range.en, sp.duration.en,
                     sp.ritual ? "Ritual" : "", sp.concentration ? "Concentration" : "",
                   ].filter(Boolean)}
@@ -265,6 +286,7 @@ export default function Browse() {
           <Filters
             q={q} setQ={setQ}
             level={fLevel} setLevel={setFLevel}
+            levelOptions={featureLevels}
             clazz={fClazz} setClazz={setFClazz}
             sort={fSort} setSort={setFSort}
             total={featuresSorted.length}
@@ -274,6 +296,7 @@ export default function Browse() {
             onClearClazz={()=>setFClazz("any")}
             // tags
             tags={fTags} setTags={setFTags} onClearTags={()=>setFTags([])}
+            kind="feature"
           />
           <div className="grid-cards container">
             {fItems.map((ft) => {
@@ -288,12 +311,12 @@ export default function Browse() {
                   schoolPt={ft.class}
                   schoolEn={ft.class}
                   pillsPt={[
-                    `Nível ${ft.level}`,
+                    formatFeatureLevel(ft.level, "pt"),
                     ft.action?.pt ?? "",
                     ft.uses ? `Usos: ${ft.uses}` : "",
                   ].filter(Boolean)}
                   pillsEn={[
-                    `Level ${ft.level}`,
+                    formatFeatureLevel(ft.level, "en"),
                     ft.action?.en ?? "",
                     ft.uses ? `Uses: ${ft.uses}` : "",
                   ].filter(Boolean)}

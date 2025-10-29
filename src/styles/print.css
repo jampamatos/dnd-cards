@@ -2,126 +2,282 @@
    Print system — screen preview + print hardening
    ----------------------------------------------------------- */
 
-/* Theme tokens used only for on-screen preview */
-:root { color-scheme: light dark; }
-:root[data-theme="dark"] { --bg:#111; --fg:#eee; --card:#1b1b1b; --border:#333; }
-:root[data-theme="light"]{ --bg:#fff; --fg:#111; --card:#fff;    --border:#ddd; }
-
-/* Print/layout variables */
-:root{
-  --print-header-h: 18mm; /* repeated header height */
-  --print-gap: 8px;       /* gap between cards */
+/* Enhanced theme tokens for D&D aesthetic */
+:root {
+  color-scheme: light dark;
+}
+:root[data-theme="dark"] {
+  --bg: #1a1410;
+  --fg: #f0e6d2;
+  --card: #2a1f1a;
+  --border: #3d2f26;
+}
+:root[data-theme="light"] {
+  --bg: #f5f1e8;
+  --fg: #2d1810;
+  --card: #fdfbf7;
+  --border: #d4c4a8;
 }
 
-/* Screen preview background */
-body{ background:var(--bg); color:var(--fg); }
+:root {
+  --print-header-h: 18mm;
+  --print-gap: 8px;
+}
 
-/* Base card preview colors (real print uses white anyway) */
-.print-card{ background:var(--card); border-color:var(--border); }
+body {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.print-card {
+  background: var(--card);
+  border-color: var(--border);
+}
 
 /* -----------------------------------------------------------
    PRINT HEADER + BASE
    ----------------------------------------------------------- */
 @media print {
-  html, body { height:auto; }
-  body { margin:0; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
-  .no-print { display:none !important; }
-
-  /* Fixed header that repeats on every page */
-  .print-header{
-    position:fixed; inset:0 0 auto 0;
-    height:var(--print-header-h);
-    background:#fff; border-bottom:1px solid #ccc;
-    display:flex; align-items:end; justify-content:space-between;
-    padding:6mm 10mm 4mm; z-index:9999;
+  html,
+  body {
+    height: auto;
   }
-  .print-header h1{
-    font-size:14pt; line-height:1.1; margin:0; text-wrap:balance;
+  body {
+    margin: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
-  .print-header .meta{ font-size:9pt; opacity:.85; }
+  .no-print {
+    display: none !important;
+  }
 
-  /* Compensate the header height */
-  .print-content{ padding-top:calc(var(--print-header-h) + 2mm); }
+  .print-header {
+    position: fixed;
+    inset: 0 0 auto 0;
+    height: var(--print-header-h);
+    background: #fff;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    padding: 6mm 10mm 4mm;
+    z-index: 9999;
+  }
+  .print-header h1 {
+    font-size: 14pt;
+    line-height: 1.1;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .print-header .meta {
+    font-size: 9pt;
+    opacity: 0.85;
+  }
+
+  .print-content {
+    padding-top: calc(var(--print-header-h) + 2mm);
+  }
 }
-/* Page size is injected dynamically via <style media="print"> */
 
 /* -----------------------------------------------------------
-   GRID + CARD (applies for preview and print)
+   GRID + CARD
    ----------------------------------------------------------- */
 
-/* Grid for print with smaller gaps */
-.print-grid{
-  display:grid;
-  grid-template-columns:repeat(var(--cols,3),1fr);
-  gap:var(--print-gap);
+.print-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 3), 1fr);
+  gap: var(--print-gap);
 }
 
-/* Card block */
-.print-card{
-  break-inside:avoid; page-break-inside:avoid;
-  border:1px solid var(--border, #bbb);
-  border-radius:8px; padding:10px;
-  background:#fff; color:#111;
-  /* readability */
-  hyphens:auto; -webkit-hyphens:auto; overflow-wrap:anywhere;
-  orphans:3; widows:3;
+.print-card {
+  break-inside: avoid;
+  page-break-inside: avoid;
+  border: 1px solid var(--border, #bbb);
+  border-radius: 8px;
+  padding: 10px;
+  background: #fff;
+  color: #111;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  overflow-wrap: anywhere;
+  orphans: 3;
+  widows: 3;
 }
 
-.print-card h3{
-  margin:0 0 4px; font-size:1.05em; line-height:1.2;
-}
-.print-card h3 small{ font-weight:500; font-size:14px; opacity:.7; }
-
-/* Pills row */
-.print-card .pills{
-  display:flex; flex-wrap:wrap; gap:4px;
-  margin:4px 0 6px;
-}
-.print-card .pill{
-  display:inline-flex; align-items:center;
-  font-size:.8em; line-height:1;
-  border:1px solid var(--border, #ccc);
-  border-radius:999px; padding:1px 6px;
-  background:transparent; color:#111;
-  /* avoid weird breaks inside a pill */
-  hyphens:none; -webkit-hyphens:none; white-space:nowrap;
+/* Improved title hierarchy and spacing */
+.print-card h3 {
+  margin: 0 0 6px;
+  font-size: 1em;
+  line-height: 1.3;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
-/* Body text */
-.print-card .body{ font-size:.95em; line-height:1.25; }
+.print-card h3 .card-title {
+  font-size: 1.1em;
+  font-weight: 700;
+  line-height: 1.2;
+}
 
-/* Densities – only typographic scaling */
-.print-S{ font-size:10px; }
-.print-M{ font-size:12px; }
-.print-L{ font-size:14px; }
+.print-card h3 .card-school {
+  font-weight: 500;
+  font-size: 0.85em;
+  opacity: 0.7;
+  font-style: italic;
+}
 
-/* Optional cut marks */
-.cutmarks{ position:relative; }
+.print-card .pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 4px 0 6px;
+}
+
+/* Grayscale styling for print - removed strong colors */
+.print-card .pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: .8em;
+  line-height: 1.2;
+  border: 1px solid #666;
+  border-radius: 999px;
+  padding: 2px 7px;
+  background: #f5f5f5;
+  color: #222;
+  hyphens: none;
+  -webkit-hyphens: none;
+  white-space: nowrap;
+}
+.print-card .pill--level {
+  background: #e4e4e4;
+  border-color: #8c8c8c;
+  color: #1f1f1f;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  font-variant: small-caps;
+  padding: 3px 10px;
+}
+
+/* Grayscale component badges for print */
+.print-card .pill--components {
+  background: #e8e8e8;
+  border-color: #888;
+  padding: 3px 8px;
+  gap: 5px;
+  font-weight: 600;
+}
+
+.print-card .pill--component {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 2px 5px;
+  border-radius: 3px;
+  background: #555;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  border: 1px solid #333;
+}
+
+.print-card .pill--component-m {
+  padding: 2px 6px;
+  min-width: auto;
+  font-size: 8px;
+  background: #666;
+}
+
+/* Grayscale styling for ritual and concentration badges */
+.print-card .pill--ritual {
+  background: #d0d0d0;
+  border-color: #888;
+  color: #222;
+  font-weight: 600;
+  gap: 4px;
+  padding: 3px 8px;
+}
+
+.print-card .pill--ritual svg {
+  fill: #444;
+  stroke: #444;
+}
+
+.print-card .pill--concentration {
+  background: #e0e0e0;
+  border-color: #999;
+  color: #222;
+  font-weight: 600;
+  gap: 4px;
+  padding: 3px 8px;
+}
+
+.print-card .pill--concentration svg {
+  stroke: #444;
+}
+
+.print-card .body {
+  font-size: .95em;
+  line-height: 1.25;
+}
+
+.print-S {
+  font-size: 10px;
+}
+.print-M {
+  font-size: 12px;
+}
+.print-L {
+  font-size: 14px;
+}
+
+.cutmarks {
+  position: relative;
+}
 .cutmarks::before,
-.cutmarks::after{
-  content:""; position:absolute; left:0; right:0;
-  border-top:1px dotted #aaa; top:-4px;
+.cutmarks::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 1px dotted #aaa;
+  top: -4px;
 }
-.cutmarks::after{ top:auto; bottom:-4px; }
+.cutmarks::after {
+  top: auto;
+  bottom: -4px;
+}
 
-/* Manual page break between front and back pages */
-.print-page-break{ break-before:page; }
+.print-page-break {
+  break-before: page;
+}
 
-/* Screen-only helpers (drag cursor, etc.) */
-@media screen{
-  .print-grid>div[draggable="true"]{ cursor:grab; }
-  .print-grid>div[draggable="true"]:active{ cursor:grabbing; }
+@media screen {
+  .print-grid > div[draggable="true"] {
+    cursor: grab;
+  }
+  .print-grid > div[draggable="true"]:active {
+    cursor: grabbing;
+  }
 }
 
 /* -----------------------------------------------------------
-   HARDENING (last, minimal !important) — prevents overrides
+   HARDENING
    ----------------------------------------------------------- */
-.print-grid{
-  display:grid !important;
-  grid-template-columns:repeat(var(--cols,3),1fr) !important;
-  gap:var(--print-gap) !important;
+.print-grid {
+  display: grid !important;
+  grid-template-columns: repeat(var(--cols, 3), 1fr) !important;
+  gap: var(--print-gap) !important;
 }
-.print-card .pills{
-  display:flex !important; flex-wrap:wrap !important; gap:4px !important;
+.print-card .pills {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 4px !important;
 }
-.print-card .pill + .pill{ margin-left:4px; } /* gap fallback for old engines */
+.print-card .pill + .pill {
+  margin-left: 4px;
+}

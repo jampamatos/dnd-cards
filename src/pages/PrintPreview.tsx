@@ -11,6 +11,7 @@ import CardPrint from "../components/CardPrint";
 import CardBackPrint from "../components/CardBackPrint";
 import { usePrefs } from "../lib/state/prefs";
 import "../styles/print.css"
+import { formatFeatureLevel, formatSpellLevel } from "../lib/format";
 
 type CardVM = {
   key: string;
@@ -63,8 +64,22 @@ export default function PrintPreview() {
           key: "spell:" + sp.id,
           titlePt: sp.name.pt, titleEn: sp.name.en,
           schoolPt: sp.school.pt, schoolEn: sp.school.en,
-          pillsPt: [ `Nível ${sp.level}`, sp.castingTime.pt, sp.range.pt, sp.duration.pt ].filter(Boolean),
-          pillsEn: [ `Level ${sp.level}`, sp.castingTime.en, sp.range.en, sp.duration.en ].filter(Boolean),
+          pillsPt: [
+            formatSpellLevel(sp.level, "pt"),
+            sp.castingTime.pt,
+            sp.range.pt,
+            sp.duration.pt,
+            sp.ritual ? "Ritual" : "",
+            sp.concentration ? "Concentração" : "",
+          ].filter(Boolean),
+          pillsEn: [
+            formatSpellLevel(sp.level, "en"),
+            sp.castingTime.en,
+            sp.range.en,
+            sp.duration.en,
+            sp.ritual ? "Ritual" : "",
+            sp.concentration ? "Concentration" : "",
+          ].filter(Boolean),
           bodyPt: sp.text.pt, bodyEn: sp.text.en,
           components: sp.components,
         });
@@ -75,8 +90,8 @@ export default function PrintPreview() {
           key: "feature:" + ft.id,
           titlePt: ft.name.pt, titleEn: ft.name.en,
           schoolPt: ft.class, schoolEn: ft.class,
-          pillsPt: [ `Nível ${ft.level}`, ft.action?.pt ?? "" ].filter(Boolean),
-          pillsEn: [ `Level ${ft.level}`, ft.action?.en ?? "" ].filter(Boolean),
+          pillsPt: [ formatFeatureLevel(ft.level, "pt"), ft.action?.pt ?? "" ].filter(Boolean),
+          pillsEn: [ formatFeatureLevel(ft.level, "en"), ft.action?.en ?? "" ].filter(Boolean),
           bodyPt: ft.text.pt, bodyEn: ft.text.en,
         });
       }
