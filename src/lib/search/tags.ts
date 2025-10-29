@@ -18,7 +18,8 @@ export type TagKey =
   | "buff"
   | "debuff"
   | "summon"
-  | "utility";
+  | "utility"
+  | "shapechanging";
 
 // Maps every tag key to localized labels for quick lookup on the UI
 export const TAG_CATALOG: Record<TagKey, { pt: string; en: string }> = {
@@ -37,12 +38,13 @@ export const TAG_CATALOG: Record<TagKey, { pt: string; en: string }> = {
   debuff:         { pt: "Debuff",           en: "Debuff" },
   summon:         { pt: "Invocação",        en: "Summon" },
   utility:        { pt: "Utilidade",        en: "Utility" },
+  shapechanging:  { pt: "Metamorfose",      en: "Shapechanging",}
 };
 
 // Stable ordering used to present tags consistently across lists
 const ORDER: TagKey[] = [
   "healing","damage","ritual","concentration","action","bonus-action","reaction",
-  "touch","self","short-rest","long-rest","buff","debuff","summon","utility"
+  "touch","self","short-rest","long-rest","buff","debuff","summon","utility", "shapechanging"
 ];
 export const TAG_ORDER = ORDER;
 
@@ -93,6 +95,7 @@ const JSON_TO_CANON: Record<string, TagKey> = {
   "buff": "buff", "debuff": "debuff",
   "invocacao": "summon", "summon": "summon",
   "utilidade": "utility", "utility": "utility",
+  "metamorfose": "shapechanging", "appearance": "shapechanging",
 
   // most common tags
   "defesa": "buff",

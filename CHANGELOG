@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2025-10-28
+### Added
+- Components pill: V/S/M grouped into **one** pill, with the material displayed in full in "M".
+- Print: Component pill parity in preview/print.
+- Rich text on cards/print: support for paragraphs (`\n\n`), **bold**, and *italics*.
+
+### Changed
+- Visualization of component chips and the container (slight distinction from other pills).
+
+### Fixed
+- Tags: Refined `buff` heuristic to avoid false positives in text like "damage increases" (e.g., *Acid Splash*). JSON tags remain the source of truth.
+- Hydration: Avoids `<p>` nested within `<p>` when wrapping the body in `<div>`.
+
+### Docs
+- Added `.markdownlint.json` and `.markdownlintignore`; Markdown lint fixes.
+
 ## [1.0.0] - 2025-10-28
 ### Added
 - Unified browser (Spells + Features) with clickable pills and PT/EN search.
@@ -18,4 +34,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Print styles (hyphenation, spacing, repeated header).
 
 ### Fixed
-- Contrast and readability in dark mode (chips, tabs, dock). - Filtering by tags and visual duplication anomalies.
+- Contrast and readability in dark mode (chips, tabs, dock).
+- Filtering by tags and visual duplication anomalies.
+
+[Unreleased]: https://github.com/jampamatos/dnd-cards/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/jampamatos/dnd-cards/compare/v1.0.0...v1.1.0
+[1.0.0]: https://github.com/jampamatos/dnd-cards/releases/tag/v1.0.0
