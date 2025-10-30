@@ -10,6 +10,7 @@ export type TagKey =
   | "debuff"
   | "communication"
   | "control"
+  | "creation"
   | "detection"
   | "shapechanging"
   | "social"
@@ -21,6 +22,7 @@ export type TagKey =
   | "stealth"
   | "mobility"
   | "magic"
+  | "negation"
   | "resource"
   | "resource-burst"
   | "recharge"
@@ -34,7 +36,9 @@ export type TagKey =
   | "self"
   | "short-rest"
   | "long-rest"
-  | "utility";
+  | "teleportation"
+  | "utility"
+  | "warding";
 
 // Maps every tag key to localized labels for quick lookup on the UI
 export const TAG_CATALOG: Record<TagKey, { pt: string; en: string }> = {
@@ -44,6 +48,7 @@ export const TAG_CATALOG: Record<TagKey, { pt: string; en: string }> = {
   debuff:         { pt: "Debuff",              en: "Debuff" },
   communication:  { pt: "Comunicação",         en: "Communication" },
   control:        { pt: "Controle",            en: "Control" },
+  creation:       { pt: "Criação",             en: "Creation" },
   detection:      { pt: "Detecção",            en: "Detection" },
   shapechanging:  { pt: "Metamorfose",         en: "Shapechanging" },
   social:         { pt: "Social",              en: "Social" },
@@ -55,6 +60,7 @@ export const TAG_CATALOG: Record<TagKey, { pt: string; en: string }> = {
   stealth:        { pt: "Furtividade",         en: "Stealth" },
   mobility:       { pt: "Mobilidade",          en: "Mobility" },
   magic:          { pt: "Magia",               en: "Magic" },
+  negation:       { pt: "Negação",             en: "Negation"},
   resource:       { pt: "Recurso",             en: "Resource" },
   "resource-burst": { pt: "Explosão de Recursos", en: "Resource Burst" },
   recharge:       { pt: "Recarga",             en: "Recharge" },
@@ -69,6 +75,8 @@ export const TAG_CATALOG: Record<TagKey, { pt: string; en: string }> = {
   "short-rest":   { pt: "Descanso Curto",      en: "Short Rest" },
   "long-rest":    { pt: "Descanso Longo",      en: "Long Rest" },
   utility:        { pt: "Utilidade",           en: "Utility" },
+  teleportation:  { pt: "Teletransporte",      en: "Teleportation" },
+  warding:        { pt: "Proteção",            en: "Warding"},
 };
 
 // Stable ordering used to present tags consistently across lists
@@ -79,6 +87,7 @@ const ORDER: TagKey[] = [
   "debuff",
   "communication",
   "control",
+  "creation",
   "detection",
   "shapechanging",
   "social",
@@ -90,6 +99,7 @@ const ORDER: TagKey[] = [
   "stealth",
   "mobility",
   "magic",
+  "negation",
   "resource",
   "resource-burst",
   "recharge",
@@ -103,7 +113,9 @@ const ORDER: TagKey[] = [
   "self",
   "short-rest",
   "long-rest",
+  "teleportation",
   "utility",
+  "warding"
 ];
 export const TAG_ORDER = ORDER;
 
@@ -134,6 +146,8 @@ const JSON_TO_CANON: Record<string, TagKey> = {
   communication: "communication",
   controle: "control",
   control: "control",
+  criacao: "creation",
+  creation: "creation",
   deteccao: "detection",
   detection: "detection",
   metamorfose: "shapechanging",
@@ -170,6 +184,8 @@ const JSON_TO_CANON: Record<string, TagKey> = {
   mobility: "mobility",
   magia: "magic",
   magic: "magic",
+  negacao: "negation",
+  negation: "negation",
   recurso: "resource",
   resource: "resource",
   "explosao-de-recursos": "resource-burst",
@@ -183,6 +199,10 @@ const JSON_TO_CANON: Record<string, TagKey> = {
   transformation: "transformation",
   utilidade: "utility",
   utility: "utility",
+  teletransporte: "teleportation",
+  teleportation: "teleportation",
+  protecao: "warding",
+  warding: "warding"
 };
 
 function mapJsonTags(tags?: string[]): TagKey[] {

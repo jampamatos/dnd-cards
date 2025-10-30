@@ -131,5 +131,138 @@
     },
     "tags": ["shapechanging"],
     "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "animate-dead",
+    "name": { "pt": "Animar Mortos", "en": "Animate Dead" },
+    "level": 3,
+    "school": { "pt": "Necromancia", "en": "Necromancy" },
+    "classes": ["Cleric", "Wizard"],
+    "castingTime": { "pt": "1 Minuto", "en": "1 Minute" },
+    "range": { "pt": "3 metros (10 pés)", "en": "10 ft." },
+    "duration": { "pt": "Instantânea", "en": "Instantaneous" },
+    "concentration": false,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true, "material":"uma gota de sangue, um pedaço de carne e uma pitada de pó de osso" },
+    "text": {
+      "pt": "Escolha uma pilha de ossos ou um cadáver de um Humanoide Médio ou Pequeno no alcance da magia. O alvo se torna um Morto-vivo: um Esqueleto se tiver escolhido ossos ou um Zumbi se tiver escolhido um cadáver (veja o apêndice B para os blocos de estatística).\n\n Em cada um dos seus turnos, você pode executar uma Ação Bônus para comandar mentalmente qualquer criatura que tenha animado com essa magia se a criatura estiver a até 18 metros de você (se você controlar várias criaturas, pode comandar qualquer uma delas ao mesmo tempo, emitindo o mesmo comando para cada uma). Você decide qual ação a criatura realiza e para onde ela se move no próximo turno dela, ou pode emitir um comando geral, como proteger uma câmara ou um corredor. Se você não der nenhum comando, a criatura executa a ação Esquivar e move-se apenas para evitar dano. Uma vez dada uma ordem, a criatura continua a segui-la até que a tarefa seja concluída.\n\nA criatura fica sob seu controle por 24 horas, após as quais ela deixa de obedecer a qualquer comando que você tenha dado a ela. Para manter o controle da criatura por mais 24 horas, é necessário conjurar essa magia na criatura novamente antes que o período atual de 24 horas termine. Esse uso da magia reafirma seu controle sobre até quatro criaturas que você animou com essa magia em vez de animar uma nova criatura. \n\n***Usando um Espaço de Magia de Círculo Superior.*** Você anima ou reafirma o controle sobre duas criaturas Mortas-vivas adicionais para cada círculo de espaço de magia acima de 3. Cada uma das criaturas deve vir de um cadáver ou pilha de ossos diferente.",
+      "en": "Choose a pile of bones or a corpse of a Medium or Small Humanoid within range. The target becomes an Undead creature: a Skeleton if you chose bones or a Zombie if you chose a corpse.\n\nOn each of your turns, you can take a Bonus Action to mentally command any creature you made with this spell if the creature is within 60 feet of you (if you control multiple creatures, you can command any of them at the same time, issuing the same command to each one). You decide what action the creature will take and where it will move on its next turn, or you can issue a general command, such as to guard a chamber or corridor. If you issue no commands, the creature takes the Dodge action and moves only to avoid harm. Once given an order, the creature continues to follow it until its task is complete.\n\nThe creature is under your control for 24 hours, after which it stops obeying any command you’ve given it. To maintain control of the creature for another 24 hours, you must cast this spell on the creature again before the current 24-hour period ends. This use of the spell reasserts your control over up to four creatures you have animated with this spell rather than animating a new creature.\n\n***Using a Higher-Level Spell Slot.*** You animate or reassert control over two additional Undead creatures for each spell slot level above 3. Each of the creatures must come from a different corpse or pile of bones."
+    },
+    "tags": ["creation"],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "animate-objects",
+    "name": { "pt": "Animar Objetos", "en": "Animate Objects" },
+    "level": 5,
+    "school": { "pt": "Transmutação", "en": "Transmutation" },
+    "classes": ["Artificer", "Bard", "Sorcerer", "Wizard"],
+    "castingTime": { "pt": "Ação", "en": "Action" },
+    "range": { "pt": "36 metros (120 pés)", "en": "120 ft." },
+    "duration": { "pt": "1 Minuto", "en": "1 Minute" },
+    "concentration": true,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true },
+    "text": {
+      "pt": "Objetos são animados ao seu comando. Escolha uma série de objetos não mágicos no alcance da magia que não estejam sendo usados ou carregados, não estejam fixados a uma superfície e não sejam Colossais. O número máximo de objetos é igual ao seu modificador de atributo de conjuração. Para este número, um tamanho Médio ou menor conta como um objeto, um alvo Grande conta como dois e um alvo Enorme conta como três. \n\nCada alvo se anima, faz brotar pernas e se torna um Constructo que usa o bloco de estatísticas do Objeto Animado; esta criatura está sob seu controle até que a magia termine ou até que ela seja reduzida a 0 Pontos de Vida. Cada criatura que você anima com esta magia é uma aliada sua e de seus aliados. Em combate, ela compartilha a contagem de Iniciativa com você e tem o turno dela imediatamente após o seu.\n\n Até que a magia encerre, você pode executar uma Ação Bônus para comandar mentalmente qualquer criatura que tenha animado com essa magia se a criatura estiver a até 150 metros de você (se você controlar várias criaturas, pode comandar quaisquer delas ao mesmo tempo, emitindo o mesmo comando para cada uma). Se você não der nenhum comando, a criatura executa a ação Esquivar e se move apenas para evitar danos. Quando a criatura é reduzida a 0 Pontos de Vida, ela reverte para sua forma de objeto, e qualquer dano restante é transferido para essa forma.\n\n***Usando um Espaço de Magia de Círculo Superior.*** O dano de Pancada da criatura aumenta em 1d4 (Médio ou menor), 1d6 (Grande) ou 1d12 (Enorme) para cada círculo de espaço de magia acima de 5.",
+      "en": "Objects animate at your command. Choose a number of nonmagical objects within range that aren’t being worn or carried, aren’t fixed to a surface, and aren’t Gargantuan. The maximum number of objects is equal to your spellcasting ability modifier; for this number, a Medium or smaller target counts as one object, a Large target counts as two, and a Huge target counts as three. \n\nEach target animates, sprouts legs, and becomes a Construct that uses the Animated Object stat block; this creature is under your control until the spell ends or until it is reduced to 0 Hit Points. Each creature you make with this spell is an ally to you and your allies. In combat, it shares your Initiative count and takes its turn immediately after yours.\n\nUntil the spell ends, you can take a Bonus Action to mentally command any creature you made with this spell if the creature is within 500 feet of you (if you control multiple creatures, you can command any of them at the same time, issuing the same command to each one). If you issue no commands, the creature takes the Dodge action and moves only to avoid harm. When the creature drops to 0 Hit Points, it reverts to its object form, and any remaining damage carries over to that form.\n\n***Using a Higher-Level Spell Slot.*** The creature’s Slam damage increases by 1d4 (Medium or smaller), 1d6 (Large), or 1d12 (Huge) for each spell slot level above 5."
+    },
+    "tags": ["creation", "damage"],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "antilife-shell",
+    "name": { "pt": "Cúpula Antivida", "en": "Antilife Shell" },
+    "level": 5,
+    "school": { "pt": "Abjuração", "en": "Abjuration" },
+    "classes": ["Druid"],
+    "castingTime": { "pt": "Ação", "en": "Action" },
+    "range": { "pt": "Pessoal", "en": "Self" },
+    "duration": { "pt": "1 Hora", "en": "1 Hour" },
+    "concentration": true,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true },
+    "text": {
+      "pt": "Uma aura estende-se de você em uma Emanação de 3 metros pela duração da magia. A aura impede que criaturas que não sejam Constructos e Mortos-Vivos passem ou alcancem através dela. Uma criatura afetada pode conjurar magias ou realizar ataques com armas à Distância ou com Extensão através da barreira.\n\nSe você se mover de modo que uma criatura afetada seja forçada a atravessar a barreira, a magia encerra.",
+      "en": "An aura extends from you in a 10-foot Emanation for the duration. The aura prevents creatures other than Constructs and Undead from passing or reaching through it. An affected creature can cast spells or make attacks with Ranged or Reach weapons through the barrier.\n\nIf you move so that an affected creature is forced to pass through the barrier, the spell ends."
+    },
+    "tags": ["control", "warding"],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "antimagic-field",
+    "name": { "pt": "Campo Antimagia", "en": "Antimagic Field" },
+    "level": 8,
+    "school": { "pt": "Abjuração", "en": "Abjuration" },
+    "classes": ["Cleric", "Wizard"],
+    "castingTime": { "pt": "Ação", "en": "Action" },
+    "range": { "pt": "Pessoal", "en": "Self" },
+    "duration": { "pt": "1 Hora", "en": "1 Hour" },
+    "concentration": true,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true, "material": "raspas de ferro" },
+    "text": {
+      "pt": "Uma aura de antimagia envolve você em uma Emanação de 3 metros. Ninguém pode conjurar magias, executar a ação Usar Magia ou criar outros efeitos mágicos dentro da aura, e esses efeitos não podem ter como alvo ou afetar qualquer coisa dentro dela. As propriedades mágicas dos itens mágicos não funcionam dentro da aura ou em qualquer coisa dentro dela.\n\nÁreas de efeito criadas por magias ou outros efeitos mágicos não podem se estender para dentro da aura, e ninguém pode se teleportar para dentro ou para fora dela ou usar viagens planares para lá. Os portais se fecham temporariamente enquanto estão na aura. \n\nMagias em andamento, exceto aquelas conjuradas por um Artefato ou por uma divindade, são suprimidas na área. Enquanto um efeito é suprimido, ele não funciona, mas o tempo que ele gasta suprimido conta para sua duração\n\n*Dissipar Magia* não tem efeito sobre a aura, e as auras criadas por diferentes magias de *Campo Antimagia* não se anulam.",
+      "en": "An aura of antimagic surrounds you in 10-foot Emanation. No one can cast spells, take Magic actions, or create other magical effects inside the aura, and those things can’t target or otherwise affect anything inside it. Magical properties of magic items don’t work inside the aura or on anything inside it.\n\nAreas of effect created by spells or other magic can’t extend into the aura, and no one can teleport into or out of it or use planar travel there. Portals close temporarily while in the aura.\n\nOngoing spells, except those cast by an Artifact or a deity, are suppressed in the area. While an effect is suppressed, it doesn’t function, but the time it spends suppressed counts against its duration.\n\n*Dispel Magic* has no effect on the aura, and the auras created by different *Antimagic Field* spells don’t nullify each other."
+    },
+    "tags": ["control", "negation", "warding"],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "antipathy-sympathy",
+    "name": { "pt": "Antipatia/Simpatia", "en": "Antipathy/Sympathy" },
+    "level": 8,
+    "school": { "pt": "Encantamento", "en": "Enchantment" },
+    "classes": ["Bard", "Druid", "Wizard"],
+    "castingTime": { "pt": "1 Hora", "en": "1 Hour" },
+    "range": { "pt": "18 metros (60 pés)", "en": "60 ft." },
+    "duration": { "pt": "10 Dias", "en": "10 Days" },
+    "concentration": false,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true, "material": "uma mistura de vinagre e mel" },
+    "text": {
+      "pt": "Ao conjurar a magia, decida se ela cria antipatia ou simpatia, e escolha como alvo uma criatura ou objeto que seja Enorme ou menor. Em seguida, especifique um tipo de criatura, como dragões vermelhos, goblins ou vampiros. Uma criatura do tipo escolhido realiza uma salvaguarda de Sabedoria quando estiver a até 36 metros (120 pés) do alvo. Sua escolha entre antipatia ou simpatia determina o que acontece com uma criatura ao falhar nessa salvaguarda:\n\n**Antipatia:** A criatura tem a condição Amedrontado. A criatura Amedrontada deve usar o movimento nos turnos dela para se afastar o máximo possível do alvo, movendo-se pela rota mais segura.\n\n**Simpatia:** A criatura tem a condição Enfeitiçado. A criatura Enfeitiçada deve usar o movimento nos turnos dela para chegar o mais próximo possível do alvo, movendo-se pela rota mais segura. Se a criatura estiver a até 1,5 metro do alvo, a criatura não pode se afastar voluntariamente. Se o alvo causar dano à criatura Enfeitiçada, essa criatura deve realizar uma salvaguarda de Sabedoria para encerrar o efeito, conforme descrito abaixo.\n\n***Encerrando o Efeito.*** Se a criatura Amedrontada ou Enfeitiçada terminar o turno a mais de 36 metros (120 pés) de distância do alvo, a criatura realiza uma salvaguarda de Sabedoria. Em caso de sucesso, a criatura não é mais afetada pelo alvo e fica imune a ele por 1 minuto, após o qual pode ser afetada novamente.",
+      "en": "As you cast the spell, choose whether it creates antipathy or sympathy, and target one creature or object that is Huge or smaller. Then specify a kind of creature, such as red dragons, goblins, or vampires. A creature of the chosen kind makes a Wisdom saving throw when it comes within 120 feet of the target. Your choice of antipathy or sympathy determines what happens to a creature when it fails that save:\n\n**Antipathy.** The creature has the Frightened condition. The Frightened creature must use its movement on its turns to get as far away as possible from the target, moving by the safest route.\n\n**Sympathy.** The creature has the Charmed condition. The Charmed creature must use its movement on its turns to get as close as possible to the target, moving by the safest route. If the creature is within 5 feet of the target, the creature can’t willingly move away. If the target damages the Charmed creature, that creature can make a Wisdom saving throw to end the effect, as described below.\n\n***Ending the Effect.*** If the Frightened or Charmed creature ends its turn more than 120 feet away from the target, the creature makes a Wisdom saving throw. On a successful save, the creature is no longer affected by the target. A creature that successfully saves against this effect is immune to it for 1 minute, after which it can be affected again."
+    },
+    "tags": ["control", "warding"],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "arcane-eye",
+    "name": { "pt": "Olho Arcano", "en": "Arcane Eye" },
+    "level": 4,
+    "school": { "pt": "Adivinhação", "en": "Divination" },
+    "classes": ["Artificer", "Wizard"],
+    "castingTime": { "pt": "Ação", "en": "Action" },
+    "range": { "pt": "9 metros (30 pés)", "en": "30 ft." },
+    "duration": { "pt": "1 Hora", "en": "1 Hour" },
+    "concentration": true,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true, "material": "um pouco de pele de morcego" },
+    "text": {
+      "pt": "Você cria um olho invisível e invulnerável no alcance da magia que fica pairando pela duração. Você recebe mentalmente do olho informações visuais, que pode ver em todas as direções. Ele também tem Visão no Escuro com um alcance de 9 metros.\n\nComo uma Ação Bônus, você pode mover o olho até 9 metros em qualquer direção. Uma barreira sólida bloqueia o movimento do olho, mas o olho pode passar por uma abertura de até 2,5 centímetros de diâmetro.",
+      "en": "You create an Invisible, invulnerable eye within range that hovers for the duration. You mentally receive visual information from the eye, which can see in every direction. It also has Darkvision with a range of 30 feet.\n\nAs a Bonus Action, you can move the eye up to 30 feet in any direction. A solid barrier blocks the eye’s movement, but the eye can pass through an opening as small as 1 inch in diameter."
+    },
+    "tags": ["detection"],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "arcane-gate",
+    "name": { "pt": "Portais Arcanos", "en": "Arcane Gate" },
+    "level": 6,
+    "school": { "pt": "Invocação", "en": "Conjuration" },
+    "classes": ["Sorcerer", "Warlock", "Wizard"],
+    "castingTime": { "pt": "Ação", "en": "Action" },
+    "range": { "pt": "150 metros (500 pés)", "en": "500 ft." },
+    "duration": { "pt": "10 Minutos", "en": "10 Minutes" },
+    "concentration": true,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true },
+    "text": {
+      "pt": "Você cria portais de teleporte vinculados. Escolha dois espaços grandes e desocupados no chão à sua vista, um espaço no alcance da magia e o outro a até 3 metros (10 pés) de você. Um portal circular se abre em cada um desses espaços e permanece pela duração da magia.\n\n Os portais são anéis brilhantes bidimensionais cheios de névoa que bloqueiam a visão. Eles pairam a centímetros do chão e são perpendiculares a ele. \n\nUm portal fica aberto apenas de um lado (à sua escolha). Qualquer coisa que entre no lado aberto de um portal sai do lado aberto do outro portal como se os dois fossem adjacentes um ao outro. Como uma Ação Bônus, você pode alterar a face dos lados abertos.",
+      "en": "You create linked teleportation portals. Choose two Large, unoccupied spaces on the ground that you can see, one space within range and the other one within 10 feet of you. A circular portal opens in each of those spaces and remains for the duration.\n\nThe portals are two-dimensional glowing rings filled with mist that blocks sight. They hover inches from the ground and are perpendicular to it.\n\nA portal is open on only one side (you choose which). Anything entering the open side of a portal exits from the open side of the other portal as if the two were adjacent to each other. As a Bonus Action, you can change the facing of the open sides."
+    },
+    "tags": ["teleportation"],
+    "source": { "name": "Player's Handbook" }
   }
 ]

@@ -230,16 +230,23 @@ export default function Card(props: CardProps) {
           >
             {compItems.map((it) => {
               const isMaterial = it.key === "M"
-              const label = isMaterial ? (it.material ?? "M") : it.key
+              if (isMaterial) {
+                return (
+                  <span
+                    key={it.key}
+                    className="chip chip--component chip--component-m"
+                    title={it.title}
+                    aria-label={it.title}
+                  >
+                    <span className="chip--component-badge">M</span>
+                    <span className="chip--component-text">{it.material}</span>
+                  </span>
+                )
+              }
 
               return (
-                <span
-                  key={it.key}
-                  className={`chip chip--component ${isMaterial ? "chip--component-m" : ""}`}
-                  title={it.title}
-                  aria-label={it.title}
-                >
-                  {label}
+                <span key={it.key} className="chip chip--component" title={it.title} aria-label={it.title}>
+                  {it.key}
                 </span>
               )
             })}
