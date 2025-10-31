@@ -9,7 +9,7 @@ import type { TSpell } from "../lib/schema/spell";
 import type { TFeature } from "../lib/schema/feature";
 import { buildIndex, toDocs } from "../lib/search/indexer";
 import type { UnifiedDoc } from "../lib/search/indexer";
-import { detectSpellTags, detectFeatureTags, type TagKey } from "../lib/search/tags";
+import { detectSpellTags, detectFeatureTags, TAG_ORDER, type TagKey } from "../lib/search/tags";
 import { usePrefs } from "../lib/state/prefs";
 import { formatFeatureLevel, formatSpellLevel } from "../lib/format";
 
@@ -110,16 +110,32 @@ export default function Browse() {
   }, [spells, features]);
 
   // tag maps (id -> TagKey[])
-  const spellTagMap = useMemo(() => {
-    const m = new Map<string, TagKey[]>();
-    for (const sp of spells) m.set(sp.id, detectSpellTags(sp));
-    return m;
+  const { map: spellTagMap, options: spellTagOptions } = useMemo(() => {
+    const map = new Map<string, TagKey[]>();
+    const used = new Set<TagKey>();
+    for (const sp of spells) {
+      const keys = detectSpellTags(sp);
+      map.set(sp.id, keys);
+      for (const key of keys) used.add(key);
+    }
+    return {
+      map,
+      options: TAG_ORDER.filter((key) => used.has(key)),
+    };
   }, [spells]);
 
-  const featureTagMap = useMemo(() => {
-    const m = new Map<string, TagKey[]>();
-    for (const ft of features) m.set(ft.id, detectFeatureTags(ft));
-    return m;
+  const { map: featureTagMap, options: featureTagOptions } = useMemo(() => {
+    const map = new Map<string, TagKey[]>();
+    const used = new Set<TagKey>();
+    for (const ft of features) {
+      const keys = detectFeatureTags(ft);
+      map.set(ft.id, keys);
+      for (const key of keys) used.add(key);
+    }
+    return {
+      map,
+      options: TAG_ORDER.filter((key) => used.has(key)),
+    };
   }, [features]);
 
   const spellLevels = useMemo(() => {
@@ -237,6 +253,7 @@ export default function Browse() {
             onClearLevel={()=>setLevel("any")}
             onClearClazz={()=>setClazz("any")}
             // tags
+            tagOptions={spellTagOptions}
             tags={tags} setTags={setTags} onClearTags={()=>setTags([])}
             kind="spell"
           />
@@ -295,6 +312,7 @@ export default function Browse() {
             onClearLevel={()=>setFLevel("any")}
             onClearClazz={()=>setFClazz("any")}
             // tags
+            tagOptions={featureTagOptions}
             tags={fTags} setTags={setFTags} onClearTags={()=>setFTags([])}
             kind="feature"
           />

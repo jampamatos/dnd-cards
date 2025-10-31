@@ -25,7 +25,7 @@
     "school": { "pt": "Abjuração", "en": "Abjuration" },
     "classes": ["Artificer", "Bard", "Cleric", "Druid", "Ranger", "Paladin"],
     "castingTime": { "pt": "Ação", "en": "Action" },
-    "range": { "pt": "9 metros (30 pés)", "en": "30 ft." },
+    "range": { "pt": "9 Metros (30 pés)", "en": "30 ft." },
     "duration": { "pt": "8 Horas", "en": "8 Hours" },
     "concentration": false,
     "ritual": false,
@@ -44,7 +44,7 @@
     "school": { "pt": "Abjuração", "en": "Abjuration" },
     "classes": ["Artificer", "Ranger", "Wizard"],
     "castingTime": { "pt": "Ação", "en": "Action" },
-    "range": { "pt": "9 metros (30 pés)", "en": "30 ft." },
+    "range": { "pt": "9 Metros (30 pés)", "en": "30 ft." },
     "duration": { "pt": "8 Horas", "en": "8 Hours" },
     "concentration": false,
     "ritual": true,
@@ -82,7 +82,7 @@
     "school": { "pt": "Encantamento", "en": "Enchantment" },
     "classes": ["Bard", "Druid", "Ranger"],
     "castingTime": { "pt": "Ação", "en": "Action" },
-    "range": { "pt": "9 metros (30 pés)", "en": "30 ft." },
+    "range": { "pt": "9 Metros (30 pés)", "en": "30 ft." },
     "duration": { "pt": "24 Horas", "en": "24 Hours" },
     "concentration": false,
     "ritual": false,
@@ -101,7 +101,7 @@
     "school": { "pt": "Encantamento", "en": "Enchantment" },
     "classes": ["Bard", "Druid", "Ranger"],
     "castingTime": { "pt": "Ação", "en": "Action" },
-    "range": { "pt": "9 metros (30 pés)", "en": "30 ft." },
+    "range": { "pt": "9 Metros (30 pés)", "en": "30 ft." },
     "duration": { "pt": "24 Horas", "en": "24 Hours" },
     "concentration": false,
     "ritual": true,
@@ -120,7 +120,7 @@
     "school": { "pt": "Transmutação", "en": "Transmutation" },
     "classes": ["Druid"],
     "castingTime": { "pt": "Ação", "en": "Action" },
-    "range": { "pt": "9 metros (30 pés)", "en": "30 ft." },
+    "range": { "pt": "9 Metros (30 pés)", "en": "30 ft." },
     "duration": { "pt": "24 Horas", "en": "24 Hours" },
     "concentration": false,
     "ritual": false,
@@ -234,13 +234,13 @@
     "school": { "pt": "Adivinhação", "en": "Divination" },
     "classes": ["Artificer", "Wizard"],
     "castingTime": { "pt": "Ação", "en": "Action" },
-    "range": { "pt": "9 metros (30 pés)", "en": "30 ft." },
+    "range": { "pt": "9 Metros (30 pés)", "en": "30 ft." },
     "duration": { "pt": "1 Hora", "en": "1 Hour" },
     "concentration": true,
     "ritual": false,
     "components": { "verbal": true, "somatic": true, "material": "um pouco de pele de morcego" },
     "text": {
-      "pt": "Você cria um olho invisível e invulnerável no alcance da magia que fica pairando pela duração. Você recebe mentalmente do olho informações visuais, que pode ver em todas as direções. Ele também tem Visão no Escuro com um alcance de 9 metros.\n\nComo uma Ação Bônus, você pode mover o olho até 9 metros em qualquer direção. Uma barreira sólida bloqueia o movimento do olho, mas o olho pode passar por uma abertura de até 2,5 centímetros de diâmetro.",
+      "pt": "Você cria um olho invisível e invulnerável no alcance da magia que fica pairando pela duração. Você recebe mentalmente do olho informações visuais, que pode ver em todas as direções. Ele também tem Visão no Escuro com um alcance de 9 Metros.\n\nComo uma Ação Bônus, você pode mover o olho até 9 Metros em qualquer direção. Uma barreira sólida bloqueia o movimento do olho, mas o olho pode passar por uma abertura de até 2,5 centímetros de diâmetro.",
       "en": "You create an Invisible, invulnerable eye within range that hovers for the duration. You mentally receive visual information from the eye, which can see in every direction. It also has Darkvision with a range of 30 feet.\n\nAs a Bonus Action, you can move the eye up to 30 feet in any direction. A solid barrier blocks the eye’s movement, but the eye can pass through an opening as small as 1 inch in diameter."
     },
     "tags": ["detection"],
@@ -263,6 +263,348 @@
       "en": "You create linked teleportation portals. Choose two Large, unoccupied spaces on the ground that you can see, one space within range and the other one within 10 feet of you. A circular portal opens in each of those spaces and remains for the duration.\n\nThe portals are two-dimensional glowing rings filled with mist that blocks sight. They hover inches from the ground and are perpendicular to it.\n\nA portal is open on only one side (you choose which). Anything entering the open side of a portal exits from the open side of the other portal as if the two were adjacent to each other. As a Bonus Action, you can change the facing of the open sides."
     },
     "tags": ["teleportation"],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "arcane-lock",
+    "name": { "pt": "Tranca Arcana", "en": "Arcane Lock" },
+    "level": 2,
+    "school": { "pt": "Abjuração", "en": "Abjuration" },
+    "classes": ["Artificer", "Wizard"],
+    "castingTime": { "pt": "Ação", "en": "Action" },
+    "range": { "pt": "Toque", "en": "Touch" },
+    "duration": { "pt": "Até Ser Dissipada", "en": "Until Dispell" },
+    "concentration": false,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true, "material": "pó de ouro no valor de 25+ PO" },
+    "text": {
+      "pt": "Você toca uma porta, janela, portão, contêiner ou escotilha fechada e a tranca magicamente pela duração da magia. Esta fechadura não pode ser destrancada por nenhum meio não mágico. Você e quaisquer criaturas que você designar ao conjurar a magia podem abrir e fechar o objeto apesar da tranca. Você também pode definir uma senha que, quando proferida a até 1,5 metro do objeto, o destranca por 1 minuto.",
+      "en": "You touch a closed door, window, gate, container, or hatch and magically lock it for the duration. This lock can’t be unlocked by any nonmagical means. You and any creatures you designate when you cast the spell can open and close the object despite the lock. You can also set a password that, when spoken within 5 feet of the object, unlocks it for 1 minute."
+    },
+    "tags": ["utility", "warding"],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "arcane-vigor",
+    "name": { "pt": "Vigor Arcano", "en": "Arcane Vigor" },
+    "level": 2,
+    "school": { "pt": "Abjuração", "en": "Abjuration" },
+    "classes": ["Sorcerer", "Wizard"],
+    "castingTime": { "pt": "Ação Bônus", "en": "Bonus Action" },
+    "range": { "pt": "Pessoal", "en": "Self" },
+    "duration": { "pt": "Instantânea", "en": "Instantaneous" },
+    "concentration": false,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true },
+    "text": {
+      "pt": "Você usa sua energia vital para se curar. Jogue um ou dois de seus Dados de Pontos de Vida não gastos e recupera um número de Pontos de Vida igual ao total do teste mais seu modificador de atributo de conjuração. Esses dados são, então, gastos.\n\n ***Usando um Espaço de Magia de Círculo Superior.*** O número de Dados de Vida não gastos que você pode jogar aumenta em um para cada  círculo de espaço de magia acima de 2.",
+      "en": "You tap into your life force to heal yourself. Roll one or two of your unexpended Hit Point Dice, and regain a number of Hit Points equal to the roll’s total plus your spellcasting ability modifier. Those dice are then expended. ***Using a Higher-Level Spell Slot.*** The number of unexpended Hit Dice you can roll increases by one for each spell slot level above 2."
+    },
+    "tags": [],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "armor-of-agathys",
+    "name": { "pt": "Armadura de Agathys", "en": "Armor of Agathys" },
+    "level": 1,
+    "school": { "pt": "Abjuração", "en": "Abjuration" },
+    "classes": ["Warlock"],
+    "castingTime": { "pt": "Ação Bônus", "en": "Bonus Action" },
+    "range": { "pt": "Pessoal", "en": "Self" },
+    "duration": { "pt": "1 Hora", "en": "1 Hour" },
+    "concentration": false,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true, "material": "um caco de vidro azul"},
+    "text": {
+      "pt": "Um frio mágico protetor envolve você. Você recebe 5 Pontos de Vida Temporários. Se uma criatura acertar você com uma jogada de ataque corpo a corpo antes que a magia termine, a criatura sofre 5 pontos de dano Gélido. A magia encerra se você não tiver Pontos de Vida Temporários.\n\n***Usando um Espaço de Magia de Círculo Superior.*** Os Pontos de Vida Temporários e o dano Gélido aumentam em 5 para cada círculo de espaço de magia acima de 1.",
+      "en": "Protective magical frost surrounds you. You gain 5 Temporary Hit Points. If a creature hits you with a melee attack roll before the spell ends, the creature takes 5 Cold damage. The spell ends early if you have no Temporary Hit Points.\n\n***Using a Higher-Level Spell Slot.*** The Temporary Hit Points and the Cold damage both increase by 5 for each spell slot level above 1."
+    },
+    "tags": ["damage", "buff", "warding"],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "arms-of-hadar",
+    "name": { "pt": "Braços de Hadar", "en": "Arms of Hadar" },
+    "level": 1,
+    "school": { "pt": "Invocação", "en": "Conjuration" },
+    "classes": ["Warlock"],
+    "castingTime": { "pt": "Ação", "en": "Action" },
+    "range": { "pt": "Pessoal", "en": "Self" },
+    "duration": { "pt": "Instantânea", "en": "Instantaneous" },
+    "concentration": false,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true },
+    "text": {
+      "pt": "Clamando por Hadar, você faz com que tentáculos irrompam em você. Cada criatura em uma Emanação de 3 metros originada em você realiza uma salvaguarda de Força. Se falhar, um alvo sofre 2d6 pontos de dano Necrótico e não pode executar Reações até o início do próximo turno dele. Em caso de sucesso, um alvo sofre apenas metade do dano.\n\n***Usando um Espaço de Magia de Círculo Superior.*** O dano aumenta em 1d6 pontos para cada círculo de espaço de magia acima de 1.",
+      "en": "Invoking Hadar, you cause tendrils to erupt from yourself. Each creature in a 10-foot Emanation originating from you makes a Strength saving throw. On a failed save, a target takes 2d6 Necrotic damage and can’t take Reactions until the start of its next turn. On a successful save, a target takes half as much damage only.\n\n***Using a Higher-Level Spell Slot.*** The damage increases by 1d6 for each spell slot level above 1."
+    },
+    "tags": ["damage", "control"],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "astral-projection",
+    "name": { "pt": "Projeção Astral", "en": "Astral Projection" },
+    "level": 9,
+    "school": { "pt": "Necromancia", "en": "Necromancy" },
+    "classes": ["Cleric", "Warlock", "Wizard"],
+    "castingTime": { "pt": "1 Hora", "en": "1 Hour" },
+    "range": { "pt": "3 metros (10 pés)", "en": "10 ft." },
+    "duration": { "pt": "Até Ser Dissipada", "en": "Until Dispell" },
+    "concentration": false,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true, "material": "p/ cada alvo um zircão no valor de 1.000+ PO e uma barra de prata no valor de 100+ PO" },
+    "text": {
+      "pt": "Você e até oito criaturas voluntárias no alcance da magia projetam seus corpos astrais no Plano Astral (a magia se encerra instantaneamente se você já estiver nesse plano). O corpo de cada alvo é deixado para trás em um estado de animação suspensa; ele tem a condição Inconsciente, não precisa comer ou respirar e não envelhece.\n\n A forma astral de um alvo se assemelha ao seu corpo em quase todos os aspectos, replicando suas estatísticas de jogo e pertences. A principal diferença é a adição de um cordão prateado que se arrasta entre as omoplatas da forma astral. O cordão desaparece de vista após 30 centímetros. Se o cordão for cortado — algo que só pode acontecer quando um efeito especificamente declarar isto — tanto o corpo quanto a forma astral do alvo morrem.\n\n A forma astral de um alvo pode viajar pelo Plano Astral. No momento em que uma forma astral deixa aquele plano, o corpo e os pertences do alvo viajam ao longo do cordão prateado, fazendo com que o alvo reentre em seu corpo no novo plano. Qualquer dano ou efeito aplicável a uma forma astral não afeta o corpo do alvo e vice-versa. Se o corpo ou a forma astral de um alvo for reduzido a 0 Pontos de Vida, a magia se encerra para esse alvo. A magia se encerra para todos os alvos se você executar uma ação Usar Magia para descartá-la.\n\nQuando a magia termina para um alvo que não está morto, o alvo reaparece em seu corpo e sai do estado de animação suspensa.",
+      "en": "You and up to eight willing creatures within range project your astral bodies into the Astral Plane (the spell ends instantly if you are already on that plane). Each target’s body is left behind in a state of suspended animation; it has the Unconscious condition, doesn’t need food or air, and doesn’t age.\n\nA target’s astral form resembles its body in almost every way, replicating its game statistics and possessions. The principal difference is the addition of a silvery cord that trails from between the shoulder blades of the astral form. The cord fades from view after 1 foot. If the cord is cut—which happens only when an effect states that it does so—the target’s body and astral form both die.\n\nA target’s astral form can travel through the Astral Plane. The moment an astral form leaves that plane, the target’s body and possessions travel along the silver cord, causing the target to re-enter its body on the new plane.\n\nAny damage or other effects that apply to an astral form have no effect on the target’s body and vice versa. If a target’s body or astral form drops to 0 Hit Points, the spell ends for that target. The spell ends for all the targets if you take a Magic action to dismiss it.\n\nWhen the spell ends for a target who isn’t dead, the target reappears in its body and exits the state of suspended animation."
+    },
+    "tags": ["teleportation"],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "augury",
+    "name": { "pt": "Augúrio", "en": "Augury" },
+    "level": 2,
+    "school": { "pt": "Adivinhação", "en": "Divination" },
+    "classes": ["Cleric", "Druid", "Wizard"],
+    "castingTime": { "pt": "1 Minuto", "en": "1 Minute" },
+    "range": { "pt": "Pessoal", "en": "Self" },
+    "duration": { "pt": "Instantânea", "en": "Instantaneous" },
+    "concentration": false,
+    "ritual": true,
+    "components": { "verbal": true, "somatic": true, "material": "varetas, ossos, cartas ou símbolos semelhantes especialmente marcados no valor de 25+ PO" },
+    "text": {
+      "pt": "Você recebe um presságio de uma entidade sobrenatural a respeito dos resultados de um curso de ação que você planeja realizar nos próximos 30 minutos. O Mestre escolhe o presságio da tabela Presságios.\n\nVocê receberá um presságio de prosperidade para resultados que serão bons; um de infortúnio para resultados que forem ruins; um de prosperidade e infortúnio para resultados que serão bons ou ruins; ou nenhum presságio, para resultados que não serão nem bons nem ruins.\n\nA magia não leva em conta circunstâncias, como outras magias, que podem alterar os resultados.\n\nSe você conjurar a magia mais de uma vez antes de terminar um Descanso Longo, há uma chance cumulativa de 25% para cada conjuração após a primeira de que você não receba resposta.",
+      "en": "You receive an omen from a otherworldly entity about the results of a course of action that you plan to take within the next 30 minutes. The DM chooses the omen from the Omens table.\n\n You will receive an omen of weal for good outcomes; an omen of woe for bad outcomes; an omen of both weal and woe for good and bad outcomes; or indiference, for outcomes that are neither good nor bad. The spell doesn’t account for circumstances, such as other spells, that might change the results.\n\nIf you cast the spell more than once before finishing a Long Rest, there is a cumulative 25 percent chance for each casting after the first that you get no answer."
+    },
+    "tags": ["foreknowledge"],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "aura-of-life",
+    "name": { "pt": "Aura de Vida", "en": "Aura of Life" },
+    "level": 4,
+    "school": { "pt": "Abjuração", "en": "Abjuration" },
+    "classes": ["Cleric", "Paladin"],
+    "castingTime": { "pt": "Ação", "en": "Action" },
+    "range": { "pt": "Pessoal", "en": "Self" },
+    "duration": { "pt": "10 Minutos", "en": "10 Minutes" },
+    "concentration": true,
+    "ritual": false,
+    "components": { "verbal": true },
+    "text": {
+      "pt": "Uma aura irradia de você em uma Emanação de 9 Metros (30 pés) pela duração da magia. Enquanto estiver na aura, você e seus aliados têm Resistência a Dano Necrótico, e seus Pontos de Vida máximos não podem ser reduzidos. Se um aliado com 0 Pontos de Vida começar o turno na aura, esse aliado recupera 1 Ponto de Vida.",
+      "en": "An aura radiates from you in a 30-foot Emanation for the duration. While in the aura, you and your allies have Resistance to Necrotic damage, and your Hit Point maximums can’t be reduced. If an ally with 0 Hit Points starts its turn in the aura, that ally regains 1 Hit Point."
+    },
+    "tags": ["healing", "warding"],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "aura-of-purity",
+    "name": { "pt": "Aura de Pureza", "en": "Aura of Purity" },
+    "level": 4,
+    "school": { "pt": "Abjuração", "en": "Abjuration" },
+    "classes": ["Cleric", "Paladin"],
+    "castingTime": { "pt": "Ação", "en": "Action" },
+    "range": { "pt": "Pessoal", "en": "Self" },
+    "duration": { "pt": "10 Minutos", "en": "10 Minutes" },
+    "concentration": true,
+    "ritual": false,
+    "components": { "verbal": true },
+    "text": {
+      "pt": "Uma aura irradia de você em uma Emanação de 9 Metros (30 pés) pela duração da magia. Enquanto estiver na aura, você e seus aliados têm Resistência a dano Venenoso e Vantagem nas salvaguardas para evitar ou encerrar efeitos que incluem a condição Amedrontado, Atordoado, Cego, Enfeitiçado, Envenenado, Paralisado ou Surdo.",
+      "en": "An aura radiates from you in a 30-foot Emanation for the duration. While in the aura, you and your allies have Resistance to Poison damage and Advantage on saving throws to avoid or end effects that include the Blinded, Charmed, Deafened, Frightened, Paralyzed, Poisoned, or Stunned condition."
+    },
+    "tags": ["buff", "warding"],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "aura-of-vitality",
+    "name": { "pt": "Aura de Vitalidade", "en": "Aura of Vitality" },
+    "level": 3,
+    "school": { "pt": "Abjuração", "en": "Abjuration" },
+    "classes": ["Cleric", "Druid", "Paladin"],
+    "castingTime": { "pt": "Ação", "en": "Action" },
+    "range": { "pt": "Pessoal", "en": "Self" },
+    "duration": { "pt": "1 Minuto", "en": "1 Minute" },
+    "concentration": true,
+    "ritual": false,
+    "components": { "verbal": true },
+    "text": {
+      "pt": "Uma aura irradia de você em uma Emanação de 9 Metros (30 pés) pela duração da magia. Quando você cria a aura e no início de cada um dos seus turnos enquanto ela persiste, você pode restaurar 2d6 Pontos de Vida em uma criatura dentro dela.",
+      "en": "An aura radiates from you in a 30-foot Emanation for the duration. When you create the aura and at the start of each of your turns while it persists, you can restore 2d6 Hit Points to one creature in it."
+    },
+    "tags": ["healing"],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "awaken",
+    "name": { "pt": "Despertar", "en": "Awaken" },
+    "level": 5,
+    "school": { "pt": "Transmutação", "en": "Transmutation" },
+    "classes": ["Bard", "Druid"],
+    "castingTime": { "pt": "8 Horas", "en": "8 Hours" },
+    "range": { "pt": "Toque", "en": "Touch" },
+    "duration": { "pt": "Instantânea", "en": "Instantaneous" },
+    "concentration": false,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true, "material": "uma ágata no valor de 1.000+ PO" },
+    "text": {
+      "pt": "Você passa o tempo de conjuração traçando caminhos mágicos em uma pedra preciosa e, em seguida, toca o alvo. O alvo deve ser uma criatura do tipo Fera ou Planta com uma Inteligência de 3 ou menos, ou uma planta natural que não seja uma criatura. O alvo obtém um valor de Inteligência de 10 e a capacidade de falar um idioma que você conhece. Se o alvo for uma planta natural, ele se torna uma criatura do tipo Planta e recebe a capacidade de mover seus membros, raízes, videiras, trepadeiras e assim por diante, e obtém sentidos semelhantes aos de um humano. O Mestre escolhe as estatísticas apropriadas para a Planta desperta, como as estatísticas do **Arbusto Desperto** ou da **Árvore Desperta** no Livro dos Monstros.\n\nO alvo desperto tem a condição Enfeitiçado por 30 dias ou até que você ou seus aliados lhe causem dano. Quando essa condição termina, a criatura despertada decide qual atitude tem em relação a você.",
+      "en": "You spend the casting time tracing magical pathways within a precious gemstone, and then touch the target. The target must be either a Beast or Plant creature with an Intelligence of 3 or less or a natural plant that isn’t a creature. The target gains an Intelligence of 10 and the ability to speak one language you know. If the target is a natural plant, it becomes a Plant creature and gains the ability to move its limbs, roots, vines, creepers, and so forth, and it gains senses similar to a human’s. The DM chooses statistics appropriate for the awakened Plant, such as the statistics for the **Awakened Shrub** or **Awakened Tree** in the Monster Manual.\n\nThe awakened target has the Charmed condition for 30 days or until you or your allies deal damage to it. When that condition ends, the awakened creature chooses its attitude toward you."
+    },
+    "tags": ["creation"],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "bane",
+    "name": { "pt": "Perdição", "en": "Bane" },
+    "level": 1,
+    "school": { "pt": "Encantamento", "en": "Enchantment" },
+    "classes": ["Bard", "Cleric", "Warlock"],
+    "castingTime": { "pt": "Ação", "en": "Action" },
+    "range": { "pt": "9 Metros (30 pés)", "en": "30 ft." },
+    "duration": { "pt": "1 Minuto", "en": "1 Minute" },
+    "concentration": true,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true, "material": "uma gota de sangue" },
+    "text": {
+      "pt": "Até três criaturas à sua escolha à sua vista e no alcance da magia devem realizar uma salvaguarda de Carisma. Sempre que um alvo que falhar nesta salvaguarda realizar uma jogada de ataque ou uma salvaguarda antes da magia terminar, o alvo deve subtrair 1d4 da jogada de ataque ou salvaguarda.\n\n***Usando um Espaço de Magia de Círculo Superior.*** Você pode escolher uma criatura adicional para cada círculo de espaço de magia acima de 1.",
+      "en": "Up to three creatures of your choice that you can see within range must each make a Charisma saving throw. Whenever a target that fails this save makes an attack roll or a saving throw before the spell ends, the target must subtract 1d4 from the attack roll or save.\n\n***Using a Higher-Level Spell Slot.*** You can target one additional creature for each spell slot level above 1."
+    },
+    "tags": ["debuff"],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "banishing-smite",
+    "name": { "pt": "Destruição Banidora", "en": "Banishing Smite" },
+    "level": 5,
+    "school": { "pt": "Invocação", "en": "Conjuration" },
+    "classes": ["Paladin"],
+    "castingTime": { "pt": "Ação Bônus", "en": "Bonus Action" },
+    "range": { "pt": "Pessoal", "en": "Self" },
+    "duration": { "pt": "1 Minuto", "en": "1 Minute" },
+    "concentration": true,
+    "ritual": false,
+    "components": { "verbal": true },
+    "text": {
+      "pt": "O alvo atingido pela jogada de ataque sofre um adicional de 5d10 pontos de dano Energético do ataque. Se o ataque reduzir o alvo a 50 Pontos de Vida ou menos, o alvo deve ser bem-sucedido em uma salvaguarda de Carisma ou é transportado para um semiplano inofensivo pela duração da magia. Enquanto estiver lá, o alvo tem a condição Incapacitado. Quando a magia termina, o alvo reaparece no espaço que deixou ou no espaço desocupado mais próximo se esse espaço estiver ocupado.",
+      "en": "The target hit by the attack roll takes an extra 5d10 Force damage from the attack. If the attack reduces the target to 50 Hit Points or fewer, the target must succeed on a Charisma saving throw or be transported to a harmless demiplane for the duration. While there, the target has the Incapacitated condition. When the spell ends, the target reappears in the space it left or in the nearest unoccupied space if that space is occupied."
+    },
+    "tags": ["damage", "control", "banishment"],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "barkskin",
+    "name": { "pt": "Pele-casca", "en": "Barkskin" },
+    "level": 2,
+    "school": { "pt": "Transmutação", "en": "Transmutation" },
+    "classes": ["Druid", "Ranger"],
+    "castingTime": { "pt": "Ação Bônus", "en": "Bonus Action" },
+    "range": { "pt": "Toque", "en": "Touch" },
+    "duration": { "pt": "1 Hora", "en": "1 Hour" },
+    "concentration": false,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true, "material": "um punhado de casca de árvore" },
+    "text": {
+      "pt": "Você toca uma criatura voluntária. Até que a magia termine, a pele do alvo assume uma aparência de casca de árvore, e o alvo tem uma Classe de Armadura de 17 se sua CA for menor que isso.",
+      "en": "You touch a willing creature. Until the spell ends, the target’s skin assumes a bark-like appearance, and the target has an Armor Class of 17 if its AC is lower than that."
+    },
+    "tags": ["buff", "warding"],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "beacon-of-hope",
+    "name": { "pt": "Sinal de Esperança", "en": "Beacon of Hope" },
+    "level": 3,
+    "school": { "pt": "Abjuração", "en": "Abjuration" },
+    "classes": ["Cleric"],
+    "castingTime": { "pt": "Ação", "en": "Action" },
+    "range": { "pt": "9 Metros (30 pés)", "en": "30 ft." },
+    "duration": { "pt": "1 Minuto", "en": "1 Minute" },
+    "concentration": true,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true },
+    "text": {
+      "pt": "Escolha qualquer número de criaturas no alcance da magia. Pela duração da magia, cada alvo tem Vantagem em salvaguardas de Sabedoria e Salvaguarda contra Morte e recupera o número de Pontos de Vida máximos possíveis de qualquer cura.",
+      "en": "Choose any number of creatures within range. For the duration, each target has Advantage on Wisdom saving throws and Death Saving Throws and regains the maximum number of Hit Points possible from any healing."
+    },
+    "tags": ["buff"],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "beast-sense",
+    "name": { "pt": "Sentido Feral", "en": "Beast Sense" },
+    "level": 2,
+    "school": { "pt": "Adivinhação", "en": "Divination" },
+    "classes": ["Druid", "Ranger"],
+    "castingTime": { "pt": "Ação", "en": "Action" },
+    "range": { "pt": "Toque", "en": "Touch" },
+    "duration": { "pt": "1 Hora", "en": "1 Hour" },
+    "concentration": true,
+    "ritual": true,
+    "components": { "somatic": true },
+    "text": {
+      "pt": "Você toca uma Fera voluntária. Pela duração da magia, você pode perceber através dos sentidos da Fera, bem como dos seus próprios. Ao perceber através dos sentidos da Fera, você se beneficia de quaisquer sentidos especiais que ela tenha.",
+      "en": "You touch a willing Beast. For the duration, you can perceive through the Beast’s senses as well as your own. When perceiving through the Beast’s senses, you benefit from any special senses it has."
+    },
+    "tags": ["detection"],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "befuddlement",
+    "name": { "pt": "Suplício", "en": "Befuddlement" },
+    "level": 8,
+    "school": { "pt": "Encantamento", "en": "Enchantment" },
+    "classes": ["Bard", "Druid", "Warlock", "Wizard"],
+    "castingTime": { "pt": "Ação", "en": "Action" },
+    "range": { "pt": "45 metros (150 pés)", "en": "150 ft." },
+    "duration": { "pt": "Instantânea", "en": "Instantaneous" },
+    "concentration": false,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true, "material": "um chaveiro sem chaves" },
+    "text": {
+      "pt": "Você sobrecarrega a mente de uma criatura à sua vista e no alcance da magia. O alvo realiza uma salvaguarda de Inteligência.\n\nSe falhar, o alvo sofre 10d12 pontos de dano Psíquico e não pode conjurar magias ou executar a ação Usar Magia. Ao final de cada 30 dias, o alvo repete a salvaguarda, encerrando o efeito em caso de sucesso. O efeito também pode ser encerrado pela magia *Cura Completa*, *Desejo* ou *Restauração Maior*.\n\nEm uma salvaguarda bem-sucedida, o alvo recebe apenas metade do dano.",
+      "en": "You blast the mind of a creature that you can see within range. The target makes an Intelligence saving throw.\n\nOn a failed save, the target takes 10d12 Psychic damage and can’t cast spells or take the Magic action. At the end of every 30 days, the target repeats the save, ending the effect on a success. The effect can also be ended by the *Greater Restoration*, *Heal*, or *Wish* spell.\n\nOn a successful save, the target takes half as much damage only."
+    },
+    "tags": [],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "bestow-curse",
+    "name": { "pt": "Rogar Maldição", "en": "Bestow Curse" },
+    "level": 3,
+    "school": { "pt": "Necromancia", "en": "Necromancy" },
+    "classes": ["Bard", "Cleric", "Wizard"],
+    "castingTime": { "pt": "Ação", "en": "Action" },
+    "range": { "pt": "Toque", "en": "Touch" },
+    "duration": { "pt": "1 Minuto", "en": "1 Minute" },
+    "concentration": true,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true },
+    "text": {
+      "pt": "Você toca uma criatura, que deve ser bem-sucedida em uma salvaguarda de Sabedoria ou fica amaldiçoada pela duração da magia. Até que a maldição termine, o alvo sofre um dos seguintes efeitos à sua escolha:\n\n**•** Escolha um atributo. O alvo tem Desvantagem em testes de atributo e salvaguardas realizadas com esse atributo.\n**•** O alvo tem Desvantagem em jogadas de ataque contra você.\n**•** Em combate, o alvo deve ser bem-sucedido em uma salvaguarda de Sabedoria no início de cada um dos turnos dele ou ele é forçado a executar a ação Esquivar neste turno.\n**•** Se você causar dano ao alvo com uma jogada de ataque ou uma magia, o alvo sofre 1d8 pontos de dano Necrótico adicionais.\n\n***Usando um Espaço de Magia de Círculo Superior.*** Se você conjurar esta magia usando um espaço de magia de 4º círculo, você pode manter a Concentração nela por até 10 minutos. Se você usar um espaço de magia de 5º círculo ou superior, a magia não requer Concentração, e a duração se torna 8 horas (espaço de 5º e 6º círculo) ou 24 horas (espaço de 7º ou 8º círculo). Se você usar um espaço de magia de 9º círculo, a magia permanece até ser dissipada.",
+      "en": "You touch a creature, which must succeed on a Wisdom saving throw or become cursed for the duration. Until the curse ends, the target suffers one of the following effects of your choice:\n\n**•** Choose one ability. The target has Disadvantage on ability checks and saving throws made with that ability.\n**•** The target has Disadvantage on attack rolls against you.\n**•** In combat, the target must succeed on a Wisdom saving throw at the start of each of its turns or be forced to take the Dodge action on that turn.\n **•** If you deal damage to the target with an attack roll or a spell, the target takes an extra 1d8 Necrotic damage.\n\n***Using a Higher-Level Spell Slot.*** If you cast this spell using a level 4 spell slot, you can maintain Concentration on it for up to 10 minutes. If you use a level 5+ spell slot, the spell doesn’t require Concentration, and the duration becomes 8 hours (level 5–6 slot) or 24 hours (level 7–8 slot). If you use a level 9 spell slot, the spell lasts until dispelled."
+    },
+    "tags": ["debuff"],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "bigbys-hand",
+    "name": { "pt": "Mão de Bigby", "en": "Bigby's Hand" },
+    "level": 5,
+    "school": { "pt": "Evocação", "en": "Evocation" },
+    "classes": ["Artificer", "Sorcerer", "Wizard"],
+    "castingTime": { "pt": "Ação", "en": "Action" },
+    "range": { "pt": "36 metros (120 pés)", "en": "120 ft." },
+    "duration": { "pt": "1 Minuto", "en": "1 Minute" },
+    "concentration": true,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true, "material": "uma casca de ovo e uma luva" },
+    "text": {
+      "pt": "Você cria uma mão Grande de energia mágica cintilante em um espaço desocupado à sua vista e no alcance da magia. A mão permanece pela duração da magia e se move ao seu comando, imitando os movimentos da sua própria mão.\n\nA mão é um objeto que tem CA 20 e Pontos de Vida iguais aos seus Pontos de Vida máximos. Se a mão é reduzida a 0 Pontos de Vida, a magia encerra. A mão não ocupa um espaço.\n\nAo conjurar a magia e como uma Ação Bônus em seus turnos posteriores, você pode mover a mão até 18 metros e causar um dos seguintes efeitos:\n\n**Mão Esmagadora.** A mão tenta imobilizar uma criatura Enorme ou menor a até 1,5 metro dela. O alvo deve ser bem-sucedido em uma salvaguarda de Destreza ou tem a condição Imobilizado, com uma CD para escapar igual à CD para evitar sua magia. Enquanto a mão imobiliza o alvo, você pode executar uma ação Bônus para fazer com que a mão o esmague, causando ao alvo 4d6 pontos de dano Contundente mais seu modificador de atributo de conjuração.\n\n**Mão Interposta.** A mão concede a você Cobertura Parcial contra ataques e outros efeitos originados do espaço da mão ou que passem por ele. Além disso, o espaço da mão conta como Terreno Difícil para seus inimigos.\n\n**Mão Vigorosa.** A mão tenta empurrar uma criatura Enorme ou menor a até 1,5 metro dela. O alvo deve ser bem-sucedido em uma salvaguarda de Força, ou a mão empurra o alvo até 1,5 metro (5 pés) mais 1,5 metro multiplicado pelo valor de seu modificador de atributo de conjuração. A mão se move com o alvo, permanecendo a até 1,5 metro (5 pés) dele.\n\n**Punho Cerrado.** A mão atinge um alvo a até 1,5 metro (5 pés) dela. Realize um ataque mágico corpo a corpo. Em caso de acerto, o alvo sofre 5d8 pontos de dano Energético.\n\n***Usando um Espaço de Magia de Círculo Superior.*** O dano do Punho Cerrado aumenta em 2d8 e o dano da Mão Esmagadora aumenta em 2d6 para cada círculo de espaço de magia acima de 5.",
+      "en": "You create a Large hand of shimmering magical energy in an unoccupied space that you can see within range. The hand lasts for the duration, and it moves at your command, mimicking the movements of your own hand.\n\nThe hand is an object that has AC 20 and Hit Points equal to your Hit Point maximum. If it drops to 0 Hit Points, the spell ends. The hand doesn’t occupy its space.\n\nWhen you cast the spell and as a Bonus Action on your later turns, you can move the hand up to 60 feet and then cause one of the following effects:\n\n**Clenched Fist.** The hand strikes a target within 5 feet of it. Make a melee spell attack. On a hit, the target takes 5d8 Force damage.\n\n**Forceful Hand.** The hand attempts to push a Huge or smaller creature within 5 feet of it. The target must succeed on a Strength saving throw, or the hand pushes the target up to 5 feet plus a number of feet equal to five times your spellcasting ability modifier. The hand moves with the target, remaining within 5 feet of it.\n\n**Grasping Hand.** The hand attempts to grapple a Huge or smaller creature within 5 feet of it. The target must succeed on a Dexterity saving throw, or the target has the Grappled condition, with an escape DC equal to your spell save DC. While the hand grapples the target, you can take a Bonus Action to cause the hand to crush it, dealing Bludgeoning damage to the target equal to 4d6 plus your spellcasting ability modifier.\n\n**Interposing Hand.** The hand grants you Half Cover against attacks and other effects that originate from its space or that pass through it. In addition, its space counts as Difficult Terrain for your enemies.\n\n***Using a Higher-Level Spell Slot.*** The damage of the Clenched Fist increases by 2d8 and the damage of the Grasping Hand increases by 2d6 for each spell slot level above 5."
+    },
+    "tags": ["damage", "control"],
     "source": { "name": "Player's Handbook" }
   }
 ]

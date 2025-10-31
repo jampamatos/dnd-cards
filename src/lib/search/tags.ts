@@ -6,12 +6,14 @@ type MaybeTagged = { tags?: string[] };
 export type TagKey =
   | "healing"
   | "damage"
+  | "banishment"
   | "buff"
   | "debuff"
   | "communication"
   | "control"
   | "creation"
   | "detection"
+  | "foreknowledge"
   | "shapechanging"
   | "social"
   | "summon"
@@ -45,11 +47,13 @@ export const TAG_CATALOG: Record<TagKey, { pt: string; en: string }> = {
   healing:        { pt: "Cura",                en: "Healing" },
   damage:         { pt: "Dano",                en: "Damage" },
   buff:           { pt: "Buff",                en: "Buff" },
+  banishment:     { pt: "Banimento",           en: "Banishment" },
   debuff:         { pt: "Debuff",              en: "Debuff" },
   communication:  { pt: "Comunicação",         en: "Communication" },
   control:        { pt: "Controle",            en: "Control" },
   creation:       { pt: "Criação",             en: "Creation" },
   detection:      { pt: "Detecção",            en: "Detection" },
+  foreknowledge:  { pt: "Presciência",         en: "Foreknowledge" },
   shapechanging:  { pt: "Metamorfose",         en: "Shapechanging" },
   social:         { pt: "Social",              en: "Social" },
   summon:         { pt: "Invocação",           en: "Summon" },
@@ -83,12 +87,14 @@ export const TAG_CATALOG: Record<TagKey, { pt: string; en: string }> = {
 const ORDER: TagKey[] = [
   "healing",
   "damage",
+  "banishment",
   "buff",
   "debuff",
   "communication",
   "control",
   "creation",
   "detection",
+  "foreknowledge",
   "shapechanging",
   "social",
   "summon",
@@ -142,6 +148,8 @@ const JSON_TO_CANON: Record<string, TagKey> = {
   damage: "damage",
   buff: "buff",
   debuff: "debuff",
+  banimento: "banishment",
+  banishment: "banishment",
   comunicacao: "communication",
   communication: "communication",
   controle: "control",
@@ -150,6 +158,8 @@ const JSON_TO_CANON: Record<string, TagKey> = {
   creation: "creation",
   deteccao: "detection",
   detection: "detection",
+  presciencia: "foreknowledge",
+  foreknowledge: "foreknowledge",
   metamorfose: "shapechanging",
   shapechanging: "shapechanging",
   social: "social",

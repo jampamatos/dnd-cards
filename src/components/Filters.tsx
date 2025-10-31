@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useState } from "react"
 import { usePrefs } from "../lib/state/prefs"
-import { TAG_CATALOG, TAG_ORDER, type TagKey } from "../lib/search/tags"
+import { TAG_CATALOG, type TagKey } from "../lib/search/tags"
 import { formatFeatureLevel, formatSpellLevel } from "../lib/format"
 
 type Sort = "name-asc" | "level-asc" | "level-desc"
@@ -23,6 +23,7 @@ type FiltersProps = {
   onClearAll: () => void
   onClearLevel: () => void
   onClearClazz: () => void
+  tagOptions: TagKey[]
   tags: TagKey[]
   setTags: (v: TagKey[]) => void
   onClearTags?: () => void
@@ -219,35 +220,37 @@ export default function Filters(p: FiltersProps) {
           </label>
         </div>
 
-        <div className="chips" style={{ alignItems: "center", flexWrap: "wrap" }}>
-          <span style={{ opacity: 0.8, fontWeight: 600 }}>{L.tags}</span>
-          {TAG_ORDER.map((k) => {
-            const active = p.tags.includes(k)
-            return (
+        {(p.tagOptions.length > 0 || p.tags.length > 0) && (
+          <div className="chips" style={{ alignItems: "center", flexWrap: "wrap" }}>
+            <span style={{ opacity: 0.8, fontWeight: 600 }}>{L.tags}</span>
+            {p.tagOptions.map((k) => {
+              const active = p.tags.includes(k)
+              return (
+                <button
+                  key={k}
+                  type="button"
+                  onClick={() => toggleTag(k)}
+                  aria-pressed={active}
+                  className={`chip ${active ? "chip--active" : "chip--click"}`}
+                  title={L.tagTitle}
+                >
+                  #{label(k)}
+                </button>
+              )
+            })}
+            {p.tags.length > 0 && (
               <button
-                key={k}
                 type="button"
-                onClick={() => toggleTag(k)}
-                aria-pressed={active}
-                className={`chip ${active ? "chip--active" : "chip--click"}`}
-                title={L.tagTitle}
+                onClick={p.onClearTags ?? (() => p.setTags([]))}
+                className="btn"
+                style={{ marginLeft: "auto" }}
+                aria-label={L.clearTags}
               >
-                #{label(k)}
+                {L.clearTags}
               </button>
-            )
-          })}
-          {p.tags.length > 0 && (
-            <button
-              type="button"
-              onClick={p.onClearTags ?? (() => p.setTags([]))}
-              className="btn"
-              style={{ marginLeft: "auto" }}
-              aria-label={L.clearTags}
-            >
-              {L.clearTags}
-            </button>
-          )}
-        </div>
+            )}
+          </div>
+        )}
 
         <div className="chips" style={{ alignItems: "center", flexWrap: "wrap" }}>
           <strong aria-live="polite" style={{ fontSize: "0.95rem" }}>
