@@ -11,7 +11,7 @@ import { buildIndex, toDocs } from "../lib/search/indexer";
 import type { UnifiedDoc } from "../lib/search/indexer";
 import { detectSpellTags, detectFeatureTags, TAG_ORDER, type TagKey } from "../lib/search/tags";
 import { usePrefs } from "../lib/state/prefs";
-import { formatFeatureLevel, formatSpellLevel } from "../lib/format";
+import { formatClassName, formatFeatureLevel, formatSpellLevel } from "../lib/format";
 
 type HitKind = "spell" | "feature";
 type SortOption = "name-asc" | "level-asc" | "level-desc";
@@ -144,10 +144,24 @@ export default function Browse() {
     return Array.from(set).sort((a, b) => a - b);
   }, [spells]);
 
+  const spellClassOptions = useMemo(() => {
+    const set = new Set<string>();
+    for (const sp of spells) {
+      for (const c of sp.classes) set.add(c);
+    }
+    return Array.from(set).sort((a, b) => a.localeCompare(b));
+  }, [spells]);
+
   const featureLevels = useMemo(() => {
     const set = new Set<number>();
     for (const ft of features) set.add(ft.level);
     return Array.from(set).sort((a, b) => a - b);
+  }, [features]);
+
+  const featureClassOptions = useMemo(() => {
+    const set = new Set<string>();
+    for (const ft of features) set.add(ft.class);
+    return Array.from(set).sort((a, b) => a.localeCompare(b));
   }, [features]);
 
   // helpers
@@ -252,7 +266,7 @@ export default function Browse() {
             onClearAll={clearAllSpells}
             onClearLevel={()=>setLevel("any")}
             onClearClazz={()=>setClazz("any")}
-            // tags
+            classOptions={spellClassOptions}
             tagOptions={spellTagOptions}
             tags={tags} setTags={setTags} onClearTags={()=>setTags([])}
             kind="spell"
@@ -311,7 +325,7 @@ export default function Browse() {
             onClearAll={()=>{ setQ(""); setFLevel("any"); setFClazz("any"); setFTags([]); setFSort("level-asc"); }}
             onClearLevel={()=>setFLevel("any")}
             onClearClazz={()=>setFClazz("any")}
-            // tags
+            classOptions={featureClassOptions}
             tagOptions={featureTagOptions}
             tags={fTags} setTags={setFTags} onClearTags={()=>setFTags([])}
             kind="feature"
@@ -326,8 +340,8 @@ export default function Browse() {
                   kind="feature"
                   titlePt={ft.name.pt}
                   titleEn={ft.name.en}
-                  schoolPt={ft.class}
-                  schoolEn={ft.class}
+                  schoolPt={formatClassName(ft.class, "pt")}
+                  schoolEn={formatClassName(ft.class, "en")}
                   pillsPt={[
                     formatFeatureLevel(ft.level, "pt"),
                     ft.action?.pt ?? "",

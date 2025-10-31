@@ -3,7 +3,7 @@
 import { useEffect, useId, useState } from "react"
 import { usePrefs } from "../lib/state/prefs"
 import { TAG_CATALOG, type TagKey } from "../lib/search/tags"
-import { formatFeatureLevel, formatSpellLevel } from "../lib/format"
+import { formatClassName, formatFeatureLevel, formatSpellLevel } from "../lib/format"
 
 type Sort = "name-asc" | "level-asc" | "level-desc"
 
@@ -23,6 +23,7 @@ type FiltersProps = {
   onClearAll: () => void
   onClearLevel: () => void
   onClearClazz: () => void
+  classOptions: string[]
   tagOptions: TagKey[]
   tags: TagKey[]
   setTags: (v: TagKey[]) => void
@@ -94,7 +95,7 @@ export default function Filters(p: FiltersProps) {
           results: (n: number) => (n === 1 ? "resultado" : "resultados"),
           levelChip: (n: number) => (isSpell ? formatSpellLevel(n, "pt") : formatFeatureLevel(n, "pt")),
           levelOption: (n: number) => (isSpell ? formatSpellLevel(n, "pt") : formatFeatureLevel(n, "pt")),
-          classChip: (c: string) => c,
+          classChip: (c: string) => formatClassName(c, "pt"),
           tagTitle: "Filtrar por tag",
           showFilters: "Mostrar filtros",
           hideFilters: "Ocultar filtros",
@@ -117,7 +118,7 @@ export default function Filters(p: FiltersProps) {
           results: (n: number) => (n === 1 ? "result" : "results"),
           levelChip: (n: number) => (isSpell ? formatSpellLevel(n, "en") : formatFeatureLevel(n, "en")),
           levelOption: (n: number) => (isSpell ? formatSpellLevel(n, "en") : formatFeatureLevel(n, "en")),
-          classChip: (c: string) => c,
+          classChip: (c: string) => formatClassName(c, "en"),
           tagTitle: "Filter by tag",
           showFilters: "Show filters",
           hideFilters: "Hide filters",
@@ -185,13 +186,11 @@ export default function Filters(p: FiltersProps) {
             <span>{L.clazz}</span>
             <select value={p.clazz} onChange={(e) => p.setClazz(e.target.value)} aria-label={L.clazz}>
               <option value="any">{L.any}</option>
-              {["Artificer", "Bard", "Cleric", "Druid", "Paladin", "Ranger", "Sorcerer", "Wizard", "Warlock"].map(
-                (c) => (
-                  <option key={c} value={c}>
-                    {c}
-                  </option>
-                ),
-              )}
+              {p.classOptions.map((c) => (
+                <option key={c} value={c}>
+                  {formatClassName(c, lang)}
+                </option>
+              ))}
             </select>
           </label>
           <label>

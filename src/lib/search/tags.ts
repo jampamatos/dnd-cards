@@ -39,6 +39,7 @@ export type TagKey =
   | "self"
   | "short-rest"
   | "long-rest"
+  | "scrying"
   | "teleportation"
   | "utility"
   | "warding";
@@ -80,6 +81,7 @@ export const TAG_CATALOG: Record<TagKey, { pt: string; en: string }> = {
   self:           { pt: "Pessoal",             en: "Self" },
   "short-rest":   { pt: "Descanso Curto",      en: "Short Rest" },
   "long-rest":    { pt: "Descanso Longo",      en: "Long Rest" },
+  scrying:        { pt: "Vidência",             en: "Scrying" },
   utility:        { pt: "Utilidade",           en: "Utility" },
   teleportation:  { pt: "Teletransporte",      en: "Teleportation" },
   warding:        { pt: "Proteção",            en: "Warding"},
@@ -122,6 +124,7 @@ const ORDER: TagKey[] = [
   "self",
   "short-rest",
   "long-rest",
+  "scrying",
   "teleportation",
   "utility",
   "warding"
@@ -185,6 +188,8 @@ const JSON_TO_CANON: Record<string, TagKey> = {
   "short rest": "short-rest",
   "descanso longo": "long-rest",
   "long rest": "long-rest",
+  videncia: "scrying",
+  scrying: "scrying",
   invocacao: "summon",
   summon: "summon",
   defesa: "defense",

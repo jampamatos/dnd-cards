@@ -7,7 +7,7 @@ type CardPrintProps = {
   pillsEn: string[]
   bodyPt: string
   bodyEn: string
-  components?: { verbal?: boolean; somatic?: boolean; material?: string }
+  components?: { verbal?: boolean; somatic?: boolean; material?: { pt: string; en: string } }
   withCutMarks?: boolean
   lang: "pt" | "en"
 }
@@ -72,12 +72,14 @@ export default function CardPrint(p: CardPrintProps) {
     const items: Array<{ key: "V" | "S" | "M"; title: string; material?: string }> = []
     if (c.verbal) items.push({ key: "V", title: p.lang === "pt" ? "Componente Verbal" : "Verbal component" })
     if (c.somatic) items.push({ key: "S", title: p.lang === "pt" ? "Componente Somático" : "Somatic component" })
-    if (c.material)
+    if (c.material) {
+      const materialText = p.lang === "pt" ? c.material.pt : c.material.en
       items.push({
         key: "M",
-        title: (p.lang === "pt" ? "Componente Material: " : "Material component: ") + c.material,
-        material: c.material,
+        title: (p.lang === "pt" ? "Componente Material: " : "Material component: ") + materialText,
+        material: materialText,
       })
+    }
     return items
   })()
 

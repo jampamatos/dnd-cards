@@ -11,7 +11,7 @@ import CardPrint from "../components/CardPrint";
 import CardBackPrint from "../components/CardBackPrint";
 import { usePrefs } from "../lib/state/prefs";
 import "../styles/print.css"
-import { formatFeatureLevel, formatSpellLevel } from "../lib/format";
+import { formatClassName, formatFeatureLevel, formatSpellLevel } from "../lib/format";
 
 type CardVM = {
   key: string;
@@ -89,7 +89,7 @@ export default function PrintPreview() {
         out.push({
           key: "feature:" + ft.id,
           titlePt: ft.name.pt, titleEn: ft.name.en,
-          schoolPt: ft.class, schoolEn: ft.class,
+          schoolPt: formatClassName(ft.class, "pt"), schoolEn: formatClassName(ft.class, "en"),
           pillsPt: [ formatFeatureLevel(ft.level, "pt"), ft.action?.pt ?? "" ].filter(Boolean),
           pillsEn: [ formatFeatureLevel(ft.level, "en"), ft.action?.en ?? "" ].filter(Boolean),
           bodyPt: ft.text.pt, bodyEn: ft.text.en,

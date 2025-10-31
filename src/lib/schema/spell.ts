@@ -15,7 +15,7 @@ export const Spell = z.object({
     components: z.object({
         verbal: z.boolean().default(false),
         somatic: z.boolean().default(false),
-        material: z.string().min(1).optional(),
+        material: LangString.optional(),
     }),
     text: LangString,
     tags: z.array(z.string()).default([]),

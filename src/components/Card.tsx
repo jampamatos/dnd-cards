@@ -3,6 +3,7 @@
 import { usePacks } from "../lib/state/packs"
 import type { Kind } from "../lib/state/packs"
 import { usePrefs } from "../lib/state/prefs"
+import { formatClassName } from "../lib/format"
 import type { TagKey } from "../lib/search/tags"
 import { TAG_CATALOG } from "../lib/search/tags"
 
@@ -17,7 +18,7 @@ type CardProps = {
   pillsEn: string[]
   bodyPt: string
   bodyEn: string
-  components?: { verbal?: boolean; somatic?: boolean; material?: string }
+  components?: { verbal?: boolean; somatic?: boolean; material?: { pt: string; en: string } }
   level?: number
   classes?: string[]
   onLevelClick?: (lvl: number) => void
@@ -149,12 +150,14 @@ export default function Card(props: CardProps) {
     const items: Array<{ key: "V" | "S" | "M"; title: string; material?: string }> = []
     if (c.verbal) items.push({ key: "V", title: lang === "pt" ? "Componente Verbal" : "Verbal component" })
     if (c.somatic) items.push({ key: "S", title: lang === "pt" ? "Componente Somático" : "Somatic component" })
-    if (c.material)
+    if (c.material) {
+      const materialText = lang === "pt" ? c.material.pt : c.material.en
       items.push({
         key: "M",
-        title: (lang === "pt" ? "Componente Material: " : "Material component: ") + c.material,
-        material: c.material,
+        title: (lang === "pt" ? "Componente Material: " : "Material component: ") + materialText,
+        material: materialText,
       })
+    }
     return items
   })()
 
@@ -305,11 +308,11 @@ export default function Card(props: CardProps) {
                 className="chip chip--click"
                 title={lang === "pt" ? "Filtrar por classe" : "Filter by class"}
               >
-                {c}
+                {formatClassName(c, lang)}
               </button>
             ) : (
               <span key={c} className="chip">
-                {c}
+                {formatClassName(c, lang)}
               </span>
             ),
           )}
