@@ -606,5 +606,138 @@
     },
     "tags": ["damage", "control"],
     "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "blade-barrier",
+    "name": { "pt": "Barreira de Lâminas", "en": "Blade Barrier" },
+    "level": 6,
+    "school": { "pt": "Evocação", "en": "Evocation" },
+    "classes": ["Cleric"],
+    "castingTime": { "pt": "Ação", "en": "Action" },
+    "range": { "pt": "27 metros (90 pés)", "en": "90 ft." },
+    "duration": { "pt": "10 Minutos", "en": "10 Minutes" },
+    "concentration": true,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true },
+    "text": {
+      "pt": "Você cria uma barreira de lâminas rodopiantes formadas de energia mágica. A barreira aparece no alcance da magia e permanece pela duração. Você cria uma barreira reta de até 30 metros (100 pés) de comprimento, 6 metros (20 pés) de altura e 1,5 (5 pés) metro de espessura, ou uma barreira circular de até 18 metros de diâmetro (60 pés), 6 metros (20 pés) de altura e 1,5 metro (5 pés) de espessura. A barreira oferece Cobertura de Três Quartos e seu espaço é considerado Terreno Difícil.\n\nQualquer criatura no espaço da barreira realiza uma salvaguarda de Destreza, sofrendo 6d10 pontos de dano Energético se falhar, ou metade desse dano em caso de sucesso. Uma criatura também realiza essa salvaguarda se entrar no espaço da barreira ou terminar seu turno lá. Uma criatura realiza essa salvaguarda apenas uma vez por turno.",
+      "en": "You create a wall of whirling blades made of magical energy. The wall appears within range and lasts for the duration. You make a straight wall up to 100 feet long, 20 feet high, and 5 feet thick, or a ringed wall up to 60 feet in diameter, 20 feet high, and 5 feet thick. The wall provides Three-Quarters Cover, and its space is Difficult Terrain.\n\nAny creature in the wall’s space makes a Dexterity saving throw, taking 6d10 Force damage on a failed save or half as much damage on a successful one. A creature also makes that save if it enters the wall’s space or ends it turn there. A creature makes that save only once per turn."
+    },
+    "tags": ["damage", "control"],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "blade-ward",
+    "name": { "pt": "Proteção Contra Lâminas", "en": "Blade Ward" },
+    "level": 0,
+    "school": { "pt": "Abjuração", "en": "Abjuration" },
+    "classes": ["Bard", "Sorcerer", "Warlock", "Wizard"],
+    "castingTime": { "pt": "Ação", "en": "Action" },
+    "range": { "pt": "Pessoal", "en": "Self" },
+    "duration": { "pt": "1 Minuto", "en": "1 Minute" },
+    "concentration": true,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true },
+    "text": {
+      "pt": "Sempre que uma criatura realizar uma jogada de ataque contra você antes que a magia termine, o atacante subtrai 1d4 da jogada de ataque.",
+      "en": "Whenever a creature makes an attack roll against you before the spell ends, the attacker subtracts 1d4 from the attack roll."
+    },
+    "tags": ["combat", "warding"],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "bless",
+    "name": { "pt": "Benção", "en": "Bless" },
+    "level": 1,
+    "school": { "pt": "Encantamento", "en": "Enchantment" },
+    "classes": ["Cleric", "Paladin"],
+    "castingTime": { "pt": "Ação", "en": "Action" },
+    "range": { "pt": "9 Metros (30 pés)", "en": "30 ft." },
+    "duration": { "pt": "1 Minuto", "en": "1 Minute" },
+    "concentration": true,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true, "material": "um Símbolo Sagrado no valor de 5+ PO" },
+    "text": {
+      "pt": "Você abençoa até três criaturas no alcance da magia. Sempre que um alvo realiza uma jogada de ataque ou uma salvaguarda antes que a magia termine, o alvo adiciona 1d4 à jogada de ataque ou salvaguarda.\n\n***Usando um Espaço de Magia de Círculo Superior.*** Você pode escolher uma criatura adicional para cada círculo de espaço de magia acima de 1.",
+      "en": "You bless up to three creatures within range. Whenever a target makes an attack roll or a saving throw before the spell ends, the target adds 1d4 to the attack roll or save.\n\n***Using a Higher-Level Spell Slot.*** You can target one additional creature for each spell slot level above 1."
+    },
+    "tags": ["buff"],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "blight",
+    "name": { "pt": "Malogro", "en": "Blight" },
+    "level": 4,
+    "school": { "pt": "Necromancia", "en": "Necromancy" },
+    "classes": ["Druid", "Sorcerer", "Warlock", "Wizard"],
+    "castingTime": { "pt": "Ação", "en": "Action" },
+    "range": { "pt": "9 Metros (30 pés)", "en": "30 ft." },
+    "duration": { "pt": "Instantânea", "en": "Instantaneous" },
+    "concentration": false,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true },
+    "text": {
+      "pt": "Uma criatura à sua vista e no alcance da magia realiza uma salvaguarda de Constituição, sofrendo 8d8 pontos de dano Necrótico se falhar ou metade desse dano em caso de sucesso. Uma criatura do tipo Planta falha automaticamente na salvaguarda.\n\nComo alternativa, escolha como alvo uma planta não mágica que não seja uma criatura, como uma árvore ou um arbusto. Ela não realiza uma salvaguarda; ela simplesmente murcha e morre.\n\n***Usando um Espaço de Magia de Círculo Superior.*** O dano aumenta em 1d8 para cada círculo de espaço de magia acima de 4.",
+      "en": "A creature that you can see within range makes a Constitution saving throw, taking 8d8 Necrotic damage on a failed save or half as much damage on a successful one. A Plant creature automatically fails the save.\n\nAlternatively, target a nonmagical plant that isn’t a creature, such as a tree or shrub. It doesn’t make a save; it simply withers and dies.\n\n***Using a Higher-Level Spell Slot.*** The damage increases by 1d8 for each spell slot level above 4."
+    },
+    "tags": ["damage"],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "bliding-smite",
+    "name": { "pt": "Destruição Cegante", "en": "Blinding Smite" },
+    "level": 3,
+    "school": { "pt": "Evocação", "en": "Evocation" },
+    "classes": ["Paladin"],
+    "castingTime": { "pt": "Ação Bônus", "en": "Bonus Action" },
+    "range": { "pt": "Pessoal", "en": "Self" },
+    "duration": { "pt": "1 Minuto", "en": "1 Minute" },
+    "concentration": false,
+    "ritual": false,
+    "components": { "verbal": true },
+    "text": {
+      "pt": "O alvo atingido pelo ataque sofre 3d8 pontos de dano Radiante adicionais e tem a condição Cego até que a magia termine. No final de cada um dos turnos dele, o alvo Cego realiza uma salvaguarda de Constituição, encerrando a magia em caso de sucesso.\n\n***Usando um Espaço de Magia de Círculo Superior.*** O dano adicional aumenta em 1d8 para cada círculo de espaço de magia acima de 3.",
+      "en": "The target hit by the strike takes an extra 3d8 Radiant damage from the attack, and the target has the Blinded condition until the spell ends. At the end of each of its turns, the Blinded target makes a Constitution saving throw, ending the spell on itself on a success.\n\n***Using a Higher-Level Spell Slot.*** The extra damage increases by 1d8 for each spell slot level above 3."
+    },
+    "tags": ["damage", "control"],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "blindness-deafness",
+    "name": { "pt": "Cegueira/Surdez", "en": "Blindness/Deafness" },
+    "level": 2,
+    "school": { "pt": "Transmutação", "en": "Transmutation" },
+    "classes": ["Bard", "Cleric", "Sorcerer", "Wizard"],
+    "castingTime": { "pt": "Ação", "en": "Action" },
+    "range": { "pt": "36 metros (120 pés)", "en": "120 ft." },
+    "duration": { "pt": "1 Minuto", "en": "1 Minute" },
+    "concentration": false,
+    "ritual": false,
+    "components": { "verbal": true },
+    "text": {
+      "pt": "Uma criatura à sua vista e no alcance da magia deve ser bem-sucedida em uma salvaguarda de Constituição, ou ela tem a condição Cego ou Surdo (à sua escolha) pela duração da magia. O alvo repete a salvaguarda no final de cada um dos turnos dele, encerrando a magia em caso de sucesso.\n\n***Usando um Espaço de Magia de Círculo Superior.*** Você pode escolher uma criatura adicional para cada círculo de espaço de magia acima de 2.",
+      "en": "One creature that you can see within range must succeed on a Constitution saving throw, or it has the Blinded or Deafened condition (your choice) for the duration. At the end of each of its turns, the target repeats the save, ending the spell on itself on a success.\n\n***Using a Higher-Level Spell Slot.*** You can target one additional creature for each spell slot level above 2."
+    },
+    "tags": ["debuff"],
+    "source": { "name": "Player's Handbook" }
+  },
+  {
+    "id": "blink",
+    "name": { "pt": "Piscar", "en": "Blink" },
+    "level": 3,
+    "school": { "pt": "Transmutação", "en": "Transmutation" },
+    "classes": ["Artificer", "Sorcerer", "Wizard"],
+    "castingTime": { "pt": "Ação", "en": "Action" },
+    "range": { "pt": "Pessoal", "en": "Self" },
+    "duration": { "pt": "1 Minuto", "en": "1 Minute" },
+    "concentration": false,
+    "ritual": false,
+    "components": { "verbal": true, "somatic": true },
+    "text": {
+      "pt": "Jogue 1d6 no final de cada um dos seus turnos pela duração da magia. Em um resultado de 4-6, você desaparece do seu plano de existência atual e aparece no Plano Etéreo (a magia termina instantaneamente se você já estiver nesse plano). Enquanto estiver no Plano Etéreo, você pode ver o plano que você deixou, que aparece em tons de cinza, mas você não pode ver nada nele a mais de 18 metros de distância. Você só pode afetar e ser afetado por criaturas que estejam no Plano Etéreo, e criaturas no outro plano não podem percebê-lo, a menos que tenham uma habilidade específica que lhes permita perceber coisas no Plano Etéreo.\n\nVocê retorna ao outro plano no início do seu próximo turno e quando a magia termina se você estiver no Plano Etéreo. Você retorna a um espaço desocupado à sua escolha à sua vista e a até 3 metros do espaço que deixou. Se nenhum espaço desocupado estiver disponível dentro desse intervalo, você aparece no espaço desocupado mais próximo.",
+      "en": "Roll 1d6 at the end of each of your turns for the duration. On a roll of 4–6, you vanish from your current plane of existence and appear in the Ethereal Plane (the spell ends instantly if you are already on that plane). While on the Ethereal Plane, you can perceive the plane you left, which is cast in shades of gray, but you can’t see anything there more than 60 feet away. You can affect and be affected only by other creatures on the Ethereal Plane, and creatures on the other plane can’t perceive you unless they have a special ability that lets them perceive things on the Ethereal Plane.\n\nYou return to the other plane at the start of your next turn and when the spell ends if you are on the Ethereal Plane. You return to an unoccupied space of your choice that you can see within 10 feet of the space you left. If no unoccupied space is available within that range, you appear in the nearest unoccupied space."
+    },
+    "tags": ["utility"],
+    "source": { "name": "Player's Handbook" }
   }
 ]
