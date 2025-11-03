@@ -3252,5 +3252,472 @@
     "source": {
       "name": "Player's Handbook"
     }
+  },
+  {
+    "id": "conjure-volley",
+    "name": {
+      "pt": "Invocar Saraivada",
+      "en": "Conjure Volley"
+    },
+    "level": 5,
+    "school": {
+      "pt": "Invocação",
+      "en": "Conjuration"
+    },
+    "classes": [
+      "Ranger"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "45 m (150 ft.)",
+      "en": "150 ft."
+    },
+    "duration": {
+      "pt": "Instantânea",
+      "en": "Instantaneous"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true,
+      "material": {
+        "pt": "uma arma Corpo a Corpo ou à Distância que vale pelo menos 1 PC",
+        "en": "a melee or ranged weapon worth at least 1 CP"
+      }
+    },
+    "text": {
+      "pt": "Você brande a arma usada para conjurar a magia e escolhe um ponto no alcance da magia. Centenas de armas espectrais similares (ou munição apropriada para a arma) caem em uma saraivada e depois desaparecem.\n\nCada criatura à sua escolha à sua vista em um Cilindro de 12 metros (40 pés) de raio e 6 metros (20 pés) de altura, centrada nesse ponto, realiza uma salvaguarda de Destreza. Uma criatura sofre 8d8 pontos de dano Energético se falhar, ou metade desse dano em caso de sucesso.",
+      "en": "You brandish the weapon used to cast the spell and choose a point within range. Hundreds of similar spectral weapons (or ammunition appropriate to the weapon) fall in a volley and then disappear. Each creature of your choice that you can see in a 40-foot-radius, 20-foot-high Cylinder centered on that point makes a Dexterity saving throw. A creature takes 8d8 Force damage on a failed save or half as much damage on a successful one."
+    },
+    "tags": [
+      "damage"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "conjure-woodland-beings",
+    "name": {
+      "pt": "Invocar Seres da Floresta",
+      "en": "Conjure Woodland Beings"
+    },
+    "level": 4,
+    "school": {
+      "pt": "Invocação",
+      "en": "Conjuration"
+    },
+    "classes": [
+      "Druid",
+      "Ranger"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "Pessoal",
+      "en": "Self"
+    },
+    "duration": {
+      "pt": "10 Minutos",
+      "en": "10 Minutes"
+    },
+    "concentration": true,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true
+    },
+    "text": {
+      "pt": "Você conjura espíritos da natureza que voam ao seu redor em uma Emanação de 3 metros (10 pés) pela duração da magia. Quando a Emanação invade o espaço de uma criatura à sua vista, ou quando uma criatura à sua vista entra ou termina o turno na Emanação, você pode forçá-la a realizar uma salvaguarda de Sabedoria. Se falhar, a criatura sofre 5d8 pontos de dano Energético ou metade desse dano se tiver sucesso. A criatura realiza essa salvaguarda apenas uma vez por turno.\n\nAlém disso, você pode executar a ação Desengajar como uma Ação Bônus pela duração da magia.\n\n***Usando um Espaço de Magia de Círculo Superior.*** O dano aumenta em 1d8 para cada círculo de espaço de magia acima de 4.",
+      "en": "You conjure nature spirits that flit around you in a 10-foot Emanation for the duration. Whenever the Emanation enters the space of a creature you can see and whenever a creature you can see enters the Emanation or ends its turn there, you can force that creature to make a Wisdom saving throw. The creature takes 5d8 Force damage on a failed save or half as much damage on a successful one. A creature makes this save only once per turn.\n\nIn addition, you can take the Disengage action as a Bonus Action for the spell’s duration.\n\n***Using a Higher-Level Spell Slot.*** The damage increases by 1d8 for each spell slot level above 4."
+    },
+    "tags": [
+      "summoning"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "contact-other-plane",
+    "name": {
+      "pt": "Contato Extraplanar",
+      "en": "Contact Other Plane"
+    },
+    "level": 5,
+    "school": {
+      "pt": "Adivinhação",
+      "en": "Divination"
+    },
+    "classes": [
+      "Warlock",
+      "Wizard"
+    ],
+    "castingTime": {
+      "pt": "1 Minuto",
+      "en": "1 Minute"
+    },
+    "range": {
+      "pt": "Pessoal",
+      "en": "Self"
+    },
+    "duration": {
+      "pt": "1 Minuto",
+      "en": "1 Minute"
+    },
+    "concentration": false,
+    "ritual": true,
+    "components": {
+      "verbal": true
+    },
+    "text": {
+      "pt": "Você entra em contato mentalmente com um semideus, com o espírito de um sábio morto há muito tempo ou com alguma outra entidade conhecedora de outro plano. Entrar em contato com essa inteligência sobrenatural pode fragmentar sua mente. Ao conjurar essa magia, realize uma salvaguarda de Inteligência CD 15.\n\nEm caso de sucesso, você pode realizar até cinco perguntas à entidade. Você deve realizar suas perguntas antes que a magia termine. O Mestre responde a cada pergunta com uma palavra, como “sim”, “não”, “talvez”, “nunca”, “irrelevante” ou “indeterminado” (se a entidade não souber a resposta à pergunta). Se a resposta com uma palavra for enganosa, o Mestre pode, em vez disso, oferecer uma frase curta como resposta.\n\nSe falhar, você sofre 6d6 pontos de dano Psíquico e tem a condição Incapacitado até completar um Descanso Longo. Uma magia *Restauração Maior* conjurada em você encerra esse efeito.",
+      "en": "You mentally contact a demigod, the spirit of a long-dead sage, or some other knowledgeable entity from another plane. Contacting this otherworldly intelligence can break your mind. When you cast this spell, make a DC 15 Intelligence saving throw.\n\n On a successful save, you can ask the entity up to five questions. You must ask your questions before the spell ends. The DM answers each question with one word, such as “yes,” “no,” “maybe,” “never,” “irrelevant,” or “unclear” (if the entity doesn’t know the answer to the question). If a one-word answer would be misleading, the DM might instead offer a short phrase as an answer.\n\nOn a failed save, you take 6d6 Psychic damage and have the Incapacitated condition until you finish a Long Rest. A *Greater Restoration* spell cast on you ends this effect."
+    },
+    "tags": [
+      "communication",
+      "foreknowledge"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "contagion",
+    "name": {
+      "pt": "Contágio",
+      "en": "Contagion"
+    },
+    "level": 5,
+    "school": {
+      "pt": "Necromancia",
+      "en": "Necromancy"
+    },
+    "classes": [
+      "Cleric",
+      "Druid"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "Toque",
+      "en": "Touch"
+    },
+    "duration": {
+      "pt": "7 Dias",
+      "en": "7 Days"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true
+    },
+    "text": {
+      "pt": "Seu toque inflige um contágio mágico. O alvo deve ser bem-sucedido em uma salvaguarda de Constituição ou sofre 11d8 pontos de dano necrótico e tem a condição Envenenado. Além disso, escolha um atributo ao conjurar a magia. Enquanto estiver envenenado, o alvo tem Desvantagem em salvaguardas realizadas com o atributo escolhido.\n\nO alvo deve repetir a salvaguarda no final de cada um dos turnos até obter três sucessos ou fracassos. Se o alvo obtiver três sucessos, a magia encerra para o alvo. Se obter três fracassos, a magia permanece 7 dias sobre ele.\n\nSempre que o alvo Envenenado receber um efeito que encerre a condição Envenenado, ele deve ser bem-sucedido em uma salvaguarda de Constituição, ou a condição Envenenado não encerra nele.",
+      "en": "Your touch inflicts a magical contagion. The target must succeed on a Constitution saving throw or take 11d8 Necrotic damage and have the Poisoned condition. Also, choose one ability when you cast the spell. While Poisoned, the target has Disadvantage on saving throws made with the chosen ability.\n\nThe target must repeat the saving throw at the end of each of its turns until it gets three successes or failures. If the target succeeds on three of these saves, the spell ends on the target. If the target fails three of the saves, the spell lasts for 7 days on it.\n\nWhenever the Poisoned target receives an effect that would end the Poisoned condition, the target must succeed on a Constitution saving throw, or the Poisoned condition doesn’t end on it."
+    },
+    "tags": [
+      "debuff"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "contingency",
+    "name": {
+      "pt": "Contingência",
+      "en": "Contingency"
+    },
+    "level": 6,
+    "school": {
+      "pt": "Abjuração",
+      "en": "Abjuration"
+    },
+    "classes": [
+      "Wizard"
+    ],
+    "castingTime": {
+      "pt": "10 Minutos",
+      "en": "10 Minutes"
+    },
+    "range": {
+      "pt": "Pessoal",
+      "en": "Self"
+    },
+    "duration": {
+      "pt": "10 Dias",
+      "en": "10 Days"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true,
+      "material": {
+        "pt": "uma estatueta de si mesmo incrustada de pedras preciosas no valor de 1.500+ PO",
+        "en": "a gem-encrusted statuette of yourself worth 1,500+ GP"
+      }
+    },
+    "text": {
+      "pt": "Escolha uma magia de 5º círculo ou inferior que você possa conjurar, que tenha um tempo de conjuração de uma ação e que possa ter você como alvo. Você conjura essa magia — chamada de magia contingente — como parte da conjuração de *Contingência*, gastando espaços de magia para ambas, mas a magia contingente não entra em efeito. Em vez disso, ela é ativada quando ocorre um determinado gatilho. Você descreve esse gatilho quando conjura as duas magias. Por exemplo, uma Contingência conjurada com *Respirar na Água* pode estipular que Respirar na Água é ativada quando você é envolvido por água ou um líquido semelhante.\n\n A magia contingente ativa-se imediatamente após o gatilho ocorrer pela primeira vez, quer você queira ou não, e então a *Contingência* termina.\n\nA magia contingente tem efeito apenas em você, mesmo que normalmente possa ter como alvo outros. Você pode usar apenas uma magia *Contingência* por vez. Se você conjurar esta magia novamente, o efeito de outra magia *Contingência* em você encerra. Além disso, a *Contingência* encerra em você se o componente material da magia não estiver em sua pessoa.",
+      "en": "Choose a spell of level 5 or lower that you can cast, that has a casting time of an action, and that can target you. You cast that spell—called the contingent spell—as part of casting *Contingency*, expending spell slots for both, but the contingent spell doesn’t come into effect. Instead, it takes effect when a certain trigger occurs. You describe that trigger when you cast the two spells. For example, a *Contingency* cast with *Water Breathing* might stipulate that *Water Breathing* comes into effect when you are engulfed in water or a similar liquid.\n\nThe contingent spell takes effect immediately after the trigger occurs for the first time, whether or not you want it to, and then *Contingency* ends.\n The contingent spell takes effect only on you, even if it can normally target others. You can use only one *Contingency* spell at a time. If you cast this spell again, the effect of another *Contingency* spell on you ends. Also, *Contingency* ends on you if its material component is ever not on your person."
+    },
+    "tags": [
+      "utility"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "continual-flame",
+    "name": {
+      "pt": "Chama Contínua",
+      "en": "Continual Flame"
+    },
+    "level": 2,
+    "school": {
+      "pt": "Evocação",
+      "en": "Evocation"
+    },
+    "classes": [
+      "Artificer",
+      "Cleric",
+      "Druid",
+      "Wizard"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "Toque",
+      "en": "Touch"
+    },
+    "duration": {
+      "pt": "Até Ser Dissipada",
+      "en": "Until Dispell"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true,
+      "material": {
+        "pt": "rubi em pó no valor de 50+ PO, que a magia consome",
+        "en": "ruby dust worth 50+ GP, which the spell consumes"
+      }
+    },
+    "text": {
+      "pt": "Uma chama brota de um objeto que você toca. O efeito conjura Luz Plena em um raio de 6 metros e Meia-luz por mais 6 metros. Ela se parece uma chama comum, mas não cria calor e não consome combustível. A chama pode ser coberta ou escondida, mas não abafada ou extinta.",
+      "en": "A flame springs from an object that you touch. The effect casts Bright Light in a 20-foot radius and Dim Light for an additional 20 feet. It looks like a regular flame, but it creates no heat and consumes no fuel. The flame can be covered or hidden but not smothered or quenched."
+    },
+    "tags": [
+      "creation"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "control-water",
+    "name": {
+      "pt": "Controlar Água",
+      "en": "Control Water"
+    },
+    "level": 4,
+    "school": {
+      "pt": "Transmutação",
+      "en": "Transmutation"
+    },
+    "classes": [
+      "Cleric",
+      "Druid",
+      "Wizard"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "90 m (300 ft.)",
+      "en": "300 ft."
+    },
+    "duration": {
+      "pt": "10 Minutos",
+      "en": "10 Minutes"
+    },
+    "concentration": true,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true,
+      "material": {
+        "pt": "uma mistura de água e poeira",
+        "en": "a mixture of water and dust"
+      }
+    },
+    "text": {
+      "pt": "Até que a magia termine, você controla qualquer água dentro de uma área escolhida em um Cubo de até 30 metros (100 pés) de lado, usando um dos seguintes efeitos. Como uma ação Usar Magia em seus turnos posteriores, você pode repetir o mesmo efeito ou escolher um diferente.\n\n***Dividir Água***. Você divide a água na área e cria uma trincheira. A trincheira se estende pela área da magia, e a água separada forma uma parede de cada lado. A trincheira permanece até que a magia termine ou você escolha um efeito diferente. A água então preenche lentamente a trincheira ao longo da próxima rodada até que o nível normal de água seja restaurado.\n***Inundação.*** Você faz com que o nível de toda a água parada na área suba em até 6 metros (20 pés). Se você escolher uma área em um grande corpo d’água, você cria uma onda de 6 metros (20 pés) de altura que viaja de um lado da área para o outro e depois quebra. Quaisquer veículos Enormes ou menores no caminho da onda são carregados com ela para o outro lado. Qualquer veículo Enorme ou menor atingido pela onda tem 25% de chance de emborcar. O nível da água permanece elevado até que a magia termine ou você escolha um efeito diferente. Se esse efeito produziu uma onda, a onda se repete no início do seu próximo turno enquanto o efeito de inundação permanecer.\n***Redemoinho.*** Você faz com que um redemoinho se forme no centro da área, que deve ser pelo menos uma área quadrada de 15 metros (50 pés) de lados e 7,5 metros (25 pés) de profundidade. O redemoinho dura até que você escolha um efeito diferente ou a magia termine. O redemoinho tem 1,5 metro (5 pés) de largura na base, até 15 metros (50 pés) de largura no topo e 7,5 metros (25 pés) de altura. Qualquer criatura na água e a até 7,5 metros (25 pés) do redemoinho é puxada a 3 metros (10 pés) em sua direção. Quando uma criatura entra no redemoinho pela primeira vez em um turno ou termina o turno lá, ela realiza uma salvaguarda de Força. Se falhar, a criatura sofre 2d8 pontos de dano Contundente. Em caso de sucesso, a criatura sofre metade do dano. Uma criatura só pode nadar para longe do redemoinho se primeiro usar uma ação para se afastar e for bem-sucedida em um teste de Força (Atletismo) contra a CD para evitar sua magia.\n***Redirecionar Fluxo.*** Você faz com que a água corrente na área se mova na direção que você escolher, mesmo que a água tenha que fluir sobre obstáculos, paredes ou em outras direções improváveis. A água na área se move à medida que você a direciona, mas uma vez que ela se move além da área da magia, ela retoma seu fluxo com base no terreno. A água continua a se mover na direção que você escolheu até que a magia termine ou você escolha um efeito diferente.",
+      "en": "Until the spell ends, you control any water inside an area you choose that is a Cube up to 100 feet on a side, using one of the following effects. As a Magic action on your later turns, you can repeat the same effect or choose a different one.\n\n***Flood.*** You cause the water level of all standing water in the area to rise by as much as 20 feet. If you choose an area in a large body of water, you instead create a 20-foot tall wave that travels from one side of the area to the other and then crashes. Any Huge or smaller vehicles in the wave’s path are carried with it to the other side. Any Huge or smaller vehicles struck by the wave have a 25 percent chance of capsizing. The water level remains elevated until the spell ends or you choose a different effect. If this effect produced a wave, the wave repeats on the start of your next turn while the flood effect lasts.\n***Part Water.*** You part water in the area and create a trench. The trench extends across the spell’s area, and the separated water forms a wall to either side. The trench remains until the spell ends or you choose a different effect. The water then slowly fills in the trench over the course of the next round until the normal water level is restored.\n***Redirect Flow.*** You cause flowing water in the area to move in a direction you choose, even if the water has to flow over obstacles, up walls, or in other unlikely directions. The water in the area moves as you direct it, but once it moves beyond the spell’s area, it resumes its flow based on the terrain. The water continues to move in the direction you chose until the spell ends or you choose a different effect.\n***Whirlpool.*** You cause a whirlpool to form in the center of the area, which must be at least 50 feet square and 25 feet deep. The whirlpool lasts until you choose a different effect or the spell ends. The whirlpool is 5 feet wide at the base, up to 50 feet wide at the top, and 25 feet tall. Any creature in the water and within 25 feet of the whirlpool is pulled 10 feet toward it. When a creature enters the whirlpool for the first time on a turn or ends its turn there, it makes a Strength saving throw. On a failed save, the creature takes 2d8 Bludgeoning damage. On a successful save, the creature takes half as much damage. A creature can swim away from the whirlpool only if it first takes an action to pull away and succeeds on a Strength (Athletics) check against your spell save DC."
+    },
+    "tags": [
+      "control"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "control-weather",
+    "name": {
+      "pt": "Controlar o Clima",
+      "en": "Control Weather"
+    },
+    "level": 8,
+    "school": {
+      "pt": "Transmutação",
+      "en": "Transmutation"
+    },
+    "classes": [
+      "Cleric",
+      "Druid",
+      "Wizard"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "Pessoal",
+      "en": "Self"
+    },
+    "duration": {
+      "pt": "8 Horas",
+      "en": "8 Hours"
+    },
+    "concentration": true,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true,
+      "material": {
+        "pt": "incenso aceso",
+        "en": "burning incense"
+      }
+    },
+    "text": {
+      "pt": "Você assume o controle do clima a até 8 quilômetros de você pela duração da magia. Você deve estar ao ar livre para conjurar esta magia, e ela encerra se você for para áreas internas.\n\nAo conjurar a magia, você altera a condição climática atual, determinada pelo Mestre. Você pode alterar a precipitação, a temperatura e o vento. Leva 1d4 x 10 minutos para as novas condições do clima entrarem em vigor. Depois que elas se estabelecerem, você pode alterar as condições novamente. Quando a magia termina, o clima volta gradualmente ao normal.\n\nAo alterar as condições meteorológicas, encontre uma condição atual nas tabelas a seguir e altere o estágio em um, para cima ou para baixo. Ao mudar o vento, você pode alterar a direção dele.\n\n***Precipitação:***\n • **Condição 1:** Limpo\n• **Condição 2:** Nuvens leves\n**• Condição 3:** Nublado ou com neblina\n**• Condição 4:** Chuva, granizo ou neve\n**• Condição 5:** Chuva torrencial, tempestade de granizo ou nevasca\n\n***Temperatura***\n**Condição 1:**• Calor insuportável\n**• Condição 2:** Quente\n**• Condição 3:** Ameno\n**• Condição 4:** Fresco\n**• Condição 5:** Frio\n**• Condição 6:** Frio extremo\n\n***Vento***\n**• Condição 1:** Calmo\n**• Condição 2:** Vento moderado\n**• Condição 3:** Vento forte\n**• Condição 4:** Vendaval\n**• Condição 5:**Tempestade",
+      "en": "You take control of the weather within 5 miles of you for the duration. You must be outdoors to cast this spell, and it ends early if you go indoors.\n\nWhen you cast the spell, you change the current weather conditions, which are determined by the DM. You can change precipitation, temperature, and wind. It takes 1d4 × 10 minutes for the new conditions to take effect. Once they do so, you can change the conditions again. When the spell ends, the weather gradually returns to normal.\n\nWhen you change the weather conditions, find a current condition on the following tables and change its stage by one, up or down. When changing the wind, you can change its direction.\n\n***Precipitation:***\n • **Stage 1:** Clear\n• **Stage 2:** Light clouds\n**• Stage 3:** Overcast or ground fog\n**• Stage 4:** Rain, hail, or snow\n**• Stage 5:** Torrential rain, driving hail, or blizzard\n\n***Temperature***\n**• Stage 1:** Heat wave\n**• Stage 2:** Hot\n**• Stage 3:** Warm\n**• Stage 4:** Cool\n**• Stage 5:** Cold\n**• Stage 6:** Freezing\n\n***Wind***\n**• Stage 1:** Calm\n**• Stage 2:** Moderate wind\n**• Stage 3:** Strong wind\n**• Stage 4:** Gale\n**• Stage 5:**Storm"
+    },
+    "tags": [
+      "control",
+      "environment"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "cordon-of-arrows",
+    "name": {
+      "pt": "Cordão de Flechas",
+      "en": "Cordon of Arrows"
+    },
+    "level": 2,
+    "school": {
+      "pt": "Transmutação",
+      "en": "Transmutation"
+    },
+    "classes": [
+      "Ranger"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "Toque",
+      "en": "Touch"
+    },
+    "duration": {
+      "pt": "8 Horas",
+      "en": "8 Hours"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true,
+      "material": {
+        "pt": "quatro ou mais flechas ou virotes",
+        "en": "four or more arrows or bolts"
+      }
+    },
+    "text": {
+      "pt": "Toque até quatro flechas ou virotes não mágicas e finque-os no chão em seu espaço. Até que a magia termine, a munição não pode ser retirada fisicamente. Sempre que uma criatura que não seja você entrar em um espaço a até 9 metros (30 pés) da munição pela primeira vez ou terminar o turno dela lá, uma das peças de munição voa para atingi-la. A criatura deve ser bem-sucedida em uma salvaguarda de Destreza ou sofre 2d4 pontos de dano Perfurante. A munição é então destruída. A magia termina quando nenhuma munição permanecer fincada no chão.\n\nAo conjurar esta magia, você pode designar quaisquer criaturas que escolher, e a magia as ignora.\n\n***Usando um Espaço de Magia de Círculo Superior.*** A quantidade de munição que pode ser afetada aumenta em dois para cada círculo de espaço de magia acima de 2.",
+      "en": "You touch up to four nonmagical Arrows or Bolts and plant them in the ground in your space. Until the spell ends, the ammunition can’t be physically uprooted, and whenever a creature other than you enters a space within 30 feet of the ammunition for the first time on a turn or ends its turn there, one piece of ammunition flies up to strike it. The creature must succeed on a Dexterity saving throw or take 2d4 Piercing damage. The piece of ammunition is then destroyed. The spell ends when none of the ammunition remains planted in the ground.\n\nWhen you cast this spell, you can designate any creatures you choose, and the spell ignores them.\n\n***Using a Higher-Level Spell Slot.*** The amount of ammunition that can be affected increases by two for each spell slot level above 2."
+    },
+    "tags": [
+      "damage",
+      "control"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "counterspell",
+    "name": {
+      "pt": "Contramagia",
+      "en": "Counterspell"
+    },
+    "level": 3,
+    "school": {
+      "pt": "Abjuração",
+      "en": "Abjuration"
+    },
+    "classes": [
+      "Sorcerer",
+      "Warlock",
+      "Wizard"
+    ],
+    "castingTime": {
+      "pt": "Reação",
+      "en": "Reaction"
+    },
+    "range": {
+      "pt": "18 m (60 ft.)",
+      "en": "60 ft."
+    },
+    "duration": {
+      "pt": "Instantânea",
+      "en": "Instantaneous"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "somatic": true
+    },
+    "text": {
+      "pt": "Você tenta interromper uma criatura no processo de conjurar uma magia. A criatura realiza uma salvaguarda de Constituição. Se falhar, a magia se dissipa sem efeito, e a ação, Ação Bônus ou Reação usada para conjurá-la é desperdiçada. Se a magia do alvo foi conjurada com um espaço de magia, o espaço de magia da criatura não é gasto.",
+      "en": "You attempt to interrupt a creature in the process of casting a spell. The creature makes a Constitution saving throw. On a failed save, the spell dissipates with no effect, and the action, Bonus Action, or Reaction used to cast it is wasted. If that spell was cast with a spell slot, the slot isn’t expended."
+    },
+    "tags": [
+      "negation"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
   }
 ]

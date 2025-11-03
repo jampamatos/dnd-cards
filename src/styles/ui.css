@@ -461,6 +461,30 @@ input::placeholder {
   font-weight: 600;
 }
 
+.chip--casting,
+.chip--duration {
+  gap: 6px;
+  font-weight: 600;
+  padding-inline: 12px;
+}
+
+.chip--casting {
+  background: var(--primary-weak);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.chip--duration {
+  background: var(--accent-weak);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.chip--casting svg,
+.chip--duration svg {
+  flex-shrink: 0;
+}
+
 /* Enhanced component chips with better visual hierarchy */
 .chip--components {
   background: var(--accent-weak);

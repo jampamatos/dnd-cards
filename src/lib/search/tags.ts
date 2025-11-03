@@ -34,9 +34,6 @@ export type TagKey =
   | "cleric"
   | "ritual"
   | "concentration"
-  | "action"
-  | "bonus-action"
-  | "reaction"
   | "touch"
   | "self"
   | "short-rest"
@@ -79,9 +76,6 @@ export const TAG_CATALOG: Record<TagKey, { pt: string; en: string }> = {
   cleric:         { pt: "Clérigo",                en: "Cleric" },
   ritual:         { pt: "Ritual",                 en: "Ritual" },
   concentration:  { pt: "Concentração",           en: "Concentration" },
-  action:         { pt: "Ação",                   en: "Action" },
-  "bonus-action": { pt: "Ação Bônus",             en: "Bonus Action" },
-  reaction:       { pt: "Reação",                 en: "Reaction" },
   touch:          { pt: "Toque",                  en: "Touch" },
   self:           { pt: "Pessoal",                en: "Self" },
   "short-rest":   { pt: "Descanso Curto",         en: "Short Rest" },
@@ -125,9 +119,6 @@ const ORDER: TagKey[] = [
   "cleric",
   "ritual",
   "concentration",
-  "action",
-  "bonus-action",
-  "reaction",
   "touch",
   "self",
   "short-rest",
@@ -187,12 +178,6 @@ const JSON_TO_CANON: Record<string, TagKey> = {
   ritual: "ritual",
   concentracao: "concentration",
   concentration: "concentration",
-  acao: "action",
-  action: "action",
-  "acao bonus": "bonus-action",
-  "bonus action": "bonus-action",
-  reacao: "reaction",
-  reaction: "reaction",
   toque: "touch",
   touch: "touch",
   pessoal: "self",

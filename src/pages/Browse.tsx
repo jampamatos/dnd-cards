@@ -11,7 +11,8 @@ import { buildIndex, toDocs } from "../lib/search/indexer";
 import type { UnifiedDoc } from "../lib/search/indexer";
 import { detectSpellTags, detectFeatureTags, TAG_ORDER, type TagKey } from "../lib/search/tags";
 import { usePrefs } from "../lib/state/prefs";
-import { formatClassName, formatFeatureLevel, formatSpellLevel } from "../lib/format";
+import { formatClassName } from "../lib/format";
+import { buildFeaturePills, buildSpellPills } from "../lib/pills";
 
 type HitKind = "spell" | "feature";
 type SortOption = "name-asc" | "level-asc" | "level-desc";
@@ -336,16 +337,8 @@ export default function Browse() {
                   titleEn={sp.name.en}
                   schoolPt={sp.school.pt}
                   schoolEn={sp.school.en}
-                  pillsPt={[
-                    formatSpellLevel(sp.level, "pt"),
-                    sp.castingTime.pt, sp.range.pt, sp.duration.pt,
-                    sp.ritual ? "Ritual" : "", sp.concentration ? "Concentração" : "",
-                  ].filter(Boolean)}
-                  pillsEn={[
-                    formatSpellLevel(sp.level, "en"),
-                    sp.castingTime.en, sp.range.en, sp.duration.en,
-                    sp.ritual ? "Ritual" : "", sp.concentration ? "Concentration" : "",
-                  ].filter(Boolean)}
+                  pillsPt={buildSpellPills(sp, "pt")}
+                  pillsEn={buildSpellPills(sp, "en")}
                   bodyPt={sp.text.pt}
                   bodyEn={sp.text.en}
                   components={{
@@ -395,16 +388,8 @@ export default function Browse() {
                   titleEn={ft.name.en}
                   schoolPt={formatClassName(ft.class, "pt")}
                   schoolEn={formatClassName(ft.class, "en")}
-                  pillsPt={[
-                    formatFeatureLevel(ft.level, "pt"),
-                    ft.action?.pt ?? "",
-                    ft.uses ? `Usos: ${ft.uses}` : "",
-                  ].filter(Boolean)}
-                  pillsEn={[
-                    formatFeatureLevel(ft.level, "en"),
-                    ft.action?.en ?? "",
-                    ft.uses ? `Uses: ${ft.uses}` : "",
-                  ].filter(Boolean)}
+                  pillsPt={buildFeaturePills(ft, "pt")}
+                  pillsEn={buildFeaturePills(ft, "en")}
                   bodyPt={ft.text.pt}
                   bodyEn={ft.text.en}
                   level={ft.level}

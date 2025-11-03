@@ -160,6 +160,28 @@ body {
   padding: 3px 10px;
 }
 
+.print-card .pill--casting,
+.print-card .pill--duration {
+  font-weight: 600;
+  padding: 3px 8px;
+  gap: 4px;
+}
+
+.print-card .pill--casting {
+  background: #ededed;
+  border-style: dashed;
+}
+
+.print-card .pill--duration {
+  background: #f2f2f2;
+  border-color: #777;
+}
+
+.print-card .pill--casting svg,
+.print-card .pill--duration svg {
+  flex-shrink: 0;
+}
+
 /* Grayscale component badges for print */
 .print-card .pill--components {
   background: #e8e8e8;

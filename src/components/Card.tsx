@@ -4,6 +4,7 @@ import { usePacks } from "../lib/state/packs"
 import type { Kind } from "../lib/state/packs"
 import { usePrefs } from "../lib/state/prefs"
 import { formatClassName } from "../lib/format"
+import type { PillKind, PillValue } from "../lib/pills"
 import type { TagKey } from "../lib/search/tags"
 import { TAG_CATALOG } from "../lib/search/tags"
 
@@ -14,8 +15,8 @@ type CardProps = {
   titleEn: string
   schoolPt: string
   schoolEn: string
-  pillsPt: string[]
-  pillsEn: string[]
+  pillsPt: PillValue[]
+  pillsEn: PillValue[]
   bodyPt: string
   bodyEn: string
   components?: { verbal?: boolean; somatic?: boolean; material?: { pt: string; en: string } }
@@ -51,13 +52,13 @@ function renderRichBody(body: string) {
 
 function pillToTag(pill: string, lang: "pt" | "en"): TagKey | null {
   const t = pill.toLowerCase()
-  if (t.includes(lang === "pt" ? "reação" : "reaction")) return "reaction"
-  if (t.includes(lang === "pt" ? "ação bônus" : "bonus action")) return "bonus-action"
-  if (t.includes(lang === "pt" ? "ação" : "action")) return "action"
-  if (t.includes(lang === "pt" ? "concentração" : "concentration")) return "concentration"
-  if (t.includes(lang === "pt" ? "ritual" : "ritual")) return "ritual"
-  if (t.includes(lang === "pt" ? "toque" : "touch")) return "touch"
-  if (t.includes(lang === "pt" ? "pessoal" : "self")) return "self"
+  if (t.includes(lang === "pt" ? "reação" : "reaction")) return "reaction" as TagKey
+  if (t.includes(lang === "pt" ? "ação bônus" : "bonus action")) return "bonus-action" as TagKey
+  if (t.includes(lang === "pt" ? "ação" : "action")) return "action" as TagKey
+  if (t.includes(lang === "pt" ? "concentração" : "concentration")) return "concentration" as TagKey
+  if (t.includes(lang === "pt" ? "ritual" : "ritual")) return "ritual" as TagKey
+  if (t.includes(lang === "pt" ? "toque" : "touch")) return "touch" as TagKey
+  if (t.includes(lang === "pt" ? "pessoal" : "self")) return "self" as TagKey
   return null
 }
 
@@ -94,6 +95,42 @@ const RitualIcon = () => (
   </svg>
 )
 
+const CastingIcon = () => (
+  <svg
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="9" />
+    <path d="M12 7v5l3 2" />
+  </svg>
+)
+
+const DurationIcon = () => (
+  <svg
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M6 2h12" />
+    <path d="M6 22h12" />
+    <path d="M8 2c0 4 8 4 8 8s-8 4-8 8" />
+    <path d="M16 2c0 4-8 4-8 8s8 4 8 8" />
+  </svg>
+)
+
 export default function Card(props: CardProps) {
   const {
     id,
@@ -118,8 +155,21 @@ export default function Card(props: CardProps) {
   const { lang } = usePrefs()
   const selected = isSelected(id, kind)
 
-  const pills = lang === "pt" ? pillsPt : pillsEn
+  const rawPills = lang === "pt" ? pillsPt : pillsEn
   const body = lang === "pt" ? bodyPt : bodyEn
+  const normalizedPills = rawPills.map((pill, index) => {
+    if (typeof pill === "string") {
+      const kind: PillKind = index === 0 && typeof level === "number" ? "level" : "default";
+      return { label: pill, kind };
+    }
+    const kind: PillKind =
+      pill.kind ?? (index === 0 && typeof level === "number" ? "level" : "default");
+    return { label: pill.label, kind };
+  });
+
+  const pillHints: Partial<Record<PillKind, string>> = lang === "pt"
+    ? { casting: "Tempo de Conjuração", duration: "Duração", range: "Alcance" }
+    : { casting: "Casting Time", duration: "Duration", range: "Range" };
 
   const L =
     lang === "pt"
@@ -161,8 +211,10 @@ export default function Card(props: CardProps) {
     return items
   })()
 
-  const hasConcentration = pills.some((p) => p.toLowerCase().includes(lang === "pt" ? "concentração" : "concentration"))
-  const hasRitual = pills.some((p) => p.toLowerCase().includes(lang === "pt" ? "ritual" : "ritual"))
+  const hasConcentration = normalizedPills.some((p) =>
+    p.label.toLowerCase().includes(lang === "pt" ? "concentração" : "concentration"),
+  )
+  const hasRitual = normalizedPills.some((p) => p.label.toLowerCase().includes(lang === "pt" ? "ritual" : "ritual"))
 
   const TitleBlock = () => (
     <h3 className="card__h3">
@@ -258,24 +310,38 @@ export default function Card(props: CardProps) {
       )}
 
       <div className="chips" style={{ margin: "8px 0" }}>
-        {pills.map((p, i) => {
-          const isConcentration = p.toLowerCase().includes(lang === "pt" ? "concentração" : "concentration")
-          const isRitual = p.toLowerCase().includes(lang === "pt" ? "ritual" : "ritual")
+        {normalizedPills.map((pill, i) => {
+          const label = pill.label
+          const lower = label.toLowerCase()
+          const isConcentration = lower.includes(lang === "pt" ? "concentração" : "concentration")
+          const isRitual = lower.includes(lang === "pt" ? "ritual" : "ritual")
           if (isConcentration || isRitual) return null
 
-          const isLevelPill = i === 0 && typeof level === "number"
+          const isLevelPill = pill.kind === "level" && typeof level === "number"
           const hasLevelClick = isLevelPill && !!onLevelClick
-          const mappedTag = !isLevelPill && onTagClick ? pillToTag(p, lang) : null
+          const canMapTag = pill.kind !== "casting"
+          const mappedTag = !isLevelPill && canMapTag && onTagClick ? pillToTag(label, lang) : null
           const clickable = hasLevelClick || Boolean(mappedTag)
           const classes = ["chip"]
           if (clickable) classes.push("chip--click")
           if (isLevelPill) classes.push("chip--level")
+          if (pill.kind === "casting") classes.push("chip--casting")
+          if (pill.kind === "duration") classes.push("chip--duration")
           const className = classes.join(" ")
+          const icon = pill.kind === "casting" ? <CastingIcon /> : pill.kind === "duration" ? <DurationIcon /> : null
+          const content = (
+            <>
+              {icon}
+              <span>{label}</span>
+            </>
+          )
+          const baseHint = pill.kind ? pillHints[pill.kind] : undefined
           const onClick = hasLevelClick
             ? () => onLevelClick!(level!)
             : mappedTag
               ? () => onTagClick!(mappedTag)
               : undefined
+          const title = hasLevelClick ? L.ttLevel : mappedTag ? L.ttTag : baseHint
           if (clickable) {
             return (
               <button
@@ -283,15 +349,16 @@ export default function Card(props: CardProps) {
                 key={i}
                 onClick={onClick}
                 className={className}
-                title={isLevelPill ? L.ttLevel : L.ttTag}
+                title={title}
+                aria-label={title}
               >
-                {p}
+                {content}
               </button>
             )
           }
           return (
-            <span key={i} className={className}>
-              {p}
+            <span key={i} className={className} title={baseHint} aria-label={baseHint}>
+              {content}
             </span>
           )
         })}

@@ -1,10 +1,12 @@
+import type { PillKind, PillValue } from "../lib/pills"
+
 type CardPrintProps = {
   titlePt: string
   titleEn: string
   schoolPt: string
   schoolEn: string
-  pillsPt: string[]
-  pillsEn: string[]
+  pillsPt: PillValue[]
+  pillsEn: PillValue[]
   bodyPt: string
   bodyEn: string
   components?: { verbal?: boolean; somatic?: boolean; material?: { pt: string; en: string } }
@@ -61,8 +63,52 @@ const RitualIconPrint = () => (
   </svg>
 )
 
+const CastingIconPrint = () => (
+  <svg
+    width="11"
+    height="11"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="9" />
+    <path d="M12 7v5l3 2" />
+  </svg>
+)
+
+const DurationIconPrint = () => (
+  <svg
+    width="11"
+    height="11"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M6 2h12" />
+    <path d="M6 22h12" />
+    <path d="M8 2c0 4 8 4 8 8s-8 4-8 8" />
+    <path d="M16 2c0 4-8 4-8 8s8 4 8 8" />
+  </svg>
+)
+
 export default function CardPrint(p: CardPrintProps) {
-  const pills = p.lang === "pt" ? p.pillsPt : p.pillsEn
+  const rawPills = p.lang === "pt" ? p.pillsPt : p.pillsEn
+  const normalizedPills = rawPills.map((pill, index) => {
+    if (typeof pill === "string") {
+      const kind: PillKind = index === 0 ? "level" : "default"
+      return { label: pill, kind }
+    }
+    const kind: PillKind = pill.kind ?? (index === 0 ? "level" : "default")
+    return { label: pill.label, kind }
+  })
   const body = p.lang === "pt" ? p.bodyPt : p.bodyEn
 
   // Derive V/S/M list for print
@@ -83,10 +129,12 @@ export default function CardPrint(p: CardPrintProps) {
     return items
   })()
 
-  const hasConcentration = pills.some((pill) =>
-    pill.toLowerCase().includes(p.lang === "pt" ? "concentração" : "concentration"),
+  const hasConcentration = normalizedPills.some((pill) =>
+    pill.label.toLowerCase().includes(p.lang === "pt" ? "concentração" : "concentration"),
   )
-  const hasRitual = pills.some((pill) => pill.toLowerCase().includes(p.lang === "pt" ? "ritual" : "ritual"))
+  const hasRitual = normalizedPills.some((pill) =>
+    pill.label.toLowerCase().includes(p.lang === "pt" ? "ritual" : "ritual"),
+  )
 
   const L =
     p.lang === "pt"
@@ -147,16 +195,26 @@ export default function CardPrint(p: CardPrintProps) {
       )}
 
       <div className="pills">
-        {pills.map((tag, i) => {
-          const isConcentration = tag.toLowerCase().includes(p.lang === "pt" ? "concentração" : "concentration")
-          const isRitual = tag.toLowerCase().includes(p.lang === "pt" ? "ritual" : "ritual")
+        {normalizedPills.map((pill, i) => {
+          const lower = pill.label.toLowerCase()
+          const isConcentration = lower.includes(p.lang === "pt" ? "concentração" : "concentration")
+          const isRitual = lower.includes(p.lang === "pt" ? "ritual" : "ritual")
           if (isConcentration || isRitual) return null
 
-          const levelClass = i === 0 ? " pill--level" : ""
+          const classes = ["pill"]
+          if (pill.kind === "level" && i === 0) classes.push("pill--level")
+          if (pill.kind === "casting") classes.push("pill--casting")
+          if (pill.kind === "duration") classes.push("pill--duration")
+          const icon = pill.kind === "casting"
+            ? <CastingIconPrint />
+            : pill.kind === "duration"
+              ? <DurationIconPrint />
+              : null
 
           return (
-            <span key={i} className={`pill${levelClass}`}>
-              {tag}
+            <span key={i} className={classes.join(" ")}>
+              {icon}
+              <span>{pill.label}</span>
             </span>
           )
         })}

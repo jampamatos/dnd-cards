@@ -11,13 +11,14 @@ import CardPrint from "../components/CardPrint";
 import CardBackPrint from "../components/CardBackPrint";
 import { usePrefs } from "../lib/state/prefs";
 import "../styles/print.css"
-import { formatClassName, formatFeatureLevel, formatSpellLevel } from "../lib/format";
+import { formatClassName } from "../lib/format";
+import { buildFeaturePills, buildSpellPills, type PillValue } from "../lib/pills";
 
 type CardVM = {
   key: string;
   titlePt: string; titleEn: string;
   schoolPt: string; schoolEn: string;
-  pillsPt: string[]; pillsEn: string[];
+  pillsPt: PillValue[]; pillsEn: PillValue[];
   bodyPt: string; bodyEn: string;
   components?: TSpell["components"];
 };
@@ -64,22 +65,8 @@ export default function PrintPreview() {
           key: "spell:" + sp.id,
           titlePt: sp.name.pt, titleEn: sp.name.en,
           schoolPt: sp.school.pt, schoolEn: sp.school.en,
-          pillsPt: [
-            formatSpellLevel(sp.level, "pt"),
-            sp.castingTime.pt,
-            sp.range.pt,
-            sp.duration.pt,
-            sp.ritual ? "Ritual" : "",
-            sp.concentration ? "Concentração" : "",
-          ].filter(Boolean),
-          pillsEn: [
-            formatSpellLevel(sp.level, "en"),
-            sp.castingTime.en,
-            sp.range.en,
-            sp.duration.en,
-            sp.ritual ? "Ritual" : "",
-            sp.concentration ? "Concentration" : "",
-          ].filter(Boolean),
+          pillsPt: buildSpellPills(sp, "pt"),
+          pillsEn: buildSpellPills(sp, "en"),
           bodyPt: sp.text.pt, bodyEn: sp.text.en,
           components: sp.components,
         });
@@ -90,8 +77,8 @@ export default function PrintPreview() {
           key: "feature:" + ft.id,
           titlePt: ft.name.pt, titleEn: ft.name.en,
           schoolPt: formatClassName(ft.class, "pt"), schoolEn: formatClassName(ft.class, "en"),
-          pillsPt: [ formatFeatureLevel(ft.level, "pt"), ft.action?.pt ?? "" ].filter(Boolean),
-          pillsEn: [ formatFeatureLevel(ft.level, "en"), ft.action?.en ?? "" ].filter(Boolean),
+          pillsPt: buildFeaturePills(ft, "pt"),
+          pillsEn: buildFeaturePills(ft, "en"),
           bodyPt: ft.text.pt, bodyEn: ft.text.en,
         });
       }
