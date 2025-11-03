@@ -3719,5 +3719,385 @@
     "source": {
       "name": "Player's Handbook"
     }
+  },
+  {
+    "id": "create-food-and-water",
+    "name": {
+      "pt": "Criar Comida e Água",
+      "en": "Create Food and Water"
+    },
+    "level": 3,
+    "school": {
+      "pt": "Invocação",
+      "en": "Conjuration"
+    },
+    "classes": [
+      "Artificer",
+      "Cleric",
+      "Paladin"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "9 m (30 ft.)",
+      "en": "30 ft."
+    },
+    "duration": {
+      "pt": "Instantânea",
+      "en": "Instantaneous"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true
+    },
+    "text": {
+      "pt": "Você cria 20 quilos de comida e 120 litros de água potável no chão ou em recipientes no alcance da magia — ambos úteis para afastar os perigos da desnutrição e desidratação. A comida não é temperada, mas nutritiva e se parece com um alimento à sua escolha, e a água é limpa. A comida estraga após 24 horas se não for consumida.",
+      "en": "You create 45 pounds of food and 30 gallons of fresh water on the ground or in containers within range—both useful in fending off the hazards of malnutrition and dehydration. The food is bland but nourishing and looks like a food of your choice, and the water is clean. The food spoils after 24 hours if uneaten."
+    },
+    "tags": [
+      "creation"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "create-or-destroy-water",
+    "name": {
+      "pt": "Criar ou Destruir Água",
+      "en": "Create or Destroy Water"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Transmutação",
+      "en": "Transmutation"
+    },
+    "classes": [
+      "Cleric",
+      "Druid"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "9 m (30 ft.)",
+      "en": "30 ft."
+    },
+    "duration": {
+      "pt": "Instantânea",
+      "en": "Instantaneous"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true,
+      "material": {
+        "pt": "uma mistura de água e areia",
+        "en": "a mixture of water and sand"
+      }
+    },
+    "text": {
+      "pt": "Você faz uma das seguintes coisas:\n\n**Criar Água.** Você cria até 40 litros de água limpa no alcance da magia em um recipiente aberto. Como alternativa, a água cai como chuva em um Cubo de 9 metros (30 pés) de lado no alcance da magia, extinguindo chamas expostas na área.\n\n**Destruir Água.** Você destrói até 40 litros de água em um recipiente aberto no alcance da magia. Como alternativa, você dispersa uma névoa em um Cubo de 9 metros (30 pés) de lado no alcance da magia.\n\n***Usando um Espaço de Magia de Círculo Superior.*** Você cria ou destrói 40 litros adicionais de água, ou o tamanho do Cubo aumenta em 1,5 metro (5 pés) de lado, para cada círculo de espaço de magia acima de 1.",
+      "en": "You do one of the following:\n\n**Create Water.** You create up to 10 gallons of clean water within range in an open container. Alternatively, the water falls as rain in a 30-foot Cube within range, extinguishing exposed flames there.\n\n**Destroy Water.** You destroy up to 10 gallons of water in an open container within range. Alternatively, you destroy fog in a 30-foot Cube within range.\n\n***Using a Higher-Level Spell Slot.*** You create or destroy 10 additional gallons of water, or the size of the Cube increases by 5 feet, for each spell slot level above 1."
+    },
+    "tags": [
+      "creation"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "crown-of-madness",
+    "name": {
+      "pt": "Coroa da Loucura",
+      "en": "Crown of Madness"
+    },
+    "level": 2,
+    "school": {
+      "pt": "Encantamento",
+      "en": "Enchantment"
+    },
+    "classes": [
+      "Bard",
+      "Sorcerer",
+      "Warlock",
+      "Wizard"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "36 m (120 ft.)",
+      "en": "120 ft."
+    },
+    "duration": {
+      "pt": "1 Minuto",
+      "en": "1 Minute"
+    },
+    "concentration": true,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true
+    },
+    "text": {
+      "pt": "Uma criatura à sua vista e no alcance da magia deve ser bem-sucedida em uma salvaguarda de Sabedoria ou tem a condição Enfeitiçado pela duração da magia. A criatura é bem-sucedida automaticamente se não for Humanoide.\n\nUma coroa espectral aparece na cabeça do alvo Enfeitiçado, e ele deve executar uma ação antes de se mover em cada um de seus turnos para realizar um ataque corpo a corpo contra uma criatura diferente dela própria que você escolher mentalmente. O alvo pode agir normalmente no turno dele se você não escolher nenhuma criatura ou se nenhuma criatura estiver ao alcance dele. O alvo repete a salvaguarda no final de cada um dos turnos dele, encerrando a magia em caso de sucesso.\n\nNos seus turnos subsequentes, você deve executar a ação Usar Magia para manter o controle sobre o alvo, ou a magia encerra.",
+      "en": "One creature that you can see within range must succeed on a Wisdom saving throw or have the Charmed condition for the duration. The creature succeeds automatically if it isn’t Humanoid.\n\nA spectral crown appears on the Charmed target's head, and it must use its action before moving on each of its turns to make a melee attack against a creature other than itself that you mentally choose. The target can act normally on its turn if you choose no creature or if no creature is within its reach. The target repeats the save at the end of each of its turns, ending the spell on itself on a success.\n\nOn your later turns, you must take the Magic action to maintain control of the target, or the spell ends."
+    },
+    "tags": [
+      "control"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "crusaders-mantle",
+    "name": {
+      "pt": "Manto do Cruzado",
+      "en": "Crusader's Mantle"
+    },
+    "level": 3,
+    "school": {
+      "pt": "Evocação",
+      "en": "Evocation"
+    },
+    "classes": [
+      "Paladin"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "Pessoal",
+      "en": "Self"
+    },
+    "duration": {
+      "pt": "1 Minuto",
+      "en": "1 Minute"
+    },
+    "concentration": true,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true
+    },
+    "text": {
+      "pt": "Você irradia uma aura mágica em uma Emanação de 9 metros (30 pés). Enquanto estiver na aura, você e seus aliados causam 1d4 pontos de dano Radiante adicionais ao atingir com uma arma ou um Ataque Desarmado.",
+      "en": "You radiate a magical aura in a 30-foot Emanation. While in the aura, you and your allies each deal an extra 1d4 Radiant damage when hitting with a weapon or an Unarmed Strike."
+    },
+    "tags": [
+      "damage",
+      "buff"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "cure-wounds",
+    "name": {
+      "pt": "Curar Ferimentos",
+      "en": "Cure Wounds"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Abjuração",
+      "en": "Abjuration"
+    },
+    "classes": [
+      "Artificer",
+      "Bard",
+      "Cleric",
+      "Druid",
+      "Paladin",
+      "Ranger"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "Toque",
+      "en": "Touch"
+    },
+    "duration": {
+      "pt": "Instantânea",
+      "en": "Instantaneous"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true
+    },
+    "text": {
+      "pt": "Uma criatura que você toca recupera um número de Pontos de Vida igual a 2d8 mais seu modificador de atributo de conjuração.\n\n***Usando um Espaço de Magia de Círculo Superior.*** A cura aumenta em 2d8 para cada círculo de espaço de magia acima de 1.",
+      "en": "A creature you touch regains a number of Hit Points equal to 2d8 plus your spellcasting ability modifier.\n\n***Using a Higher-Level Spell Slot.*** The healing increases by 2d8 for each spell slot level above 1."
+    },
+    "tags": [
+      "healing"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "dancing-lights",
+    "name": {
+      "pt": "Luzes Dançantes",
+      "en": "Dancing Lights"
+    },
+    "level": 0,
+    "school": {
+      "pt": "Ilusão",
+      "en": "Illusion"
+    },
+    "classes": [
+      "Artificer",
+      "Bard",
+      "Sorcerer",
+      "Wizard"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "36 m (120 ft.)",
+      "en": "120 ft."
+    },
+    "duration": {
+      "pt": "1 Minuto",
+      "en": "1 Minute"
+    },
+    "concentration": true,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true,
+      "material": {
+        "pt": "um pouco de fósforo",
+        "en": "a bit of phosphorus"
+      }
+    },
+    "text": {
+      "pt": "Você cria até quatro luzes do tamanho de tochas no alcance da magia, fazendo com que elas pareçam tochas, lanternas ou esferas brilhantes que pairam pela duração da magia. Como alternativa, você combina as quatro luzes em uma forma Média, brilhante, a qual é vagamente humanoide. Seja qual for a forma que você escolher, cada luz emite Meia-luz em um raio de 3 metros (10 pés).\n\nComo uma Ação Bônus, você pode mover as luzes até 18 metros (60 pés) para um espaço no alcance da magia. Uma luz deve estar a até 6 metros (20 pés) de outra luz criada por esta magia, e uma luz desaparece se ultrapassar o alcance da magia.",
+      "en": "You create up to four torch-size lights within range, making them appear as torches, lanterns, or glowing orbs that hover for the duration. Alternatively, you combine the four lights into one glowing Medium form that is vaguely humanlike. Whichever form you choose, each light sheds Dim Light in a 10-foot radius.\n\nAs a Bonus Action, you can move the lights up to 60 feet to a space within range. A light must be within 20 feet of another light created by this spell, and a light vanishes if it exceeds the spell’s range."
+    },
+    "tags": [
+      "utility"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "darkness",
+    "name": {
+      "pt": "Escuridão",
+      "en": "Darkness"
+    },
+    "level": 2,
+    "school": {
+      "pt": "Evocação",
+      "en": "Evocation"
+    },
+    "classes": [
+      "Sorcerer",
+      "Warlock",
+      "Wizard"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "18 m (60 ft.)",
+      "en": "60 ft."
+    },
+    "duration": {
+      "pt": "10 Minutos",
+      "en": "10 Minutes"
+    },
+    "concentration": true,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "material": {
+        "pt": "pele de morcego e um pedaço de carvão",
+        "en": "bat fur and a piece of coal"
+      }
+    },
+    "text": {
+      "pt": "Pela duração da magia, uma Escuridão mágica se espalha a partir de um ponto no alcance da magia e preenche uma Esfera de 4,5 metros (15 pés) de raio. Visão no escuro não pode ver através dela, e luz não mágica não pode iluminá-la.\n\nComo alternativa, você conjura a magia em um objeto que não esteja sendo usado ou carregado, fazendo com que a Escuridão preencha uma Emanação de 4,5 metros (15 pés) originada desse objeto. Cobrir esse objeto com algo opaco, como uma tigela ou elmo, bloqueia a Escuridão.\n\nSe qualquer área desta magia se sobrepuser a uma área de Luz Plena ou Meia-luz criada por uma magia de 2º círculo ou inferior, essa outra magia é dissipada.",
+      "en": "For the duration, magical Darkness spreads from a point within range and fills a 15-foot-radius Sphere. Darkvision can’t see through it, and nonmagical light can’t illuminate it.\n\nAlternatively, you cast the spell on an object that isn’t being worn or carried, causing the Darkness to fill a 15-foot Emanation originating from that object. Covering that object with something opaque, such as a bowl or helm, blocks the Darkness.\n\nIf any of this spell’s area overlaps with an area of Bright Light or Dim Light created by a spell of level 2 or lower, that other spell is dispelled."
+    },
+    "tags": [
+      "control"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "darkvision",
+    "name": {
+      "pt": "Visão no Escuro",
+      "en": "Darkvision"
+    },
+    "level": 2,
+    "school": {
+      "pt": "Transmutação",
+      "en": "Transmutation"
+    },
+    "classes": [
+      "Artificer",
+      "Druid",
+      "Ranger",
+      "Sorcerer",
+      "Wizard"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "Toque",
+      "en": "Touch"
+    },
+    "duration": {
+      "pt": "8 Horas",
+      "en": "8 Hours"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true,
+      "material": {
+        "pt": "uma cenoura seca",
+        "en": "a dried carrot"
+      }
+    },
+    "text": {
+      "pt": "Pela duração da magia, uma criatura voluntária que você tocar tem Visão no Escuro com um alcance de 45 metros (150 pés).",
+      "en": "For the duration, a willing creature you touch has Darkvision with a range of 150 feet."
+    },
+    "tags": [
+      "buff"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
   }
 ]
