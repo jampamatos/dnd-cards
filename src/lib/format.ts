@@ -32,3 +32,20 @@ export function formatClassName(clazz: string, lang: Lang): string {
   if (labels) return lang === "pt" ? labels.pt : labels.en
   return clazz
 }
+
+const SCHOOL_LABELS: Record<string, { pt: string; en: string }> = {
+  Abjuration: { pt: "Abjuração", en: "Abjuration" },
+  Conjuration: { pt: "Conjuração", en: "Conjuration" },
+  Divination: { pt: "Adivinhação", en: "Divination" },
+  Enchantment: { pt: "Encantamento", en: "Enchantment" },
+  Evocation: { pt: "Evocação", en: "Evocation" },
+  Illusion: { pt: "Ilusão", en: "Illusion" },
+  Necromancy: { pt: "Necromancia", en: "Necromancy" },
+  Transmutation: { pt: "Transmutação", en: "Transmutation" },
+}
+
+export function formatSchoolName(school: string, lang: Lang): string {
+  const labels = SCHOOL_LABELS[school]
+  if (labels) return lang === "pt" ? labels.pt : labels.en
+  return school
+}

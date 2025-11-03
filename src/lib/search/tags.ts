@@ -14,6 +14,8 @@ export type TagKey =
   | "control"
   | "creation"
   | "detection"
+  | "environment"
+  | "exploration"
   | "foreknowledge"
   | "shapechanging"
   | "social"
@@ -40,51 +42,55 @@ export type TagKey =
   | "short-rest"
   | "long-rest"
   | "scrying"
+  | "summoning"
   | "teleportation"
   | "utility"
   | "warding";
 
 // Maps every tag key to localized labels for quick lookup on the UI
 export const TAG_CATALOG: Record<TagKey, { pt: string; en: string }> = {
-  healing:        { pt: "Cura",                en: "Healing" },
-  damage:         { pt: "Dano",                en: "Damage" },
-  buff:           { pt: "Buff",                en: "Buff" },
-  banishment:     { pt: "Banimento",           en: "Banishment" },
-  debuff:         { pt: "Debuff",              en: "Debuff" },
-  communication:  { pt: "Comunicação",         en: "Communication" },
-  control:        { pt: "Controle",            en: "Control" },
-  combat:         { pt: "Combate",             en: "Combat" },
-  creation:       { pt: "Criação",             en: "Creation" },
-  detection:      { pt: "Detecção",            en: "Detection" },
-  foreknowledge:  { pt: "Presciência",         en: "Foreknowledge" },
-  shapechanging:  { pt: "Metamorfose",         en: "Shapechanging" },
-  social:         { pt: "Social",              en: "Social" },
-  summon:         { pt: "Invocação",           en: "Summon" },
-  transformation: { pt: "Transformação",       en: "Transformation" },
-  defense:        { pt: "Defesa",              en: "Defense" },
-  offense:        { pt: "Ofensiva",            en: "Offense" },
-  passive:        { pt: "Passiva",             en: "Passive" },
-  stealth:        { pt: "Furtividade",         en: "Stealth" },
-  mobility:       { pt: "Mobilidade",          en: "Mobility" },
-  magic:          { pt: "Magia",               en: "Magic" },
-  negation:       { pt: "Negação",             en: "Negation"},
-  resource:       { pt: "Recurso",             en: "Resource" },
+  healing:        { pt: "Cura",                   en: "Healing" },
+  damage:         { pt: "Dano",                   en: "Damage" },
+  buff:           { pt: "Buff",                   en: "Buff" },
+  banishment:     { pt: "Banimento",              en: "Banishment" },
+  debuff:         { pt: "Debuff",                 en: "Debuff" },
+  communication:  { pt: "Comunicação",            en: "Communication" },
+  control:        { pt: "Controle",               en: "Control" },
+  combat:         { pt: "Combate",                en: "Combat" },
+  creation:       { pt: "Criação",                en: "Creation" },
+  detection:      { pt: "Detecção",               en: "Detection" },
+  environment:    { pt: "Ambiente",               en: "Environment" },
+  exploration:    { pt: "Exploração",             en: "Exploration" },
+  foreknowledge:  { pt: "Presciência",            en: "Foreknowledge" },
+  shapechanging:  { pt: "Metamorfose",            en: "Shapechanging" },
+  social:         { pt: "Social",                 en: "Social" },
+  summon:         { pt: "Invocação",              en: "Summon" },
+  transformation: { pt: "Transformação",          en: "Transformation" },
+  defense:        { pt: "Defesa",                 en: "Defense" },
+  offense:        { pt: "Ofensiva",               en: "Offense" },
+  passive:        { pt: "Passiva",                en: "Passive" },
+  stealth:        { pt: "Furtividade",            en: "Stealth" },
+  mobility:       { pt: "Mobilidade",             en: "Mobility" },
+  magic:          { pt: "Magia",                  en: "Magic" },
+  negation:       { pt: "Negação",                en: "Negation"},
+  resource:       { pt: "Recurso",                en: "Resource" },
   "resource-burst": { pt: "Explosão de Recursos", en: "Resource Burst" },
-  recharge:       { pt: "Recarga",             en: "Recharge" },
-  cleric:         { pt: "Clérigo",             en: "Cleric" },
-  ritual:         { pt: "Ritual",              en: "Ritual" },
-  concentration:  { pt: "Concentração",        en: "Concentration" },
-  action:         { pt: "Ação",                en: "Action" },
-  "bonus-action": { pt: "Ação Bônus",          en: "Bonus Action" },
-  reaction:       { pt: "Reação",              en: "Reaction" },
-  touch:          { pt: "Toque",               en: "Touch" },
-  self:           { pt: "Pessoal",             en: "Self" },
-  "short-rest":   { pt: "Descanso Curto",      en: "Short Rest" },
-  "long-rest":    { pt: "Descanso Longo",      en: "Long Rest" },
-  scrying:        { pt: "Vidência",             en: "Scrying" },
-  utility:        { pt: "Utilidade",           en: "Utility" },
-  teleportation:  { pt: "Teletransporte",      en: "Teleportation" },
-  warding:        { pt: "Proteção",            en: "Warding"},
+  recharge:       { pt: "Recarga",                en: "Recharge" },
+  cleric:         { pt: "Clérigo",                en: "Cleric" },
+  ritual:         { pt: "Ritual",                 en: "Ritual" },
+  concentration:  { pt: "Concentração",           en: "Concentration" },
+  action:         { pt: "Ação",                   en: "Action" },
+  "bonus-action": { pt: "Ação Bônus",             en: "Bonus Action" },
+  reaction:       { pt: "Reação",                 en: "Reaction" },
+  touch:          { pt: "Toque",                  en: "Touch" },
+  self:           { pt: "Pessoal",                en: "Self" },
+  "short-rest":   { pt: "Descanso Curto",         en: "Short Rest" },
+  "long-rest":    { pt: "Descanso Longo",         en: "Long Rest" },
+  scrying:        { pt: "Vidência",               en: "Scrying" },
+  summoning:      { pt: "Invocação",              en: "Summoning" },
+  utility:        { pt: "Utilidade",              en: "Utility" },
+  teleportation:  { pt: "Teletransporte",         en: "Teleportation" },
+  warding:        { pt: "Proteção",               en: "Warding"},
 };
 
 // Stable ordering used to present tags consistently across lists
@@ -99,6 +105,8 @@ const ORDER: TagKey[] = [
   "control",
   "creation",
   "detection",
+  "environment",
+  "exploration",
   "foreknowledge",
   "shapechanging",
   "social",
@@ -125,6 +133,7 @@ const ORDER: TagKey[] = [
   "short-rest",
   "long-rest",
   "scrying",
+  "summoning",
   "teleportation",
   "utility",
   "warding"
@@ -166,6 +175,10 @@ const JSON_TO_CANON: Record<string, TagKey> = {
   creation: "creation",
   deteccao: "detection",
   detection: "detection",
+  ambiente: "environment",
+  environment: "environment",
+  exploracao: "exploration",
+  exploration: "exploration",
   presciencia: "foreknowledge",
   foreknowledge: "foreknowledge",
   metamorfose: "shapechanging",
@@ -190,8 +203,8 @@ const JSON_TO_CANON: Record<string, TagKey> = {
   "long rest": "long-rest",
   videncia: "scrying",
   scrying: "scrying",
-  invocacao: "summon",
-  summon: "summon",
+  invocacao: "summoning",
+  summoning: "summoning",
   defesa: "defense",
   defense: "defense",
   ofensiva: "offense",

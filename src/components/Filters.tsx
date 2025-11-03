@@ -3,7 +3,7 @@
 import { useEffect, useId, useState } from "react"
 import { usePrefs } from "../lib/state/prefs"
 import { TAG_CATALOG, type TagKey } from "../lib/search/tags"
-import { formatClassName, formatFeatureLevel, formatSpellLevel } from "../lib/format"
+import { formatClassName, formatFeatureLevel, formatSchoolName, formatSpellLevel } from "../lib/format"
 
 type Sort = "name-asc" | "level-asc" | "level-desc"
 
@@ -15,6 +15,9 @@ type FiltersProps = {
   levelOptions: number[]
   clazz: string | "any"
   setClazz: (v: string | "any") => void
+  school?: string | "any"
+  setSchool?: (v: string | "any") => void
+  schoolOptions?: string[]
   sort: Sort
   setSort: (v: Sort) => void
   total: number
@@ -23,6 +26,7 @@ type FiltersProps = {
   onClearAll: () => void
   onClearLevel: () => void
   onClearClazz: () => void
+  onClearSchool?: () => void
   classOptions: string[]
   tagOptions: TagKey[]
   tags: TagKey[]
@@ -84,6 +88,7 @@ export default function Filters(p: FiltersProps) {
           level: isSpell ? "Círculo:" : "Nível:",
           any: "Qualquer",
           clazz: "Classe:",
+          school: "Escola:",
           sort: "Ordenar por:",
           nameAZ: "Nome (A→Z)",
           levelUp: "Nível (↑)",
@@ -96,6 +101,7 @@ export default function Filters(p: FiltersProps) {
           levelChip: (n: number) => (isSpell ? formatSpellLevel(n, "pt") : formatFeatureLevel(n, "pt")),
           levelOption: (n: number) => (isSpell ? formatSpellLevel(n, "pt") : formatFeatureLevel(n, "pt")),
           classChip: (c: string) => formatClassName(c, "pt"),
+          schoolChip: (s: string) => formatSchoolName(s, "pt"),
           tagTitle: "Filtrar por tag",
           showFilters: "Mostrar filtros",
           hideFilters: "Ocultar filtros",
@@ -107,6 +113,7 @@ export default function Filters(p: FiltersProps) {
           level: "Level:",
           any: "Any",
           clazz: "Class:",
+          school: "School:",
           sort: "Sort by:",
           nameAZ: "Name (A→Z)",
           levelUp: "Level (↑)",
@@ -119,10 +126,18 @@ export default function Filters(p: FiltersProps) {
           levelChip: (n: number) => (isSpell ? formatSpellLevel(n, "en") : formatFeatureLevel(n, "en")),
           levelOption: (n: number) => (isSpell ? formatSpellLevel(n, "en") : formatFeatureLevel(n, "en")),
           classChip: (c: string) => formatClassName(c, "en"),
+          schoolChip: (s: string) => formatSchoolName(s, "en"),
           tagTitle: "Filter by tag",
           showFilters: "Show filters",
           hideFilters: "Hide filters",
         }
+
+  const hasSchoolFilter =
+    isSpell &&
+    Array.isArray(p.schoolOptions) &&
+    p.schoolOptions.length > 0 &&
+    typeof p.school !== "undefined" &&
+    typeof p.setSchool === "function"
 
   const label = (k: TagKey) => (lang === "pt" ? TAG_CATALOG[k].pt : TAG_CATALOG[k].en)
 
@@ -132,22 +147,24 @@ export default function Filters(p: FiltersProps) {
   }
 
   const toggleLabel = filtersOpen ? L.hideFilters : L.showFilters
-  const showButtonText = filtersOpen || !isDesktop
+  const showButtonText = !isDesktop
 
   return (
     <>
-      <div className={`filters-toggle container ${filtersOpen ? "" : "filters-toggle--floating"}`}>
-        <button
-          className={`btn btn-primary filters-toggle-btn ${filtersOpen ? "" : "filters-toggle-btn--floating"}`}
-          onClick={() => setFiltersOpen((prev) => !prev)}
-          aria-expanded={filtersOpen}
-          aria-controls={filtersId}
-          aria-label={toggleLabel}
-        >
-          <FilterIcon />
-          {showButtonText && <span>{toggleLabel}</span>}
-        </button>
-      </div>
+      {!filtersOpen && (
+        <div className="filters-toggle container filters-toggle--floating">
+          <button
+            className="btn btn-primary filters-toggle-btn filters-toggle-btn--floating"
+            onClick={() => setFiltersOpen(true)}
+            aria-expanded={filtersOpen}
+            aria-controls={filtersId}
+            aria-label={toggleLabel}
+          >
+            <FilterIcon />
+            {showButtonText && <span>{toggleLabel}</span>}
+          </button>
+        </div>
+      )}
 
       <form
         id={filtersId}
@@ -156,7 +173,7 @@ export default function Filters(p: FiltersProps) {
         aria-label={L.formLabel}
         aria-hidden={filtersOpen ? undefined : true}
       >
-        <div className="filters-row">
+        <div className="filters-top">
           <label>
             <span>{L.search}</span>
             <input
@@ -168,6 +185,20 @@ export default function Filters(p: FiltersProps) {
               aria-label={L.search}
             />
           </label>
+          <button
+            type="button"
+            className="btn btn-primary filters-hide-btn"
+            onClick={() => setFiltersOpen(false)}
+            aria-expanded={filtersOpen}
+            aria-controls={filtersId}
+            aria-label={L.hideFilters}
+          >
+            <FilterIcon />
+            <span>{L.hideFilters}</span>
+          </button>
+        </div>
+
+        <div className="filters-controls">
           <label>
             <span>{L.level}</span>
             <select
@@ -193,6 +224,23 @@ export default function Filters(p: FiltersProps) {
               ))}
             </select>
           </label>
+          {hasSchoolFilter && (
+            <label>
+              <span>{L.school}</span>
+              <select
+                value={String(p.school)}
+                onChange={(e) => p.setSchool!(e.target.value === "any" ? "any" : e.target.value)}
+                aria-label={L.school}
+              >
+                <option value="any">{L.any}</option>
+                {p.schoolOptions!.map((school) => (
+                  <option key={school} value={school}>
+                    {formatSchoolName(school, lang)}
+                  </option>
+                ))}
+              </select>
+            </label>
+          )}
           <label>
             <span>{L.sort}</span>
             <select value={p.sort} onChange={(e) => p.setSort(e.target.value as Sort)} aria-label={L.sort}>
@@ -275,6 +323,16 @@ export default function Filters(p: FiltersProps) {
               {L.classChip(p.clazz)} ✕
             </button>
           )}
+          {hasSchoolFilter && p.school !== "any" && (
+            <button
+              type="button"
+              onClick={p.onClearSchool ?? (() => p.setSchool?.("any"))}
+              className="chip"
+              aria-label={`${L.clearAll} ${L.schoolChip(p.school as string)}`}
+            >
+              {L.schoolChip(p.school as string)} ✕
+            </button>
+          )}
           {p.tags.map((k) => (
             <button
               key={k}
@@ -286,7 +344,11 @@ export default function Filters(p: FiltersProps) {
               #{label(k)} ✕
             </button>
           ))}
-          {(p.level !== "any" || p.clazz !== "any" || p.q || p.tags.length > 0) && (
+          {(p.level !== "any" ||
+            p.clazz !== "any" ||
+            (hasSchoolFilter && p.school !== "any") ||
+            p.q ||
+            p.tags.length > 0) && (
             <button
               type="button"
               onClick={p.onClearAll}

@@ -33,10 +33,22 @@ const toPickedHit = (hit: SearchHit | null | undefined): PickedHit | null => {
 
 const isPickedHit = (hit: PickedHit | null): hit is PickedHit => Boolean(hit);
 
-const collectIdsByKind = (
+const normalizeText = (text: string): string => {
+  try {
+    return text
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+  } catch {
+    return text.toLowerCase();
+  }
+};
+
+const collectIdsByKind = <T extends { id: string; name: { pt: string; en: string } }>(
   mini: MiniSearch<UnifiedDoc> | null,
   query: string,
-  kind: HitKind
+  kind: HitKind,
+  items: T[]
 ): string[] | null => {
   const trimmed = query.trim();
   if (!mini || !trimmed) return null;
@@ -45,6 +57,30 @@ const collectIdsByKind = (
     .filter(isPickedHit)
     .filter((hit) => hit.kind === kind)
     .map((hit) => hit.id);
+
+  if (hits.length === 0) return hits;
+
+  const normalizedQuery = normalizeText(trimmed);
+  const tokens = normalizedQuery.split(/\s+/).filter(Boolean);
+  if (tokens.length === 0) return hits;
+
+  const map = new Map(items.map((item) => [item.id, item]));
+  const directMatches = hits.filter((id) => {
+    const item = map.get(id);
+    if (!item) return false;
+    const names = [item.name?.pt ?? "", item.name?.en ?? ""]
+      .map((name) => normalizeText(name))
+      .filter(Boolean);
+    if (names.length === 0) return false;
+    if (names.some((name) => name.includes(normalizedQuery))) return true;
+    if (tokens.length === 1) {
+      const token = tokens[0]!;
+      return names.some((name) => name.includes(token));
+    }
+    return tokens.every((token) => names.some((name) => name.includes(token)));
+  });
+
+  if (directMatches.length > 0) return directMatches;
   return hits;
 };
 
@@ -80,6 +116,7 @@ export default function Browse() {
   const [q, setQ] = useState("");
   const [level, setLevel] = useState<number | "any">("any");
   const [clazz, setClazz] = useState<string | "any">("any");
+  const [school, setSchool] = useState<string | "any">("any");
   const [tags, setTags] = useState<TagKey[]>([]);
   const [sort, setSort] = useState<SortOption>("level-asc");
   const [page, setPage] = useState(1);
@@ -152,6 +189,15 @@ export default function Browse() {
     return Array.from(set).sort((a, b) => a.localeCompare(b));
   }, [spells]);
 
+  const spellSchoolOptions = useMemo(() => {
+    const set = new Set<string>();
+    for (const sp of spells) {
+      const key = sp.school?.en;
+      if (key) set.add(key);
+    }
+    return Array.from(set).sort((a, b) => a.localeCompare(b));
+  }, [spells]);
+
   const featureLevels = useMemo(() => {
     const set = new Set<number>();
     for (const ft of features) set.add(ft.level);
@@ -179,31 +225,35 @@ export default function Browse() {
 
   // spells pipeline
   const spellsFiltered = useMemo(() => {
-    const ids = collectIdsByKind(mini, q, "spell");
+    const ids = collectIdsByKind(mini, q, "spell", spells);
     let arr = filterByIds(spells.slice(), ids, (s) => s.id);
     if (level !== "any") arr = arr.filter((s) => s.level === level);
     if (clazz !== "any") arr = arr.filter((s) => s.classes.includes(clazz));
+    if (school !== "any") arr = arr.filter((s) => (s.school?.en ?? "") === school);
     if (tags.length > 0) {
       arr = arr.filter((s) => hasAllTags(spellTagMap.get(s.id), tags));
     }
     return arr;
-  }, [mini, spells, q, level, clazz, tags, spellTagMap]);
+  }, [mini, spells, q, level, clazz, school, tags, spellTagMap]);
 
   const spellsSorted = useMemo(() => sortByOption(spellsFiltered, sort), [spellsFiltered, sort]);
   const sStart = (page-1) * pageSize;
   const sItems = spellsSorted.slice(sStart, sStart + pageSize);
-  useEffect(()=>{ setPage(1); }, [q, level, clazz, tags, pageSize, sort]);
+  useEffect(()=>{ setPage(1); }, [q, level, clazz, school, tags, pageSize, sort]);
   useEffect(() => {
     if (level !== "any" && !spellLevels.includes(level)) setLevel("any");
   }, [level, spellLevels]);
+  useEffect(() => {
+    if (school !== "any" && !spellSchoolOptions.includes(school)) setSchool("any");
+  }, [school, spellSchoolOptions]);
 
   function handleLevelClick(l:number){ setLevel(l); window.scrollTo({top:0, behavior:"smooth"}); }
   function handleClassClick(c:string){ setClazz(c); window.scrollTo({top:0, behavior:"smooth"}); }
-  function clearAllSpells(){ setQ(""); setLevel("any"); setClazz("any"); setTags([]); setSort("level-asc"); }
+  function clearAllSpells(){ setQ(""); setLevel("any"); setClazz("any"); setSchool("any"); setTags([]); setSort("level-asc"); }
 
   // features pipeline
   const featuresFiltered = useMemo(() => {
-    const ids = collectIdsByKind(mini, q, "feature");
+    const ids = collectIdsByKind(mini, q, "feature", features);
     let arr = filterByIds(features.slice(), ids, (f) => f.id);
     if (fLevel !== "any") arr = arr.filter((f) => f.level === fLevel);
     if (fClazz !== "any") arr = arr.filter((f) => f.class === fClazz);
@@ -260,12 +310,15 @@ export default function Browse() {
             level={level} setLevel={setLevel}
             levelOptions={spellLevels}
             clazz={clazz} setClazz={setClazz}
+            school={school} setSchool={setSchool}
+            schoolOptions={spellSchoolOptions}
             sort={sort} setSort={setSort}
             total={spellsSorted.length}
             pageSize={pageSize} setPageSize={setPageSize}
             onClearAll={clearAllSpells}
             onClearLevel={()=>setLevel("any")}
             onClearClazz={()=>setClazz("any")}
+            onClearSchool={()=>setSchool("any")}
             classOptions={spellClassOptions}
             tagOptions={spellTagOptions}
             tags={tags} setTags={setTags} onClearTags={()=>setTags([])}

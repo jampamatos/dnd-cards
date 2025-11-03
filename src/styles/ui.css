@@ -34,8 +34,8 @@
   --accent: #c9941a; /* gold accent */
   --accent-weak: #fef6e4; /* pale gold */
 
-  /* Updated sticky-top to account for smaller header */
-  --sticky-top: 60px;
+  /* Updated sticky-top to match sticky header height (handles safe areas) */
+  --sticky-top: calc(70px + max(env(safe-area-inset-top), 0px));
 }
 
 /* D&D-themed dark mode: deep fantasy colors with mystical feel */
@@ -170,8 +170,8 @@ input::placeholder {
    ------------------------------------------------------------------------ */
 .site-header {
   position: sticky;
-  top: 0;
-  z-index: 40;
+  top: max(env(safe-area-inset-top), 0px);
+  z-index: 60;
   background: var(--bg);
   border-bottom: 2px solid var(--border);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
@@ -652,7 +652,32 @@ input::placeholder {
   display: none;
 }
 
-.filters-row {
+.filters-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: flex-end;
+}
+
+.filters-top label {
+  flex: 1 1 260px;
+}
+
+.filters-hide-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .filters-hide-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.filters-controls {
   display: grid;
   gap: var(--space-3);
   grid-template-columns: 1fr;
@@ -660,14 +685,14 @@ input::placeholder {
 }
 
 @media (min-width: 640px) {
-  .filters-row {
+  .filters-controls {
     grid-template-columns: 1fr 1fr;
   }
 }
 
 @media (min-width: 1024px) {
-  .filters-row {
-    grid-template-columns: 2fr repeat(4, 1fr);
+  .filters-controls {
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 
