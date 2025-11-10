@@ -27,6 +27,7 @@ export type TagKey =
   | "passive"
   | "stealth"
   | "mobility"
+  | "movement"
   | "magic"
   | "negation"
   | "resource"
@@ -70,6 +71,7 @@ export const TAG_CATALOG: Record<TagKey, { pt: string; en: string }> = {
   passive:        { pt: "Passiva",                en: "Passive" },
   stealth:        { pt: "Furtividade",            en: "Stealth" },
   mobility:       { pt: "Mobilidade",             en: "Mobility" },
+  movement:       { pt: "Movimento",              en: "Movement" },
   magic:          { pt: "Magia",                  en: "Magic" },
   negation:       { pt: "Negação",                en: "Negation"},
   resource:       { pt: "Recurso",                en: "Resource" },
@@ -114,6 +116,7 @@ const ORDER: TagKey[] = [
   "passive",
   "stealth",
   "mobility",
+  "movement",
   "magic",
   "negation",
   "resource",
@@ -205,6 +208,8 @@ const JSON_TO_CANON: Record<string, TagKey> = {
   stealth: "stealth",
   mobilidade: "mobility",
   mobility: "mobility",
+  movimento: "movement",
+  movement: "movement",
   magia: "magic",
   magic: "magic",
   negacao: "negation",

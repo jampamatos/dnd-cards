@@ -2282,6 +2282,1147 @@
     }
   },
   {
+    "id": "detect-evil-and-good",
+    "name": {
+      "pt": "Detectar o Bem e o Mal",
+      "en": "Detect Evil and Good"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Adivinhação",
+      "en": "Divination"
+    },
+    "classes": [
+      "Cleric",
+      "Paladin"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "Pessoal",
+      "en": "Self"
+    },
+    "duration": {
+      "pt": "10 Minutos",
+      "en": "10 Minutes"
+    },
+    "concentration": true,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true
+    },
+    "text": {
+      "pt": "Pela duração da magia, você sente a localização de qualquer Aberração, Celestial, Elemental, Feérico, Ínfero ou Morto-Vivo a até 9 metros (30 pés) de você. Você também sente se a magia *Consagrar* está ativa lá e, em caso afirmativo, onde.\n\nA magia é bloqueada por 30 centímetros de pedra, terra ou madeira, 2,5 centímetros de metal ou uma folha fina de chumbo.",
+      "en": "For the duration, you sense the location of any Aberration, Celestial, Elemental, Fey, Fiend, or Undead within 30 feet of yourself. You also sense whether the *Hallow* spell is active there and, if so, where.\n\nThe spell is blocked by 1 foot of stone, dirt, or wood; 1 inch of metal; or a thin sheet of lead."
+    },
+    "tags": [
+      "detection"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "detect-magic",
+    "name": {
+      "pt": "Detectar Magia",
+      "en": "Detect Magic"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Adivinhação",
+      "en": "Divination"
+    },
+    "classes": [
+      "Artificer",
+      "Bard",
+      "Cleric",
+      "Druid",
+      "Paladin",
+      "Ranger",
+      "Sorcerer",
+      "Warlock",
+      "Wizard"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "Pessoal",
+      "en": "Self"
+    },
+    "duration": {
+      "pt": "10 Minutos",
+      "en": "10 Minutes"
+    },
+    "concentration": true,
+    "ritual": true,
+    "components": {
+      "verbal": true,
+      "somatic": true
+    },
+    "text": {
+      "pt": "Pela duração da magia, você sente a presença de efeitos mágicos a até 9 metros (30 pés) de você. Se você sentir tais efeitos, pode executar a ação Usar Magia para ver uma aura fraca ao redor de qualquer criatura ou objeto visível na área que contém a magia, e se um efeito foi criado por uma magia, você descobre a escola dessa magia.\n\nA magia é bloqueada por 30 centímetros de pedra, terra ou madeira, 2,5 centímetros de metal ou uma folha fina de chumbo.",
+      "en": "For the duration, you sense the presence of magical effects within 30 feet of yourself. If you sense such effects, you can take the Magic action to see a faint aura around any visible creature or object in the area that bears the magic, and if an effect was created by a spell, you learn the spell’s school of magic.\n\nThe spell is blocked by 1 foot of stone, dirt, or wood; 1 inch of metal; or a thin sheet of lead."
+    },
+    "tags": [
+      "detection"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "detect-poison-and-disease",
+    "name": {
+      "pt": "Detectar Veneno e Doença",
+      "en": "Detect Poison and Disease"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Adivinhação",
+      "en": "Divination"
+    },
+    "classes": [
+      "Cleric",
+      "Druid",
+      "Paladin",
+      "Ranger"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "Pessoal",
+      "en": "Self"
+    },
+    "duration": {
+      "pt": "10 Minutos",
+      "en": "10 Minutes"
+    },
+    "concentration": true,
+    "ritual": true,
+    "components": {
+      "verbal": true,
+      "somatic": true,
+      "material": {
+        "pt": "uma folha de teixo",
+        "en": "a yew leaf"
+      }
+    },
+    "text": {
+      "pt": "Pela duração da magia, você sente a localização de venenos, criaturas venenosas ou peçonhentas e contágios mágicos a até 9 metros (30 pés) de você. Você sente o tipo de veneno, criatura ou contágio em cada caso.\n\nA magia é bloqueada por 30 centímetros de pedra, terra ou madeira, 2,5 centímetros de metal ou uma folha fina de chumbo.",
+      "en": "For the duration, you sense the location of poisons, poisonous or venomous creatures, and magical contagions within 30 feet of yourself. You sense the kind of poison, creature, or contagion in each case.\n\nThe spell is blocked by 1 foot of stone, dirt, or wood; 1 inch of metal; or a thin sheet of lead."
+    },
+    "tags": [
+      "detection"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "disguise-self",
+    "name": {
+      "pt": "Disfarçar-se",
+      "en": "Disguise Self"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Ilusão",
+      "en": "Illusion"
+    },
+    "classes": [
+      "Artificer",
+      "Bard",
+      "Sorcerer",
+      "Wizard"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "Pessoal",
+      "en": "Self"
+    },
+    "duration": {
+      "pt": "1 Hora",
+      "en": "1 Hour"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true
+    },
+    "text": {
+      "pt": "Você faz com que você mesmo — incluindo suas roupas, armaduras, armas e outros pertences — pareça diferente até que a magia termine. Você pode parecer 30 centímetros mais baixo ou mais alto e pode parecer mais pesado ou mais leve. Você deve adotar uma forma que tenha a mesma disposição básica de membros que você. Fora isso, a extensão da ilusão depende de você.\n\nAs mudanças causadas por esta magia falham em uma inspeção física. Por exemplo, se você usar esta magia para adicionar um chapéu ao seu traje, objetos passarão através do chapéu, e qualquer um que o tocar não sentirá nada.\n\nPara descobrir se você está disfarçado, uma criatura deve executar a ação Analisar para inspecionar sua aparência e ser bem-sucedido em um teste de Inteligência (Investigação) contra a CD para evitar sua magia.",
+      "en": "You make yourself—including your clothing, armor, weapons, and other belongings on your person—look different until the spell ends. You can seem 1 foot shorter or taller and can appear heavier or lighter. You must adopt a form that has the same basic arrangement of limbs as you have. Otherwise, the extent of the illusion is up to you.\n\nThe changes wrought by this spell fail to hold up to physical inspection. For example, if you use this spell to add a hat to your outfit, objects pass through the hat, and anyone who touches it would feel nothing.\n\nTo discern that you are disguised, a creature must take the Study action to inspect your appearance and succeed on an Intelligence (Investigation) check against your spell save DC."
+    },
+    "tags": [
+      "shapechanging"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "dissonant-whisper",
+    "name": {
+      "pt": "Sussurros Dissonantes",
+      "en": "Dissonant Whispers"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Encantamento",
+      "en": "Enchantment"
+    },
+    "classes": [
+      "Bard"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "18 m (60 ft.)",
+      "en": "60 ft."
+    },
+    "duration": {
+      "pt": "Instantânea",
+      "en": "Instantaneous"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "verbal": true
+    },
+    "text": {
+      "pt": "Uma criatura à sua escolha à sua vista no alcance da magia escuta uma melodia dissonante na mente. O alvo deve realizar uma salvaguarda de Sabedoria. Se falhar, sofre 3d6 pontos de dano Psíquico e deve usar imediatamente a Reação, se disponível, para se mover o mais longe possível de você, usando a rota mais segura. Em caso de sucesso, o alvo sofre apenas metade do dano.\n\n***Usando um Espaço de Magia de Círculo Superior.*** O dano aumenta em 1d6 pontos para cada círculo de espaço de magia acima de 1.",
+      "en": "One creature of your choice that you can see within range hears a discordant melody in its mind. The target makes a Wisdom saving throw. On a failed save, it takes 3d6 Psychic damage and must immediately use its Reaction, if available, to move as far away from you as it can, using the safest route. On a successful save, the target takes half as much damage only.\n\n***Using a Higher-Level Spell Slot.*** The damage increases by 1d6 for each spell slot level above 1."
+    },
+    "tags": [
+      "damage",
+      "control"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "divine-favor",
+    "name": {
+      "pt": "Favor Divino",
+      "en": "Divine Favor"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Transmutação",
+      "en": "Transmutation"
+    },
+    "classes": [
+      "Paladin"
+    ],
+    "castingTime": {
+      "pt": "Ação Bônus",
+      "en": "Bonus Action"
+    },
+    "range": {
+      "pt": "Pessoal",
+      "en": "Self"
+    },
+    "duration": {
+      "pt": "1 Minuto",
+      "en": "1 Minute"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true
+    },
+    "text": {
+      "pt": "Até que a magia termine, seus ataques com armas causam 1d4 pontos de dano Radiante adicionais em um acerto.",
+      "en": "Until the spell ends, your attacks with weapons deal an extra 1d4 Radiant damage on a hit."
+    },
+    "tags": [
+      "damage"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "divine-smite",
+    "name": {
+      "pt": "Destruição Divina",
+      "en": "Divine Smite"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Evocação",
+      "en": "Evocation"
+    },
+    "classes": [
+      "Paladin"
+    ],
+    "castingTime": {
+      "pt": "Ação Bônus",
+      "en": "Bonus Action"
+    },
+    "range": {
+      "pt": "Pessoal",
+      "en": "Self"
+    },
+    "duration": {
+      "pt": "Instantânea",
+      "en": "Instantaneous"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "verbal": true
+    },
+    "text": {
+      "pt": "O alvo sofre 2d8 pontos de dano Radiante adicionais do ataque. O dano aumenta em 1d8 se o alvo for um Ínfero ou um Morto-vivo.\n\n***Usando um Espaço de Magia de Círculo Superior.*** O dano aumenta em 1d8 para cada círculo de espaço de magia acima de 1.",
+      "en": "The target takes an extra 2d8 Radiant damage from the attack. The damage increases by 1d8 if the target is a Fiend or an Undead.\n\n***Using a Higher-Level Spell Slot.*** The damage increases by 1d8 for each spell slot level above 1."
+    },
+    "tags": [
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "esnaring-strike",
+    "name": {
+      "pt": "Golpe Constritor",
+      "en": "Esnaring Strike"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Invocação",
+      "en": "Conjuration"
+    },
+    "classes": [
+      "Ranger"
+    ],
+    "castingTime": {
+      "pt": "Ação Bônus",
+      "en": "Bonus Action"
+    },
+    "range": {
+      "pt": "Pessoal",
+      "en": "Self"
+    },
+    "duration": {
+      "pt": "1 Minuto",
+      "en": "1 Minute"
+    },
+    "concentration": true,
+    "ritual": false,
+    "components": {
+      "verbal": true
+    },
+    "text": {
+      "pt": "Ao acertar o alvo, vinhas agarradoras aparecem nele e ele realiza uma salvaguarda de Força. Uma criatura Grande ou maior tem Vantagem nesta salvaguarda. Se falhar, o alvo está com a condição Contido até que a magia termine. Em caso de sucesso, as videiras murcham e a magia se encerra.\n\nEnquanto Contido desse modo, o alvo sofre 1d6 pontos de dano Perfurante no início de cada um dos turnos dele. O alvo ou uma criatura ao alcance dele pode executar uma ação para realizar um teste de Força (Atletismo) contra a CD para evitar sua magia. Em caso de sucesso, as videiras desaparecem.\n\n***Usando um Espaço de Magia de Círculo Superior.*** O dano aumenta em 1d6 pontos para cada círculo de espaço de magia acima de 1.",
+      "en": "As you hit the target, grasping vines appear on it, and it makes a Strength saving throw. A Large or larger creature has Advantage on this save. On a failed save, the target has the Restrained condition until the spell ends. On a successful save, the vines shrivel away, and the spell ends.\n\nWhile Restrained, the target takes 1d6 Piercing damage at the start of each of its turns. The target or a creature within reach of it can take an action to make a Strength (Athletics) check against your spell save DC. On a success, the spell ends.\n\n***Using a Higher-Level Spell Slot.*** The damage increases by 1d6 for each spell slot level above 1."
+    },
+    "tags": [
+      "damage",
+      "control"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "entangle",
+    "name": {
+      "pt": "Emaranhar",
+      "en": "Entangle"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Invocação",
+      "en": "Conjuration"
+    },
+    "classes": [
+      "Druid",
+      "Ranger"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "27 m (90 ft.)",
+      "en": "90 ft."
+    },
+    "duration": {
+      "pt": "1 Minuto",
+      "en": "1 Minute"
+    },
+    "concentration": true,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true
+    },
+    "text": {
+      "pt": "Plantas agarradoras brotam do chão em um quadrado de 6 metros (20 pés) de lado no alcance da magia. Pela duração da magia, essas plantas transformam o terreno em Terreno Difícil. Elas desaparecem quando a magia termina.\n\nCada criatura (exceto você) na área quando você conjura a magia deve ser bem-sucedida em uma salvaguarda de Força ou tem a condição Contido até que a magia termine. Uma criatura Contida pode executar uma ação para realizar um teste de Força (Atletismo) contra a CD para evitar sua magia. Em caso de sucesso, ela se liberta das plantas agarradoras e não está mais Contida por elas.",
+      "en": "Grasping plants sprout from the ground in a 20-foot square within range. For the duration, these plants turn the ground in the area into Difficult Terrain. They disappear when the spell ends.\n\nEach creature (other than you) in the area when you cast the spell must succeed on a Strength saving throw or have the Restrained condition until the spell ends. A Restrained creature can take an action to make a Strength (Athletics) check against your spell save DC. On a success, it frees itself from the grasping plants and is no longer Restrained by them."
+    },
+    "tags": [
+      "control"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "expeditious-retreat",
+    "name": {
+      "pt": "Expeditious Retreat",
+      "en": "Retirada Acelerada"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Transmutação",
+      "en": "Transmutation"
+    },
+    "classes": [
+      "Artificer",
+      "Sorcerer",
+      "Warlock",
+      "Wizard"
+    ],
+    "castingTime": {
+      "pt": "Ação Bônus",
+      "en": "Bonus Action"
+    },
+    "range": {
+      "pt": "Pessoal",
+      "en": "Self"
+    },
+    "duration": {
+      "pt": "10 Minutos",
+      "en": "10 Minutes"
+    },
+    "concentration": true,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true
+    },
+    "text": {
+      "pt": "Você executa a ação Correr e, até que a magia termine, pode executar essa ação novamente como uma Ação Bônus.",
+      "en": "You take the Dash action, and until the spell ends, you can take that action again as a Bonus Action."
+    },
+    "tags": [
+      "movement"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "faerie-fire",
+    "name": {
+      "pt": "Fogo das Fadas",
+      "en": "Faerie Fire"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Evocação",
+      "en": "Evocation"
+    },
+    "classes": [
+      "Artificer",
+      "Bard",
+      "Druid"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "18 m (60 ft.)",
+      "en": "60 ft."
+    },
+    "duration": {
+      "pt": "1 Minuto",
+      "en": "1 Minute"
+    },
+    "concentration": true,
+    "ritual": false,
+    "components": {
+      "verbal": true
+    },
+    "text": {
+      "pt": "Objetos em um Cubo de 6 metros (20 pés) de lado no alcance da magia são delineados por luz azul, verde ou violeta (à sua escolha). Cada criatura no Cubo também é delineada se falhar em uma salvaguarda de Destreza. Pela duração da magia, objetos e criaturas afetadas emitem Meia-Luz em um raio de 3 metros e não podem se beneficiar da condição Invisível.\n\nJogadas de ataque contra uma criatura ou objeto afetado têm Vantagem se o atacante puder vê-la.",
+      "en": "Objects in a 20-foot Cube within range are outlined in blue, green, or violet light (your choice). Each creature in the Cube is also outlined if it fails a Dexterity saving throw. For the duration, objects and affected creatures shed Dim Light in a 10-foot radius and can’t benefit from the Invisible condition.\n\nAttack rolls against an affected creature or object have Advantage if the attacker can see it."
+    },
+    "tags": [
+      "debuff"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "false-life",
+    "name": {
+      "pt": "Vitalidade Vazia",
+      "en": "False Life"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Necromancia",
+      "en": "Necromancy"
+    },
+    "classes": [
+      "Artificer",
+      "Sorcerer",
+      "Wizard"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "Pessoal",
+      "en": "Self"
+    },
+    "duration": {
+      "pt": "Instantânea",
+      "en": "Instantaneous"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true,
+      "material": {
+        "pt": "uma gota de álcool",
+        "en": "a drop of alcohol"
+      }
+    },
+    "text": {
+      "pt": "Você obtém 2d4 + 4 Pontos de Vida Temporários.\n\n***Usando um Espaço de Magia de Círculo Superior.*** Você obtém 5 Pontos de Vida Temporários adicionais para cada círculo de espaço de magia acima de 1.",
+      "en": "You gain 2d4 + 4 Temporary Hit Points.\n\n***Using a Higher-Level Spell Slot.*** You gain 5 additional Temporary Hit Points for each spell slot level above 1."
+    },
+    "tags": [
+      "buff"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "feather-fall",
+    "name": {
+      "pt": "Queda Suave",
+      "en": "Feather Fall"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Transmutação",
+      "en": "Transmutation"
+    },
+    "classes": [
+      "Artificer",
+      "Bard",
+      "Sorcerer",
+      "Wizard"
+    ],
+    "castingTime": {
+      "pt": "Reação",
+      "en": "Reaction"
+    },
+    "range": {
+      "pt": "18 m (60 ft.)",
+      "en": "60 ft."
+    },
+    "duration": {
+      "pt": "1 Minuto",
+      "en": "1 Minute"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "material": {
+        "pt": "uma pequena pena ou pedaço de penugem",
+        "en": "a small feather or piece of down"
+      }
+    },
+    "text": {
+      "pt": "Escolha até cinco criaturas em queda no alcance da magia. A taxa de queda de cada uma diminui para 18 metros (60 pés) por rodada até que a magia termine. Se uma criatura pousar antes do fim da magia, não sofre dano da queda e a magia se encerra para ela.",
+      "en": "Choose up to five falling creatures within range. A falling creature’s rate of descent slows to 60 feet per round until the spell ends. If a creature lands before the spell ends, the creature takes no damage from the fall, and the spell ends for that creature."
+    },
+    "tags": [
+      "utility",
+      "exploration"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "find-familiar",
+    "name": {
+      "pt": "Convocar Familiar",
+      "en": "Find Familiar"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Invocação",
+      "en": "Conjuration"
+    },
+    "classes": [
+      "Wizard"
+    ],
+    "castingTime": {
+      "pt": "1 Hora",
+      "en": "1 Hour"
+    },
+    "range": {
+      "pt": "3 m (10 ft.)",
+      "en": "10 ft."
+    },
+    "duration": {
+      "pt": "Instantânea",
+      "en": "Instantaneous"
+    },
+    "concentration": false,
+    "ritual": true,
+    "components": {
+      "verbal": true,
+      "somatic": true,
+      "material": {
+        "pt": "incenso queimado no valor de 10+ PO, que a magia consome",
+        "en": "burning incense worth 10+ GP, which the spell consumes"
+      }
+    },
+    "text": {
+      "pt": "Você adquire o serviço de um familiar, um espírito que assume uma forma animal que você escolhe: **Aranha, Coruja, Corvo, Doninha, Falcão, Gato, Lagarto, Morcego, Polvo, Rato, Sapo** ou outra Fera que tenha um Nível de Desafio 0. Aparecendo em um espaço desocupado no alcance da magia, o familiar tem as estatísticas da forma escolhida (veja o apêndice B), embora seja um Celestial, Feérico ou Ínfero (à sua escolha) em vez de uma Fera. Seu familiar age independentemente de você, mas obedece aos seus comandos.\n\n***Conexão Telepática.*** Enquanto seu familiar estiver a até 30 metros (100 pés) de você, você pode se comunicar telepaticamente com ele. Além disso, como uma Ação Bônus, você pode ver através dos olhos do familiar e ouvir o que ele ouve até o início do seu próximo turno, obtendo os benefícios de quaisquer sentidos especiais que ele tenha.\n\nPor fim, ao conjurar uma magia com um alcance de toque, seu familiar pode entregar o toque. Seu familiar deve estar a até 30 metros (100 pés) de você, e ele deve executar uma Reação para entregar o toque quando você conjurar a magia.\n\n***Combate.*** O familiar é um aliado seu e de seus aliados. Ele joga a Iniciativa dele e age no turno dele. Um familiar não pode atacar, mas pode realizar outras ações normalmente.\n\n***Desaparecimento do Familiar.*** Quando o familiar é reduzido a 0 Pontos de Vida, ele desaparece. Ele reaparece depois que você conjura esta magia novamente. Como uma ação Usar Magia, você pode descartar temporariamente o familiar para uma mini dimensão. Como alternativa, você pode descartá-lo para sempre. Como uma ação Usar Magia enquanto está temporariamente descartado, você pode fazer com que ele reapareça em um espaço desocupado a até 9 metros (30 pés) de você. Sempre que o familiar é reduzido a 0 Pontos de Vida ou desaparece na mini dimensão, ele deixa para trás no espaço que ocupava qualquer coisa que estivesse vestindo ou carregando.\n\n***Apenas um Familiar.*** Você não pode ter mais de um familiar ao mesmo tempo. Ao conjurar esta magia enquanto você tem um familiar, você faz com que ele adote uma nova forma elegível.",
+      "en": "You gain the service of a familiar, a spirit that takes an animal form you choose: **Bat, Cat, Frog, Hawk, Lizard, Octopus, Owl, Rat, Raven, Spider, Weasel**, or another Beast that has a Challenge Rating of 0. Appearing in an unoccupied space within range, the familiar has the statistics of the chosen form, though it is a Celestial, Fey, or Fiend (your choice) instead of a Beast. Your familiar acts independently of you, but it obeys your commands.\n\n***Telepathic Connection.*** While your familiar is within 100 feet of you, you can communicate with it telepathically. Additionally, as a Bonus Action, you can see through the familiar’s eyes and hear what it hears until the start of your next turn, gaining the benefits of any special senses it has.\n\nFinally, when you cast a spell with a range of touch, your familiar can deliver the touch. Your familiar must be within 100 feet of you, and it must take a Reaction to deliver the touch when you cast the spell.\n\n***Combat.*** The familiar is an ally to you and your allies. It rolls its own Initiative and acts on its own turn. A familiar can’t attack, but it can take other actions as normal.\n\n***Disappearance of the Familiar.*** When the familiar drops to 0 Hit Points, it disappears. It reappears after you cast this spell again. As a Magic action, you can temporarily dismiss the familiar to a pocket dimension. Alternatively, you can dismiss it forever. As a Magic action while it is temporarily dismissed, you can cause it to reappear in an unoccupied space within 30 feet of you. Whenever the familiar drops to 0 Hit Points or disappears into the pocket dimension, it leaves behind in its space anything it was wearing or carrying.\n\n***One Familiar Only.*** You can’t have more than one familiar at a time. If you cast this spell while you have a familiar, you instead cause it to adopt a new eligible form."
+    },
+    "tags": [
+      "summoning"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "fog-cloud",
+    "name": {
+      "pt": "Névoa Obscurescente",
+      "en": "Fog Cloud"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Invocação",
+      "en": "Conjuration"
+    },
+    "classes": [
+      "Druid",
+      "Ranger",
+      "Sorcerer",
+      "Wizard"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "36 m (120 ft.)",
+      "en": "120 ft."
+    },
+    "duration": {
+      "pt": "1 Hora",
+      "en": "1 Hour"
+    },
+    "concentration": true,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true
+    },
+    "text": {
+      "pt": "Você cria uma Esfera de névoa de 6 metros (20 pés) de raio centrada em um ponto no alcance da magia. A Esfera é Totalmente Obscurecida. Ela permanece pela duração da magia ou até que um vento forte (como um criado por *Lufada de Vento*) a disperse.\n\n***Usando um Espaço de Magia de Círculo Superior.*** O raio da névoa aumenta em 6 metros para cada círculo de espaço de magia acima de 1.",
+      "en": "You create a 20-foot-radius Sphere of fog centered on a point within range. The Sphere is Heavily Obscured. It lasts for the duration or until a strong wind (such as one created by *Gust of Wind*) disperses it.\n\n***Using a Higher-Level Spell Slot.*** The fog’s radius increases by 20 feet for each spell slot level above 1."
+    },
+    "tags": [
+      "control",
+      "environment"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "goodberry",
+    "name": {
+      "pt": "Bom Fruto",
+      "en": "Goodberry"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Invocação",
+      "en": "Conjuration"
+    },
+    "classes": [
+      "Druid",
+      "Ranger"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "Pessoal",
+      "en": "Self"
+    },
+    "duration": {
+      "pt": "24 Horas",
+      "en": "24 Hours"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true,
+      "material": {
+        "pt": "um ramo de visco",
+        "en": "a spring of mistletoe"
+      }
+    },
+    "text": {
+      "pt": "Dez frutos aparecem em sua mão e são infundidos magicamente pela duração da magia. Uma criatura pode executar uma Ação Bônus para comer um fruto. Comer um fruto restaura 1 Ponto de Vida e fornece alimento suficiente para sustentar uma criatura por um dia.\n\nFrutos não comidos desaparecem quando a magia termina.",
+      "en": "Ten berries appear in your hand and are infused with magic for the duration. A creature can take a Bonus Action to eat one berry. Eating a berry restores 1 Hit Point, and the berry provides enough nourishment to sustain a creature for one day.\n\nUneaten berries disappear when the spell ends."
+    },
+    "tags": [
+      "healing"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "grease",
+    "name": {
+      "pt": "Graxa",
+      "en": "Grease"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Invocação",
+      "en": "Conjuration"
+    },
+    "classes": [
+      "Artificer",
+      "Sorcerer",
+      "Wizard"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "18 m (60 ft.)",
+      "en": "60 ft."
+    },
+    "duration": {
+      "pt": "1 Minuto",
+      "en": "1 Minute"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true,
+      "material": {
+        "pt": "um pouco de banha de porco ou manteiga",
+        "en": "a bit of pork rind or butter"
+      }
+    },
+    "text": {
+      "pt": "Uma graxa não inflamável cobre o solo em um quadrado de 3 metros de lados centrado em um ponto no alcance da magia e o transforma em Terreno Difícil pela duração da magia.\n\nQuando a graxa aparece, cada criatura em pé e na área da magia deve ser bem-sucedida em uma salvaguarda de Destreza ou tem a condição Caído. Uma criatura que entra na área ou termina o turno nela também deve ser bem-sucedida nessa salvaguarda ou fica Caída.",
+      "en": "Nonflammable grease covers the ground in a 10-foot square centered on a point within range and turns it into Difficult Terrain for the duration.\n\nWhen the grease appears, each creature standing in its area must succeed on a Dexterity saving throw or have the Prone condition. A creature that enters the area or ends its turn there must also succeed on that save or fall Prone."
+    },
+    "tags": [
+      "control"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "guiding-bolt",
+    "name": {
+      "pt": "Raio Guia",
+      "en": "Guiding Bolt"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Evocação",
+      "en": "Evocation"
+    },
+    "classes": [
+      "Cleric"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "36 m (120 ft.)",
+      "en": "120 ft."
+    },
+    "duration": {
+      "pt": "1 Rodada",
+      "en": "1 Round"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true
+    },
+    "text": {
+      "pt": "Você lança um raio de luz em direção a uma criatura no alcance da magia. Realize um ataque mágico à distância contra o alvo. Em caso de acerto, ele sofre 4d6 pontos de dano Radiante, e a próxima jogada de ataque realizado contra ele antes do final do seu próximo turno tem Vantagem.\n\n***Usando um Espaço de Magia de Círculo Superior.*** O dano aumenta em 1d6 pontos para cada círculo de espaço de magia acima de 1.",
+      "en": "You hurl a bolt of light toward a creature within range. Make a ranged spell attack against the target. On a hit, it takes 4d6 Radiant damage, and the next attack roll made against it before the end of your next turn has Advantage.\n\n***Using a Higher-Level Spell Slot.*** The damage increases by 1d6 for each spell slot level above 1."
+    },
+    "tags": [
+      "damage",
+      "buff"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "hail-of-thorns",
+    "name": {
+      "pt": "Saraivada de Espinhos",
+      "en": "Hail of Thorns"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Invocação",
+      "en": "Conjuration"
+    },
+    "classes": [
+      "Ranger"
+    ],
+    "castingTime": {
+      "pt": "Ação Bônus",
+      "en": "Bonus Action"
+    },
+    "range": {
+      "pt": "Pessoal",
+      "en": "Self"
+    },
+    "duration": {
+      "pt": "Instantânea",
+      "en": "Instantaneous"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "verbal": true
+    },
+    "text": {
+      "pt": "Ao atingir uma criatura com uma arma à distância, essa magia faz surgir uma chuva de espinhos a partir da sua arma à distância ou munição. O alvo e cada criatura em um raio de 1,5 metro (5 pés) devem realizar uma salvaguarda de Destreza, sofrendo 1d10 pontos de dano perfurante se falharem ou metade desse dano em caso de sucesso.\n\n***Usando um Espaço de Magia de Círculo Superior.*** O dano aumenta em 1d10 para cada círculo de espaço de magia acima de 1.",
+      "en": "As you hit the creature with a ranged weapon, this spell creates a rain of thorns that sprouts from your Ranged weapon or ammunition. The target of the attack and each creature within 5 feet of it make a Dexterity saving throw, taking 1d10 Piercing damage on a failed save or half as much damage on a successful one.\n\n***Using a Higher-Level Spell Slot.*** The damage increases by 1d10 for each spell slot level above 1."
+    },
+    "tags": [
+      "damage"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "healing-word",
+    "name": {
+      "pt": "Palavra Curativa",
+      "en": "Healing Word"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Abjuração",
+      "en": "Abjuration"
+    },
+    "classes": [
+      "Bard",
+      "Cleric",
+      "Druid"
+    ],
+    "castingTime": {
+      "pt": "Ação Bônus",
+      "en": "Bonus Action"
+    },
+    "range": {
+      "pt": "18 m (60 ft.)",
+      "en": "60 ft."
+    },
+    "duration": {
+      "pt": "Instantânea",
+      "en": "Instantaneous"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "verbal": true
+    },
+    "text": {
+      "pt": "Uma criatura à sua escolha, à sua vista e no alcance da magia recupera Pontos de Vida iguais a 2d4 mais seu modificador de atributo de conjuração.\n\n***Usando um Espaço de Magia de Círculo Superior.*** A cura aumenta em 2d4 para cada círculo de espaço de magia acima de 1.",
+      "en": "A creature of your choice that you can see within range regains Hit Points equal to 2d4 plus your spellcasting ability modifier.\n\n***Using a Higher-Level Spell Slot.*** The healing increases by 2d4 for each spell slot level above 1."
+    },
+    "tags": [
+      "healing"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "hellish-rebuke",
+    "name": {
+      "pt": "Repreensão Diabólica",
+      "en": "Hellish Rebuke"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Evocação",
+      "en": "Evocation"
+    },
+    "classes": [
+      "Warlock"
+    ],
+    "castingTime": {
+      "pt": "Reação",
+      "en": "Reaction"
+    },
+    "range": {
+      "pt": "18 m (60 ft.)",
+      "en": "60 ft."
+    },
+    "duration": {
+      "pt": "Instantânea",
+      "en": "Instantaneous"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true
+    },
+    "text": {
+      "pt": "A criatura que lhe causou dano é momentaneamente cercada por chamas verdes. Ela realiza uma salvaguarda de Destreza, sofrendo 2d10 pontos de dano Ígneo se falhar, ou metade desse dano em caso de sucesso.\n\n***Usando um Espaço de Magia de Círculo Superior.*** O dano aumenta em 1d10 para cada círculo de espaço de magia acima de 1.",
+      "en": "The creature that damaged you is momentarily surrounded by green flames. It makes a Dexterity saving throw, taking 2d10 Fire damage on a failed save or half as much damage on a successful one.\n\n***Using a Higher-Level Spell Slot.*** The damage increases by 1d10 for each spell slot level above 1."
+    },
+    "tags": [
+      "damage"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "heroism",
+    "name": {
+      "pt": "Heroísmo",
+      "en": "Heroism"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Encantamento",
+      "en": "Enchantment"
+    },
+    "classes": [
+      "Bard",
+      "Paladin"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "Toque",
+      "en": "Touch"
+    },
+    "duration": {
+      "pt": "Instantânea",
+      "en": "Instantaneous"
+    },
+    "concentration": true,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true
+    },
+    "text": {
+      "pt": "Você toca uma criatura voluntária que se torna imbuída de bravura. Até que a magia termine, a criatura é imune à condição Amedrontado e recebe Pontos de Vida Temporários igual ao seu modificador de atributo de conjuração no início de cada um dos turnos dela.\n\n***Usando um Espaço de Magia de Círculo Superior.*** Você pode escolher uma criatura adicional para cada círculo de espaço de magia acima de 1.",
+      "en": "A willing creature you touch is imbued with bravery. Until the spell ends, the creature is immune to the Frightened condition and gains Temporary Hit Points equal to your spellcasting ability modifier at the start of each of its turns.\n\n***Using a Higher-Level Spell Slot.*** You can target one additional creature for each spell slot level above 1."
+    },
+    "tags": [
+      "buff"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "hex",
+    "name": {
+      "pt": "Danação",
+      "en": "Hex"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Encantamento",
+      "en": "Enchantment"
+    },
+    "classes": [
+      "Warlock"
+    ],
+    "castingTime": {
+      "pt": "Ação Bônus",
+      "en": "Bonus Action"
+    },
+    "range": {
+      "pt": "27 m (90 ft.)",
+      "en": "90 ft."
+    },
+    "duration": {
+      "pt": "1 Hora",
+      "en": "1 Hour"
+    },
+    "concentration": true,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true,
+      "material": {
+        "pt": "olho petrificado de uma salamandra",
+        "en": "petrified eye of a newt"
+      }
+    },
+    "text": {
+      "pt": "Você coloca uma maldição em uma criatura à sua vista e no alcance da magia. Até que a magia termine, você causa 1d6 pontos de dano Necrótico adicional ao alvo sempre que o acertar com uma jogada de ataque. Além disso, escolha um atributo ao conjurar a magia. O alvo tem Desvantagem nos testes de atributo realizados com o atributo escolhido.\n\nSe o alvo é reduzido a 0 Pontos de Vida antes que esta magia termine, você pode executar uma ação Bônus em um turno posterior para amaldiçoar uma nova criatura.\n\n***Usando um Espaço de Magia de Círculo Superior.*** Sua Concentração pode durar mais com um espaço de magia de 2º círculo (em até 4 horas), 3º–4º círculo (em até 8 horas) ou 5º círculo ou superior (em até 24 horas).",
+      "en": "You place a curse on a creature that you can see within range. Until the spell ends, you deal an extra 1d6 Necrotic damage to the target whenever you hit it with an attack roll. Also, choose one ability when you cast the spell. The target has Disadvantage on ability checks made with the chosen ability.\n\nIf the target drops to 0 Hit Points before this spell ends, you can take a Bonus Action on a later turn to curse a new creature.\n\n***Using a Higher-Level Spell Slot.*** Your Concentration can last longer with a spell slot of level 2 (up to 4 hours), 3–4 (up to 8 hours), or 5+ (24 hours)."
+    },
+    "tags": [
+      "damage",
+      "debuff"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "hunters-mark",
+    "name": {
+      "pt": "Marca do Predador",
+      "en": "Hunter's Mark"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Adivinhação",
+      "en": "Divination"
+    },
+    "classes": [
+      "Ranger"
+    ],
+    "castingTime": {
+      "pt": "Ação Bônus",
+      "en": "Bonus Action"
+    },
+    "range": {
+      "pt": "27 m (90 ft.)",
+      "en": "90 ft."
+    },
+    "duration": {
+      "pt": "1 Hora",
+      "en": "1 Hour"
+    },
+    "concentration": true,
+    "ritual": false,
+    "components": {
+      "verbal": true
+    },
+    "text": {
+      "pt": "Você marca magicamente como sua presa uma criatura à sua vista e no alcance da magia. Até que a magia termine, você causa 1d6 pontos de dano Energético adicionais ao alvo sempre que o acertar com uma jogada de ataque. Você também tem Vantagem em qualquer teste de Sabedoria (Percepção ou Sobrevivência) que realizar para encontrá-lo.\n\nSe o alvo é reduzido a 0 Pontos de Vida antes que esta magia termine, você pode executar uma ação Bônus para mover a marca para uma nova criatura à sua vista e no alcance da magia.\n\n***Usando um Espaço de Magia de Círculo Superior.*** Sua Concentração pode durar mais com um espaço de magia de 3º–4º círculo (em até 8 horas) ou 5º círculo ou superior (em até 24 horas).",
+      "en": "You magically mark one creature you can see within range as your quarry. Until the spell ends, you deal an extra 1d6 Force damage to the target whenever you hit it with an attack roll. You also have Advantage on any Wisdom (Perception or Survival) check you make to find it.\n\nIf the target drops to 0 Hit Points before this spell ends, you can take a Bonus Action to move the mark to a new creature you can see within range.\n\n***Using a Higher-Level Spell Slot.*** Your Concentration can last longer with a spell slot of level 3–4 (up to 8 hours) or 5+ (up to 24 hours)."
+    },
+    "tags": [
+      "damage",
+      "debuff"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "ice-knife",
+    "name": {
+      "pt": "Faca de Gelo",
+      "en": "Ice Knife"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Invocação",
+      "en": "Conjuration"
+    },
+    "classes": [
+      "Druid",
+      "Sorcerer",
+      "Wizard"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "18 m (60 ft.)",
+      "en": "60 ft."
+    },
+    "duration": {
+      "pt": "Instantânea",
+      "en": "Instantaneous"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "somatic": true,
+      "material": {
+        "pt": "uma gora de água ou um pedaço de gelo",
+        "en": "a drop of water or a piece of ice"
+      }
+    },
+    "text": {
+      "pt": "Você cria um fragmento de gelo e o arremessa em uma criatura no alcance da magia. Realize um ataque mágico à distância contra o alvo. Se o ataque for bem-sucedido, o alvo sofre 1d10 pontos de dano Perfurante. Independentemente de ter acertado ou não, o fragmento explode. O alvo e cada criatura a até 1,5 metro (5 pés) dele devem ser bem-sucedidos em uma salvaguarda de Destreza ou sofrem 2d6 pontos de dano Gélido.\n\n***Usando um Espaço de Magia de Círculo Superior.*** O dano Gélido aumenta em 1d6 para cada círculo de espaço de magia acima de 1.",
+      "en": "You create a shard of ice and fling it at one creature within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 Piercing damage. Hit or miss, the shard then explodes. The target and each creature within 5 feet of it must succeed on a Dexterity saving throw or take 2d6 Cold damage.\n\n***Using a Higher-Level Spell Slot.*** The Cold damage increases by 1d6 for each spell slot level above 1."
+    },
+    "tags": [
+      "damage"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
     "id": "aid",
     "name": {
       "pt": "Auxílio",
