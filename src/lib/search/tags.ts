@@ -14,6 +14,7 @@ export type TagKey =
   | "control"
   | "creation"
   | "detection"
+  | "deception"
   | "environment"
   | "exploration"
   | "foreknowledge"
@@ -56,6 +57,7 @@ export const TAG_CATALOG: Record<TagKey, { pt: string; en: string }> = {
   combat:         { pt: "Combate",                en: "Combat" },
   creation:       { pt: "Criação",                en: "Creation" },
   detection:      { pt: "Detecção",               en: "Detection" },
+  deception:      { pt: "Engano",                 en: "Deception" },
   environment:    { pt: "Ambiente",               en: "Environment" },
   exploration:    { pt: "Exploração",             en: "Exploration" },
   foreknowledge:  { pt: "Presciência",            en: "Foreknowledge" },
@@ -94,6 +96,7 @@ const ORDER: TagKey[] = [
   "banishment",
   "buff",
   "debuff",
+  "deception",
   "combat",
   "communication",
   "control",
@@ -154,6 +157,8 @@ const JSON_TO_CANON: Record<string, TagKey> = {
   damage: "damage",
   buff: "buff",
   debuff: "debuff",
+  engano: "deception",
+  deception: "deception",
   banimento: "banishment",
   banishment: "banishment",
   combate: "combat",

@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useId, useState } from "react"
+import { useEffect, useId, useMemo, useState } from "react"
 import { usePrefs } from "../lib/state/prefs"
 import { TAG_CATALOG, type TagKey } from "../lib/search/tags"
 import { formatClassName, formatFeatureLevel, formatSchoolName, formatSpellLevel } from "../lib/format"
@@ -10,8 +10,8 @@ type Sort = "name-asc" | "level-asc" | "level-desc"
 type FiltersProps = {
   q: string
   setQ: (v: string) => void
-  level: number | "any"
-  setLevel: (v: number | "any") => void
+  level: number[]
+  setLevel: (v: number[]) => void
   levelOptions: number[]
   clazz: string | "any"
   setClazz: (v: string | "any") => void
@@ -24,7 +24,6 @@ type FiltersProps = {
   pageSize: number
   setPageSize: (n: number) => void
   onClearAll: () => void
-  onClearLevel: () => void
   onClearClazz: () => void
   onClearSchool?: () => void
   classOptions: string[]
@@ -55,7 +54,6 @@ export default function Filters(p: FiltersProps) {
   const { lang } = usePrefs()
   const filtersId = useId()
   const isSpell = p.kind === "spell"
-  const levelValues: Array<number | "any"> = ["any", ...p.levelOptions]
   const getDesktopMatch = () => {
     if (typeof window === "undefined") return true
     return window.matchMedia("(min-width: 769px)").matches
@@ -148,6 +146,20 @@ export default function Filters(p: FiltersProps) {
 
   const toggleLabel = filtersOpen ? L.hideFilters : L.showFilters
   const showButtonText = !isDesktop
+  const selectedLevels = useMemo(() => [...p.level].sort((a, b) => a - b), [p.level])
+
+  const toggleLevel = (lvl: number) => {
+    const exists = selectedLevels.includes(lvl)
+    if (exists) {
+      p.setLevel(selectedLevels.filter((value) => value !== lvl))
+    } else {
+      p.setLevel([...selectedLevels, lvl].sort((a, b) => a - b))
+    }
+  }
+
+  const clearLevels = () => {
+    p.setLevel([])
+  }
 
   return (
     <>
@@ -199,20 +211,6 @@ export default function Filters(p: FiltersProps) {
         </div>
 
         <div className="filters-controls">
-          <label>
-            <span>{L.level}</span>
-            <select
-              value={String(p.level)}
-              onChange={(e) => p.setLevel(e.target.value === "any" ? "any" : Number(e.target.value))}
-              aria-label={L.level}
-            >
-              {levelValues.map((l) => (
-                <option key={String(l)} value={String(l)}>
-                  {l === "any" ? L.any : L.levelOption(l)}
-                </option>
-              ))}
-            </select>
-          </label>
           <label>
             <span>{L.clazz}</span>
             <select value={p.clazz} onChange={(e) => p.setClazz(e.target.value)} aria-label={L.clazz}>
@@ -267,6 +265,42 @@ export default function Filters(p: FiltersProps) {
           </label>
         </div>
 
+        {p.levelOptions.length > 0 && (
+          <div
+            className="chips"
+            style={{
+              alignItems: "center",
+              flexWrap: "wrap",
+              gap: "0.6rem",
+              marginTop: "0.75rem",
+            }}
+          >
+            <span style={{ opacity: 0.8, fontWeight: 600 }}>{L.level}</span>
+            <button
+              type="button"
+              onClick={clearLevels}
+              className={`chip chip--click chip--filter-level${selectedLevels.length === 0 ? " chip--filter-level--active" : ""}`}
+              aria-pressed={selectedLevels.length === 0}
+            >
+              {L.any}
+            </button>
+            {p.levelOptions.map((lvl) => {
+              const active = selectedLevels.includes(lvl)
+              return (
+                <button
+                  key={lvl}
+                  type="button"
+                  onClick={() => toggleLevel(lvl)}
+                  className={`chip chip--click chip--filter-level${active ? " chip--filter-level--active" : ""}`}
+                  aria-pressed={active}
+                >
+                  {L.levelOption(lvl)}
+                </button>
+              )
+            })}
+          </div>
+        )}
+
         {(p.tagOptions.length > 0 || p.tags.length > 0) && (
           <div className="chips" style={{ alignItems: "center", flexWrap: "wrap" }}>
             <span style={{ opacity: 0.8, fontWeight: 600 }}>{L.tags}</span>
@@ -303,16 +337,17 @@ export default function Filters(p: FiltersProps) {
           <strong aria-live="polite" style={{ fontSize: "0.95rem" }}>
             {p.total} {L.results(p.total)}
           </strong>
-          {p.level !== "any" && (
+          {selectedLevels.map((lvl) => (
             <button
+              key={lvl}
               type="button"
-              onClick={p.onClearLevel}
+              onClick={() => p.setLevel(p.level.filter((n) => n !== lvl))}
               className="chip"
-              aria-label={`${L.clearAll} ${L.levelChip(p.level as number)}`}
+              aria-label={`${L.clearAll} ${L.levelChip(lvl)}`}
             >
-              {L.levelChip(p.level as number)} ✕
+              {L.levelChip(lvl)} ✕
             </button>
-          )}
+          ))}
           {p.clazz !== "any" && (
             <button
               type="button"
@@ -344,7 +379,7 @@ export default function Filters(p: FiltersProps) {
               #{label(k)} ✕
             </button>
           ))}
-          {(p.level !== "any" ||
+          {(p.level.length > 0 ||
             p.clazz !== "any" ||
             (hasSchoolFilter && p.school !== "any") ||
             p.q ||

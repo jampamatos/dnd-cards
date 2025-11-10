@@ -115,7 +115,7 @@ export default function Browse() {
   // spells state
   const [spells, setSpells] = useState<TSpell[]>([]);
   const [q, setQ] = useState("");
-  const [level, setLevel] = useState<number | "any">("any");
+  const [level, setLevel] = useState<number[]>([]);
   const [clazz, setClazz] = useState<string | "any">("any");
   const [school, setSchool] = useState<string | "any">("any");
   const [tags, setTags] = useState<TagKey[]>([]);
@@ -125,7 +125,7 @@ export default function Browse() {
   
   // features state
   const [features, setFeatures] = useState<TFeature[]>([]);
-  const [fLevel, setFLevel] = useState<number | "any">("any");
+  const [fLevel, setFLevel] = useState<number[]>([]);
   const [fClazz, setFClazz] = useState<string | "any">("any");
   const [fTags, setFTags] = useState<TagKey[]>([]);
   const [fSort, setFSort] = useState<SortOption>("level-asc");
@@ -228,7 +228,7 @@ export default function Browse() {
   const spellsFiltered = useMemo(() => {
     const ids = collectIdsByKind(mini, q, "spell", spells);
     let arr = filterByIds(spells.slice(), ids, (s) => s.id);
-    if (level !== "any") arr = arr.filter((s) => s.level === level);
+    if (level.length > 0) arr = arr.filter((s) => level.includes(s.level));
     if (clazz !== "any") arr = arr.filter((s) => s.classes.includes(clazz));
     if (school !== "any") arr = arr.filter((s) => (s.school?.en ?? "") === school);
     if (tags.length > 0) {
@@ -242,21 +242,26 @@ export default function Browse() {
   const sItems = spellsSorted.slice(sStart, sStart + pageSize);
   useEffect(()=>{ setPage(1); }, [q, level, clazz, school, tags, pageSize, sort]);
   useEffect(() => {
-    if (level !== "any" && !spellLevels.includes(level)) setLevel("any");
+    if (level.length === 0) return;
+    const allowed = level.filter((l) => spellLevels.includes(l));
+    const normalized = Array.from(new Set(allowed)).sort((a, b) => a - b);
+    const sameLength = normalized.length === level.length;
+    const sameOrder = sameLength && normalized.every((value, index) => value === level[index]);
+    if (!sameOrder) setLevel(normalized);
   }, [level, spellLevels]);
   useEffect(() => {
     if (school !== "any" && !spellSchoolOptions.includes(school)) setSchool("any");
   }, [school, spellSchoolOptions]);
 
-  function handleLevelClick(l:number){ setLevel(l); window.scrollTo({top:0, behavior:"smooth"}); }
+  function handleLevelClick(l:number){ setLevel([l]); window.scrollTo({top:0, behavior:"smooth"}); }
   function handleClassClick(c:string){ setClazz(c); window.scrollTo({top:0, behavior:"smooth"}); }
-  function clearAllSpells(){ setQ(""); setLevel("any"); setClazz("any"); setSchool("any"); setTags([]); setSort("level-asc"); }
+  function clearAllSpells(){ setQ(""); setLevel([]); setClazz("any"); setSchool("any"); setTags([]); setSort("level-asc"); }
 
   // features pipeline
   const featuresFiltered = useMemo(() => {
     const ids = collectIdsByKind(mini, q, "feature", features);
     let arr = filterByIds(features.slice(), ids, (f) => f.id);
-    if (fLevel !== "any") arr = arr.filter((f) => f.level === fLevel);
+    if (fLevel.length > 0) arr = arr.filter((f) => fLevel.includes(f.level));
     if (fClazz !== "any") arr = arr.filter((f) => f.class === fClazz);
     if (fTags.length > 0) {
       arr = arr.filter((f) => hasAllTags(featureTagMap.get(f.id), fTags));
@@ -269,7 +274,12 @@ export default function Browse() {
   const fItems = featuresSorted.slice(fStart, fStart + fPageSize);
   useEffect(()=>{ setFPage(1); }, [q, fLevel, fClazz, fTags, fPageSize, fSort]);
   useEffect(() => {
-    if (fLevel !== "any" && !featureLevels.includes(fLevel)) setFLevel("any");
+    if (fLevel.length === 0) return;
+    const allowed = fLevel.filter((l) => featureLevels.includes(l));
+    const normalized = Array.from(new Set(allowed)).sort((a, b) => a - b);
+    const sameLength = normalized.length === fLevel.length;
+    const sameOrder = sameLength && normalized.every((value, index) => value === fLevel[index]);
+    if (!sameOrder) setFLevel(normalized);
   }, [fLevel, featureLevels]);
 
   if (error) {
@@ -317,7 +327,6 @@ export default function Browse() {
             total={spellsSorted.length}
             pageSize={pageSize} setPageSize={setPageSize}
             onClearAll={clearAllSpells}
-            onClearLevel={()=>setLevel("any")}
             onClearClazz={()=>setClazz("any")}
             onClearSchool={()=>setSchool("any")}
             classOptions={spellClassOptions}
@@ -368,8 +377,7 @@ export default function Browse() {
             sort={fSort} setSort={setFSort}
             total={featuresSorted.length}
             pageSize={fPageSize} setPageSize={setFPageSize}
-            onClearAll={()=>{ setQ(""); setFLevel("any"); setFClazz("any"); setFTags([]); setFSort("level-asc"); }}
-            onClearLevel={()=>setFLevel("any")}
+            onClearAll={()=>{ setQ(""); setFLevel([]); setFClazz("any"); setFTags([]); setFSort("level-asc"); }}
             onClearClazz={()=>setFClazz("any")}
             classOptions={featureClassOptions}
             tagOptions={featureTagOptions}
@@ -394,7 +402,7 @@ export default function Browse() {
                   bodyEn={ft.text.en}
                   level={ft.level}
                   classes={[ft.class]}
-                  onLevelClick={(l:number)=>setFLevel(l)}
+                  onLevelClick={(l:number)=>setFLevel([l])}
                   onClassClick={(c:string)=>setFClazz(c)}
                   tagKeys={keys}
                   onTagClick={toggleFeatureTag}
