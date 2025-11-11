@@ -3407,7 +3407,7 @@
     "components": {
       "somatic": true,
       "material": {
-        "pt": "uma gora de água ou um pedaço de gelo",
+        "pt": "uma gota de água ou um pedaço de gelo",
         "en": "a drop of water or a piece of ice"
       }
     },
@@ -3417,6 +3417,534 @@
     },
     "tags": [
       "damage"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "identify",
+    "name": {
+      "pt": "Identificar",
+      "en": "Identify"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Adivinhação",
+      "en": "Divination"
+    },
+    "classes": [
+      "Artificer",
+      "Bard",
+      "Wizard"
+    ],
+    "castingTime": {
+      "pt": "1 Minuto",
+      "en": "1 Minute"
+    },
+    "range": {
+      "pt": "Toque",
+      "en": "Touch"
+    },
+    "duration": {
+      "pt": "Instantânea",
+      "en": "Instantaneous"
+    },
+    "concentration": false,
+    "ritual": true,
+    "components": {
+      "somatic": true,
+      "material": {
+        "pt": "uma pérola no valor de 100+ PO",
+        "en": "a pearl worth 100+ GP"
+      }
+    },
+    "text": {
+      "pt": "Você toca um objeto durante a conjuração da magia. Se for um item mágico ou algum outro objeto mágico, você descobre suas propriedades e como usá-las, se ele requer Sintonização e quantas cargas possui, se houver. Você também descobre se alguma magia está afetando o item e quais são elas. Se o item foi criado por uma magia, você identifica o nome dessa magia.\n\nSe em vez disso você tocar uma criatura durante a conjuração, você descobre quais magias a estão afetando, caso estejam.",
+      "en": "You touch an object throughout the spell’s casting. If the object is a magic item or some other magical object, you learn its properties and how to use them, whether it requires Attunement, and how many charges it has, if any. You learn whether any ongoing spells are affecting the item and what they are. If the item was created by a spell, you learn that spell’s name.\n\nIf you instead touch a creature throughout the casting, you learn which ongoing spells, if any, are currently affecting it."
+    },
+    "tags": [
+      "detection"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "illusory-script",
+    "name": {
+      "pt": "Escrita Ilusória",
+      "en": "Illusory Script"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Ilusão",
+      "en": "Illusion"
+    },
+    "classes": [
+      "Bard",
+      "Warlock",
+      "Wizard"
+    ],
+    "castingTime": {
+      "pt": "1 Minuto",
+      "en": "1 Minute"
+    },
+    "range": {
+      "pt": "Toque",
+      "en": "Touch"
+    },
+    "duration": {
+      "pt": "10 Dias",
+      "en": "10 Days"
+    },
+    "concentration": false,
+    "ritual": true,
+    "components": {
+      "somatic": true,
+      "material": {
+        "pt": "tinta no valor de 10+ PO, que a magia consome",
+        "en": "ink worth 10+ GP, which the spell consumes"
+      }
+    },
+    "text": {
+      "pt": "Você escreve em pergaminho, papel ou outro material apropriado e o imbuí com uma ilusão que permanece pela duração. Para você e quaisquer criaturas que escolher ao conjurar a magia, a escrita parece normal, como se estivesse escrita por sua mão, e transmite o significado de sua intenção no momento em que o texto foi redigido. Para os demais, as palavras aparecem como se estivessem em um alfabeto desconhecido ou mágico, tornando-se ininteligíveis. Se preferir, a ilusão pode alterar o significado, a caligrafia e o idioma do texto, embora você deva conhecer o idioma.\n\nSe a magia for dissipada, o texto original e a ilusão desaparecem.\n\nUma criatura que possui Visão Verdadeira pode ler a mensagem oculta.",
+      "en": "You write on parchment, paper, or another suitable material and imbue it with an illusion that lasts for the duration. To you and any creatures you designate when you cast the spell, the writing appears normal, seems to be written in your hand, and conveys whatever meaning you intended when you wrote the text. To all others, the writing appears as if it were written in an unknown or magical script that is unintelligible. Alternatively, the illusion can alter the meaning, handwriting, and language of the text, though the language must be one you know.\n\nIf the spell is dispelled, the original script and the illusion both disappear.\n\nA creature that has Truesight can read the hidden message."
+    },
+    "tags": [
+      "communication"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "inflict-wounds",
+    "name": {
+      "pt": "Infligir Ferimentos",
+      "en": "Inflict Wounds"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Necromancia",
+      "en": "Necromancy"
+    },
+    "classes": [
+      "Cleric"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "Toque",
+      "en": "Touch"
+    },
+    "duration": {
+      "pt": "Instantânea",
+      "en": "Instantaneous"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true
+    },
+    "text": {
+      "pt": "Uma criatura que você tocar realiza uma salvaguarda de Constituição, sofrendo 2d10 pontos de dano Necrótico se falhar ou metade desse dano em caso de sucesso.\n\n***Usando um Espaço de Magia de Círculo Superior.*** O dano aumenta em 1d10 para cada círculo de espaço de magia acima de 1.",
+      "en": "A creature you touch makes a Constitution saving throw, taking 2d10 Necrotic damage on a failed save or half as much damage on a successful one.\n\n***Using a Higher-Level Spell Slot.*** The damage increases by 1d10 for each spell slot level above 1."
+    },
+    "tags": [
+      "damage"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "jump",
+    "name": {
+      "pt": "Salto",
+      "en": "Jump"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Transmutação",
+      "en": "Transmutation"
+    },
+    "classes": [
+      "Artificer",
+      "Druid",
+      "Ranger",
+      "Sorcerer",
+      "Wizard"
+    ],
+    "castingTime": {
+      "pt": "Ação Bônus",
+      "en": "Bonus Action"
+    },
+    "range": {
+      "pt": "Toque",
+      "en": "Touch"
+    },
+    "duration": {
+      "pt": "1 Minuto",
+      "en": "1 Minute"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true,
+      "material": {
+        "pt": "perna traseira de um gafanhoto",
+        "en": "a grasshopper's hind leg"
+      }
+    },
+    "text": {
+      "pt": "Você toca uma criatura voluntária. Uma vez em cada um dos turnos dela até que a magia encerre, essa criatura pode saltar até 9 metros gastando 3 metros de movimento.\n\n***Usando um Espaço de Magia de Círculo Superior.*** Você pode escolher uma criatura adicional para cada círculo de espaço de magia acima de 1.",
+      "en": "You touch a willing creature. Once on each of its turns until the spell ends, that creature can jump up to 30 feet by spending 10 feet of movement.\n\n***Using a Higher-Level Spell Slot.*** You can target one additional creature for each spell slot level above 1."
+    },
+    "tags": [
+      "movement"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "longstrider",
+    "name": {
+      "pt": "Passos Largos",
+      "en": "Longstrider"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Transmutação",
+      "en": "Transmutation"
+    },
+    "classes": [
+      "Artificer",
+      "Bard",
+      "Druid",
+      "Ranger",
+      "Wizard"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "Toque",
+      "en": "Touch"
+    },
+    "duration": {
+      "pt": "1 Hora",
+      "en": "1 Hour"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true,
+      "material": {
+        "pt": "uma pitada de poeira",
+        "en": "a pinch of dirt"
+      }
+    },
+    "text": {
+      "pt": "Você toca uma criatura. O Deslocamento do alvo aumenta em 3 metros até que a magia termine.\n\n***Usando um Espaço de Magia de Círculo Superior.*** Você pode escolher uma criatura adicional para cada círculo de espaço de magia acima de 1.",
+      "en": "You touch a creature. The target’s Speed increases by 10 feet until the spell ends.\n\n***Using a Higher-Level Spell Slot.*** You can target one additional creature for each spell slot level above 1."
+    },
+    "tags": [
+      "buff",
+      "movement"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "mage-armor",
+    "name": {
+      "pt": "Armadura Arcana",
+      "en": "Mage Armor"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Abjuração",
+      "en": "Abjuration"
+    },
+    "classes": [
+      "Sorcerer",
+      "Wizard"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "Toque",
+      "en": "Touch"
+    },
+    "duration": {
+      "pt": "8 Horas",
+      "en": "8 Hours"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true,
+      "material": {
+        "pt": "um pedaço de couro curtido",
+        "en": "a piece of cured leather"
+      }
+    },
+    "text": {
+      "pt": "Você toca uma criatura voluntária que não está usando armadura. Até que a magia termine, a CA base do alvo se torna 13 mais o modificador de Destreza dele. A magia se encerra se o alvo vestir uma armadura.",
+      "en": "You touch a willing creature who isn’t wearing armor. Until the spell ends, the target’s base AC becomes 13 plus its Dexterity modifier. The spell ends early if the target dons armor."
+    },
+    "tags": [
+      "buff",
+      "warding"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "magic-missile",
+    "name": {
+      "pt": "Mísseis Mágicos",
+      "en": "Magic Missile"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Evocação",
+      "en": "Evocation"
+    },
+    "classes": [
+      "Sorcerer",
+      "Wizard"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "36 m (120 ft.)",
+      "en": "120 ft."
+    },
+    "duration": {
+      "pt": "Instantânea",
+      "en": "Instantaneous"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true
+    },
+    "text": {
+      "pt": "Você cria três dardos brilhantes feitos de pura energia mágica. Cada dardo acerta uma criatura à sua escolha, à sua vista e no alcance da magia. Um dardo causa 1d4 + 1 pontos de dano Energético ao alvo. Os dardos acertam ao mesmo tempo, e você pode direcioná-los para uma mesma criatura ou várias.\n\n***Usando um Espaço de Magia de Círculo Superior.*** A magia cria um dardo adicional para cada círculo de espaço de magia acima de 1.",
+      "en": "You create three glowing darts of magical force. Each dart strikes a creature of your choice that you can see within range. A dart deals 1d4 + 1 Force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several.\n\n***Using a Higher-Level Spell Slot.*** The spell creates one more dart for each spell slot level above 1."
+    },
+    "tags": [
+      "damage"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "protection-from-evil-and-good",
+    "name": {
+      "pt": "Proteção Contra o Bem e o Mal",
+      "en": "Protection from Evil and Good"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Abjuração",
+      "en": "Abjuration"
+    },
+    "classes": [
+      "Cleric",
+      "Druid",
+      "Paladin",
+      "Warlock",
+      "Wizard"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "Toque",
+      "en": "Touch"
+    },
+    "duration": {
+      "pt": "10 Minutos",
+      "en": "10 Minutes"
+    },
+    "concentration": true,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true,
+      "material": {
+        "pt": "um pote de Água Benta no valor de 25+ POm que a magia consome",
+        "en": "a flask of Holy Water worth 25+ GP, which the spell consumes"
+      }
+    },
+    "text": {
+      "pt": "Até que a magia termine, uma criatura voluntária que você tocar está protegida contra criaturas que são Aberrações, Celestiais, Elementais, Feéricos, Ínferos ou Mortos-Vivos. A proteção concede vários benefícios. Criaturas desses tipos têm Desvantagem em jogadas de ataque contra o alvo. O alvo também não pode ser possuído por essas criaturas nem adquirir as condições de Amedrontado ou Enfeitiçado por elas. Se o alvo já estiver possuído, Amedrontado ou Enfeitiçado por uma dessas criaturas, ele tem Vantagem em qualquer nova salvaguarda contra o efeito relevante.",
+      "en": "Until the spell ends, one willing creature you touch is protected against creatures that are Aberrations, Celestials, Elementals, Fey, Fiends, or Undead. The protection grants several benefits. Creatures of those types have Disadvantage on attack rolls against the target. The target also can’t be possessed by or gain the Charmed or Frightened conditions from them. If the target is already possessed, Charmed, or Frightened by such a creature, the target has Advantage on any new saving throw against the relevant effect."
+    },
+    "tags": [
+      "buff",
+      "debuff",
+      "warding"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "purify-food-and-drink",
+    "name": {
+      "pt": "Purificar Alimentos e Bebidas",
+      "en": "Purify Food and Drink"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Transmutação",
+      "en": "Transmutation"
+    },
+    "classes": [
+      "Artificer",
+      "Cleric",
+      "Druid",
+      "Paladin"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "3 m (10 ft.)",
+      "en": "10 ft."
+    },
+    "duration": {
+      "pt": "Instantânea",
+      "en": "Instantaneous"
+    },
+    "concentration": false,
+    "ritual": true,
+    "components": {
+      "verbal": true,
+      "somatic": true
+    },
+    "text": {
+      "pt": "Você remove veneno e podridão de alimentos e bebidas não mágicos em uma Esfera de 1,5 metro (5 pés) de raio centrada em um ponto no alcance da magia.",
+      "en": "You remove poison and rot from nonmagical food and drink in a 5-foot-radius Sphere centered on a point within range."
+    },
+    "tags": [
+      "utility"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "ray-of-sickness",
+    "name": {
+      "pt": "Raio Nauseante",
+      "en": "Ray of Sickness"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Necromancia",
+      "en": "Necromancy"
+    },
+    "classes": [
+      "Sorcerer",
+      "Wizard"
+    ],
+    "castingTime": {
+      "pt": "Ação",
+      "en": "Action"
+    },
+    "range": {
+      "pt": "18 m (60 ft.)",
+      "en": "60 ft."
+    },
+    "duration": {
+      "pt": "Instantânea",
+      "en": "Instantaneous"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true
+    },
+    "text": {
+      "pt": "Você dispara um raio esverdeado em uma criatura no alcance da magia. Realize um ataque mágico à distância contra o alvo. Em caso de acerto, o alvo sofre 2d8 pontos de dano Venenoso e tem a condição Envenenado até o final do seu próximo turno.\n\n***Usando um Espaço de Magia de Círculo Superior.*** O dano aumenta em 1d8 para cada círculo de espaço de magia acima de 1.",
+      "en": "You shoot a greenish ray at a creature within range. Make a ranged spell attack against the target. On a hit, the target takes 2d8 Poison damage and has the Poisoned condition until the end of your next turn.\n\n***Using a Higher-Level Spell Slot.*** The damage increases by 1d8 for each spell slot level above 1."
+    },
+    "tags": [
+      "damage",
+      "debuff"
+    ],
+    "source": {
+      "name": "Player's Handbook"
+    }
+  },
+  {
+    "id": "sanctuary",
+    "name": {
+      "pt": "Santuário",
+      "en": "Sanctuary"
+    },
+    "level": 1,
+    "school": {
+      "pt": "Abjuração",
+      "en": "Abjuration"
+    },
+    "classes": [
+      "Artificer",
+      "Cleric"
+    ],
+    "castingTime": {
+      "pt": "Ação Bônus",
+      "en": "Bonus Action"
+    },
+    "range": {
+      "pt": "9 m (30 ft.)",
+      "en": "30 ft."
+    },
+    "duration": {
+      "pt": "1 Minuto",
+      "en": "1 Minute"
+    },
+    "concentration": false,
+    "ritual": false,
+    "components": {
+      "verbal": true,
+      "somatic": true,
+      "material": {
+        "pt": "o caco de um espelho",
+        "en": "a shard of glass from a mirror"
+      }
+    },
+    "text": {
+      "pt": "Você protege uma criatura no alcance da magia. Até que a magia termine, qualquer criatura que tenha como alvo a criatura protegida com uma jogada de ataque ou uma magia que cause dano deve ser bem-sucedida em uma salvaguarda de Sabedoria, ou deve escolher um novo alvo ou perder o ataque ou a magia. Esta magia não protege contra áreas de efeito.\n\nA magia se encerra se a criatura protegida realizar uma jogada de ataque, conjurar uma magia ou causar dano.",
+      "en": "You ward a creature within range. Until the spell ends, any creature who targets the warded creature with an attack roll or a damaging spell must succeed on a Wisdom saving throw or either choose a new target or lose the attack or spell. This spell doesn’t protect the warded creature from areas of effect.\n\nThe spell ends if the warded creature makes an attack roll, casts a spell, or deals damage."
+    },
+    "tags": [
+      "buff",
+      "warding"
     ],
     "source": {
       "name": "Player's Handbook"
